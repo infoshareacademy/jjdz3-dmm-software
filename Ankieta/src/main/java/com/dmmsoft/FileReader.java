@@ -14,7 +14,8 @@ public class FileReader {
     // zwraca całą zawartość pliku jako String
 
     public String readTxtFile(String path, Charset encoding) throws IOException {
-        byte[] encoded = Files.readAllBytes(Paths.get(path));
+        String OSidependentPath = path.replaceFirst("^/(.:/)", "$1");        // bez tego nie zadziala na Windows
+        byte[] encoded = Files.readAllBytes(Paths.get(OSidependentPath));
         return new String(encoded, encoding);
     }
 

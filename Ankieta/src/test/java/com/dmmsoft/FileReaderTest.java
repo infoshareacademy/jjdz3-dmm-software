@@ -10,16 +10,12 @@ public class FileReaderTest extends TestCase {
     public void testReadTxtFile() throws Exception {
 
 
-        String path ="tat";
-
-                 getClass().getResource("/test.json").getFile();
+        String path = getClass().getResource("/test.json").getFile();
         System.out.println(path);
-//        String OSidependentPath = path.replaceFirst("^/(.:/)", "$1");        // bez tego nie zadziala na Windows
-//        System.out.println(path);
-//
-//        FileReader fr = new FileReader();
-//        String test = fr.readTxtFile(OSidependentPath, Charset.forName("UTF-8"));
-//        System.out.println(test);
+
+        FileReader fr = new FileReader();
+        String test = fr.readTxtFile(path, Charset.forName("UTF-8"));
+        System.out.println(test);
 
     }
 
