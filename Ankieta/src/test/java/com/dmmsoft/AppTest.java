@@ -1,4 +1,4 @@
-package com.test2;
+package com.dmmsoft;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

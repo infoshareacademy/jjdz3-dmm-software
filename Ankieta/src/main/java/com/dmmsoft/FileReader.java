@@ -1,4 +1,4 @@
-package com.test2;
+package com.dmmsoft;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
