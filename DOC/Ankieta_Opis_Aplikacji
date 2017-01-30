@@ -1,0 +1,109 @@
+I) Zadanie ze slacka
+*************************************************************************************************
+2. Stworzenie pliku w formacie JSON z ankietą
+   1. 3 pytania, jednokrotnego wyboru
+   2. Minimum po 3 opcje na pytanie (Jackson)                // minimum, ale chyba nie stała ilość ?
+3. Stworzenie struktury obiektów JAVA
+   1. Kwestionariusz
+   2. Pytania
+   3. Opcje pytań                                            // miał na myśli chyba "opcje odpowiedzi"
+4. Mechanizm odczytujący z pliku JSON do obiektów JAVA
+5. Nawigacja w konsoli menu startowe
+   1. Wypisywanie, opcji menu
+   2. Rozpocznij ankietę,
+   3. Zakończ program
+   4. wstecz                                // może jako cały czas dostępne "w - wstecz" - powrót do menu
+
+wskazówki od prowadzącego przekazane "werbalnie":
+"posługujcie się Id-kami w taki sposób, aby obiekty można było łatwo zapisać do bazy danych"
+
+*************************************************************************************************
+
+II) Przykładowa Treść kwestionariusza:
+
+Pytanie 1 : Twój ulubiony kolor?
+	a) niebieski
+	b) zielony
+	c) czerwony
+Pytanie 2 : Twoja ulubiona potrawa?
+	a) pizza
+	b) hamburger
+	c) miska ryżu
+Pytanie 3 : Jakiej muzyki słuchasz?
+	a) poważnej
+	b) disko-polo
+	c) metal
+	d) żadnej                        // celowo czwarte pytanie bo ilość nie musi być na sztywno
+                                     // w ankiecie będzie mogła być dowolna ilość pytań i
+                                     // dowolna ilość odpowiedzi na pytanie (przynajnmniej 3)
+----------------------------------
+
+III) DZIAŁANIE APLIKACJI (konsola):
+
+0) Wyświetlenie MENU w konsoli zgodnie z wytyczną z zajęć
+1) opcjonalnie aplikacja mogłaby pytać o imię wypełniającego "podaj swoje imię: _ "
+2) Aplikacja wyświetla pierwsze pytanie oraz możliwe odpowiedzi, kursor miga przy odpowiedźi:
+
+----------------------------------
+Pytanie 1 : Twój ulubiony kolor?
+	a) niebieski
+	b) zielony
+	c) czerwony
+
+Twoja odpowiedź:_
+----------------------------------
+
+3) Użytkownik wybiera opcję:
+------------------------------------
+Pytanie 1 : Twój ulubiony kolor?
+	a) niebieski
+	b) zielony
+	c) czerwony
+
+Twoja odpowiedź:a
+------------------------------------
+
+4) Aplikacja zapisuje stan: wybraną odpowiedź (isChecked: true)
+
+5) W pętli aplikacja pyta kolejno o wszystkie pytania z kwestionariusza:
+
+6) na koniec aplikacja wyświetla wynik:
+
+-----------------------------------------------------------
+Wynik kwestionariusza wypelnionego przez: <imię>
+pytanie 1 a
+pytanie 2 c
+pytanie 3 b
+-----------------------------------------------------------
+
+
+
+=== IV) UWAGI DO IMPLEMENTACJI=========================================================================
+
+1. Struktura klas ma być zrobiona tak jakby aplikacja miała zapisywać dane do bazy danych (wymóg prowadzącego),
+ale wystarczy, że aplikacja będzie przechowywała stan obiektów tylko w czasie runtime.
+
+Ewentualnie jeżeli z mapowaniem JSON do obiektów pójdzie gładko, to zapisanie stanu
+kwestionariusza do pliku JSON przy pomocy biblioteki JACKSON nie powinno być trudne
+z tego co widziałem w dokmentacji JACKSONa mapowanie działa w obie strony:
+Obiekt JSON --> Objekt Java
+Objekt Java --> obiekt JSON
+wtedy można by zapisać wynik ankiety do pliku JSON i np. oddać datę utworzenia pliku w nazwie pliku lub
+imię wypełniającego kwestionariusz(żeby kolejne pliki z wynikami nie nadpisywały się).
+
+3. Numerowanie pytań może odbywać się dynamicznie podczas runtime (np. nr iteracji)
+
+4. opcje odpowiedzi "a) b)..." powinny być chyba "na sztywno" jako property odpowiedzi,
+bo na kombinowanie z dynamicznym przypisywaniem liter nie ma zabardzo czasu
+
+5. plik wejściowy JSON musiałby być nieco zmodyfikowany do struktury klas
+
+===================================================================================================
+
+
+V) W załączeniu propozycja diagramu klas
+
+
+
+
+
