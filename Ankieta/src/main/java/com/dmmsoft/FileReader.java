@@ -1,33 +1,28 @@
 package com.dmmsoft;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 
 /**
  * Created by Milo on 2017-01-29.
  */
 
 public class FileReader {
-    // zwraca całą zawartość pliku jako String
 
-    public String readTxtFile(String path, Charset encoding) throws IOException {
-        String OSidependentPath = path.replaceFirst("^/(.:/)", "$1");        // bez tego nie zadziala na Windows
-        byte[] encoded = Files.readAllBytes(Paths.get(OSidependentPath));
-        return new String(encoded, encoding);
+    private String resourceFilePath;
+
+    public FileReader(String resourceFilePath) {
+        this.resourceFilePath = resourceFilePath;
     }
 
-    // zwraca wiersze pliku tekstowego w List<String>
-
-    public List<String> readTxtFileRowByRow(String path, Charset encoding) throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get(path), encoding);
-        for (String line : lines) {
-            System.out.println(line);
+    public String getFileAsString() throws IOException {
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(this.resourceFilePath);
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            stringBuilder.append(line);
         }
-        return lines;
-
+        return stringBuilder.toString();
     }
-
 }
