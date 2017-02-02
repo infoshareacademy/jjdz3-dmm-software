@@ -1,7 +1,11 @@
 package com.dmmsoft;
 
+import com.dmmsoft.Survey.Exception.SurveyCreationException;
+import com.dmmsoft.Survey.Mapper.JSONMapper;
+
+import com.dmmsoft.Survey.Survey;
+
 import java.io.IOException;
-import java.nio.charset.Charset;
 
 /**
  * Hello world!
@@ -13,21 +17,17 @@ public class App
     {
         System.out.println( "Hello World!");
 
-        // przykład użycia klasy FileReader
+        FileReader fileReader = new FileReader("test.json");
 
-        FileReader fr = new FileReader();
-        String test = null;
         try {
-            test = fr.readTxtFile("resources/test.json", Charset.forName("UTF-8") );
-        } catch (IOException e) {
-            e.printStackTrace();
+            String jsonString = fileReader.getFileAsString();
+            JSONMapper jsonMapper = new JSONMapper(jsonString);
+            Survey survey = jsonMapper.getSurveyFromJson();
+            System.out.println(survey.getId());
+        } catch (IOException exception) {
+            System.out.println("Error reading the file: " + exception.getMessage());
+        } catch (SurveyCreationException exception) {
+            System.out.println("Error creating the survey: " + exception.getMessage());
         }
-        System.out.println(test);
-
     }
-
-
-
-
-
 }

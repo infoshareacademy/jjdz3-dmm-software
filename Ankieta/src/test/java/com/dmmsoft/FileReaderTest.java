@@ -1,5 +1,7 @@
 package com.dmmsoft;
 import junit.framework.TestCase;
+
+import java.io.IOException;
 import java.nio.charset.Charset;
 
 
@@ -7,20 +9,19 @@ import java.nio.charset.Charset;
  * Created by Milo on 2017-01-29.
  */
 public class FileReaderTest extends TestCase {
-    public void testReadTxtFile() throws Exception {
 
-
-        String path = getClass().getResource("/test.json").getFile();
-        System.out.println(path);
-
-        FileReader fr = new FileReader();
-        String test = fr.readTxtFile(path, Charset.forName("UTF-8"));
-        System.out.println(test);
-
+    public void testReadResourceFileResourceExistsShouldReturnString() throws Exception {
+        FileReader fr = new FileReader("test.json");
+        String test = fr.getFileAsString();
+        assertNotNull(test);
     }
 
-    public void testReadTxtFileByRow() throws Exception {
-
+    public void testReadResourceFileResourceDoesntExistShouldThrowException() throws Exception {
+        try {
+            FileReader fr = new FileReader("abc");
+            String test = fr.getFileAsString();
+            fail();
+        } catch (NullPointerException exception) {
+        }
     }
-
 }
