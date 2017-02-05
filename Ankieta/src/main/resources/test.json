@@ -2,19 +2,104 @@
   "id":123,
   "questions":[
     {
-      "id":123,
-      "question":"Jak się nazywasz ąśę©?",
+      "id":1,
+      "question":"Jaki jest Twój ulubiony kolor",
       "answers":[
         {
-          "id":1,
-          "answer":"wiem",
+          "id":0,
+          "answer":"niebieski",
           "isCorrect":true
         },
         {
+          "id":1,
+          "answer":"zielony",
+          "isCorrect":false
+        },
+        {
           "id":2,
-          "answer":"nie wiem",
+          "answer":"czerwony",
+          "isCorrect":false
+        },
+        {
+          "id":3,
+          "answer":"czarny",
           "isCorrect":false
         }
+      ]}
+  ,{
+      "id":2,
+      "question":"Jaka jest Twoja ulubiona potrawa?",
+      "answers":[
+        {
+          "id":0,
+          "answer":"pizza",
+          "isCorrect":true
+        },
+        {
+          "id":1,
+          "answer":"hamburger",
+          "isCorrect":false
+        },
+        {
+          "id":2,
+          "answer":"miska ryżu",
+          "isCorrect":false
+        }
+
+      ]
+    }
+  ,{
+      "id":3,
+      "question":"Jakiej muzyki słuchasz?",
+      "answers":[
+        {
+          "id":0,
+          "answer":"poważnej",
+          "isCorrect":true
+        },
+        {
+          "id":1,
+          "answer":"disco-polo",
+          "isCorrect":false
+        },
+        {
+          "id":2,
+          "answer":"hip-hop",
+          "isCorrect":false
+        },
+        {
+          "id":3,
+          "answer":"metalu",
+          "isCorrect":false
+        },
+        {
+          "id":4,
+          "answer":"drewnianej",
+          "isCorrect":false
+        }
+        ]
+    }
+      ,{
+          "id":4,
+          "question":"Co sądzisz o tej ankiecie?",
+          "answers":[
+            {
+              "id":0,
+              "answer":"nudna",
+              "isCorrect":true
+            },
+            {
+              "id":1,
+              "answer":"taka sobie",
+              "isCorrect":false
+            },
+            {
+              "id":2,
+              "answer":"nie wiem ;)",
+              "isCorrect":false
+            }
+
+
       ]
     }
   ]
