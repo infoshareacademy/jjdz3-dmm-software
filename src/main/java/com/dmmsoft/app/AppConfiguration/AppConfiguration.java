@@ -3,21 +3,24 @@ package com.dmmsoft.app;
 import com.dmmsoft.app.Exception.AppConfigurationException;
 
 import java.io.IOException;
+import java.sql.RowIdLifetime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Milo4321 on 2017-02-09.
  */
 public class AppConfiguration {
 
-    String fundFilePath;
-    String currencyFilePath;
+    List<FilePath> fundFilePaths = new ArrayList<FilePath>();
+    List<FilePath> currencyFilePaths = new ArrayList<FilePath>();
 
-    public String getFundFilePath() {
-        return fundFilePath;
+    public List<FilePath> getFundFilePaths() {
+        return fundFilePaths;
     }
 
-    public String getCurrencyFilePath() {
-        return currencyFilePath;
+    public List<FilePath> getCurrencyFilePaths() {
+        return currencyFilePaths;
     }
 
     public AppConfiguration() {
@@ -31,8 +34,8 @@ public class AppConfiguration {
             String jsonString = fileReader.getFileAsString();
             JSONMapper jsonMapper = new JSONMapper(jsonString);
 
-            this.fundFilePath= jsonMapper.getAppConfigurationFromJson().fundFilePath;
-            this.currencyFilePath=jsonMapper.getAppConfigurationFromJson().currencyFilePath;
+            this.fundFilePaths = jsonMapper.getAppConfigurationFromJson().fundFilePaths;
+            this.currencyFilePaths = jsonMapper.getAppConfigurationFromJson().currencyFilePaths;
 
         } catch (IOException exception) {
             System.out.println("Error reading the file: " + exception.getMessage());
