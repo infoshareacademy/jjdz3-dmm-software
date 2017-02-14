@@ -1,4 +1,4 @@
-package com.dmmsoft.app.FileReader;
+package com.dmmsoft.app.FileIO;
 
 /**
  * Created by Milo4321 on 2017-02-13.

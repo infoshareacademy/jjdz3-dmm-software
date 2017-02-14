@@ -1,19 +1,22 @@
-package com.dmmsoft.app;
+package com.dmmsoft.app.AppConfiguration;
 
 import com.dmmsoft.app.Exception.AppConfigurationException;
+import com.dmmsoft.app.FileIO.FilePath;
+import com.dmmsoft.app.FileIO.FileReader;
 
 import java.io.IOException;
-import java.sql.RowIdLifetime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Milo4321 on 2017-02-09.
+/* Created by Milo4321 on 2017-02-09.
+ *
+ * reads configuration settings form Configuration.json and maps to AppConfiguration object
+ *
  */
 public class AppConfiguration {
 
-    List<FilePath> fundFilePaths = new ArrayList<FilePath>();
-    List<FilePath> currencyFilePaths = new ArrayList<FilePath>();
+    List<FilePath> fundFilePaths = new ArrayList<>();
+    List<FilePath> currencyFilePaths = new ArrayList<>();
 
     public List<FilePath> getFundFilePaths() {
         return fundFilePaths;
@@ -24,8 +27,7 @@ public class AppConfiguration {
     }
 
     public AppConfiguration() {
-
-        // Note! Do not remove this "dummy" constructor (Jackson JSONMapper will stop working).
+        // Note! Do not remove this "dummy" constructor (com.fasterxml.jackson JSONMapper will stop working).
     }
 
     public AppConfiguration(String ConfigurationJSONFileName) throws Exception {
@@ -37,10 +39,10 @@ public class AppConfiguration {
             this.fundFilePaths = jsonMapper.getAppConfigurationFromJson().fundFilePaths;
             this.currencyFilePaths = jsonMapper.getAppConfigurationFromJson().currencyFilePaths;
 
-        } catch (IOException exception) {
-            System.out.println("Error reading the file: " + exception.getMessage());
-        } catch (AppConfigurationException exception) {
-            System.out.println("Error creating the AppConfiguration: " + exception.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error reading the file: " + e.getMessage());
+        } catch (AppConfigurationException e) {
+            System.out.println("Error creating the AppConfiguration: " + e.getMessage());
         }
     }
 

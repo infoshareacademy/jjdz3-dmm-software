@@ -1,4 +1,4 @@
-package com.dmmsoft.app;
+package com.dmmsoft.app.AppConfiguration;
 
 import java.io.IOException;
 
@@ -18,8 +18,8 @@ public class JSONMapper {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(jsonString, AppConfiguration.class);
-        } catch (IOException exeption) {
-            throw new AppConfigurationException(exeption);
+        } catch (IOException e) {
+            throw new AppConfigurationException(e);
         }
     }
 }

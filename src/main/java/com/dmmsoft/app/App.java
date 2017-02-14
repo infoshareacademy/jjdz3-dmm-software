@@ -1,6 +1,9 @@
 package com.dmmsoft.app;
 
 
+import com.dmmsoft.app.AppConfiguration.AppConfiguration;
+import com.dmmsoft.app.FileIO.FilePath;
+
 public class App {
     public static void main(String[] args) throws Exception {
 
@@ -8,12 +11,15 @@ public class App {
 
         // quick test of AppConfiguration (to remove)
 
-        AppConfiguration con = new AppConfiguration("ConfigurationJSON.json");
+        AppConfiguration appCon = new AppConfiguration("Configuration.json");
 
         System.out.println("\n*** Paths from AppConfiguration object:");
-        System.out.println("\nfundFilePath: " + con.getFundFilePath());
-        System.out.print("\ncurrencyFilePath: " + con.getCurrencyFilePath());
-
+        for(FilePath fp : appCon.getFundFilePaths()) {
+            System.out.println(fp.getFilePath());
+        }
+        for(FilePath fp : appCon.getCurrencyFilePaths()) {
+            System.out.println(fp.getFilePath());
+        }
     }
 
 }
