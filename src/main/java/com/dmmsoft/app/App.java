@@ -9,17 +9,15 @@ public class App {
 
         System.out.println("Hello World!");
 
-        // quick test of AppConfiguration (to remove)
+        // quick demo of AppConfiguration usage (to remove)
 
-        AppConfiguration appCon = new AppConfiguration("Configuration.json");
+        AppConfiguration appCon = new AppConfiguration().initialize("Configuration.json");
 
         System.out.println("\n*** Paths from AppConfiguration object:");
-        for(FilePath fp : appCon.getFundFilePaths()) {
+        for (FilePath fp : appCon.getFundFilePaths())
             System.out.println(fp.getFilePath());
-        }
-        for(FilePath fp : appCon.getCurrencyFilePaths()) {
-            System.out.println(fp.getFilePath());
-        }
-    }
 
+        for (FilePath fp : appCon.getCurrencyFilePaths())
+            System.out.println(fp.getFilePath());
+    }
 }

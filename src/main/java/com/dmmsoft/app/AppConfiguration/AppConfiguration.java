@@ -9,14 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* Created by Milo4321 on 2017-02-09.
- *
  * reads configuration settings form Configuration.json and maps to AppConfiguration object
- *
  */
 public class AppConfiguration {
 
-    List<FilePath> fundFilePaths = new ArrayList<>();
-    List<FilePath> currencyFilePaths = new ArrayList<>();
+    private List<FilePath> fundFilePaths = new ArrayList<>();
+    private List<FilePath> currencyFilePaths = new ArrayList<>();
 
     public List<FilePath> getFundFilePaths() {
         return fundFilePaths;
@@ -30,7 +28,7 @@ public class AppConfiguration {
         // Note! Do not remove this "dummy" constructor (com.fasterxml.jackson JSONMapper will stop working).
     }
 
-    public AppConfiguration(String ConfigurationJSONFileName) throws Exception {
+    public AppConfiguration initialize(String ConfigurationJSONFileName) {
         FileReader fileReader = new FileReader(ConfigurationJSONFileName);
         try {
             String jsonString = fileReader.getFileAsString();
@@ -44,6 +42,7 @@ public class AppConfiguration {
         } catch (AppConfigurationException e) {
             System.out.println("Error creating the AppConfiguration: " + e.getMessage());
         }
+        return this;
     }
 
 
