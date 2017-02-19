@@ -30,7 +30,16 @@ public class AppConfiguration {
         // Note! Do not remove this "dummy" constructor (com.fasterxml.jackson JSONMapper will stop working).
     }
 
-    public AppConfiguration(String ConfigurationJSONFileName) throws Exception {
+    public static AppConfiguration Create(String ConfigurationJSONFileName) throws Exception {
+        AppConfiguration foo = new AppConfiguration();
+        foo.Initialize(ConfigurationJSONFileName);
+//        foo.doStufff();
+//        doo external stuff
+
+        return foo;
+    }
+
+    public AppConfiguration Initialize(String ConfigurationJSONFileName) throws  Exception{
         FileReader fileReader = new FileReader(ConfigurationJSONFileName);
         try {
             String jsonString = fileReader.getFileAsString();
@@ -44,7 +53,82 @@ public class AppConfiguration {
         } catch (AppConfigurationException e) {
             System.out.println("Error creating the AppConfiguration: " + e.getMessage());
         }
+
+        return this;
+    }
+}
+
+
+class AppConfigurationFactory {
+    public AppConfiguration Create(String configurationJsonFilePath) throws Exception {
+        return new AppConfiguration().Initialize(configurationJsonFilePath);
+    }
+}
+
+
+
+class Fund {
+    public String getName() {
+        return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    String name;
+}
+
+class BuildExample {
+    void Main() {
+        FundStorageFactory fundStorageFactory = new FundStorageFactory();
+
+        // 1 - from file
+        // 2 - from db
+        int input = 0;
+        FundStorageInterface storage = fundStorageFactory.create(input);
+
+        List<Fund> funds = storage.get();
+    }
+}
+
+class FundStorageFactory {
+    FundStorageInterface create(int loaderType) {
+        FundStorageInterface storage;
+
+        switch (loaderType) {
+            case 1:
+                storage = new FileReaderFundStorage();
+            case 2:
+                storage = new DbFundStorage();
+            default:
+                storage = new FileReaderFundStorage();
+        }
+
+        return storage;
+    }
+}
+
+
+
+interface FundStorageInterface {
+    List<Fund> get();
+}
+
+class FileReaderFundStorage implements FundStorageInterface {
+
+    @Override
+    public List<Fund> get() {
+        // read from file
+        return null;
+    }
+}
+
+class DbFundStorage implements FundStorageInterface{
+
+    @Override
+    public List<Fund> get() {
+        // load from db
+        return null;
+    }
 }

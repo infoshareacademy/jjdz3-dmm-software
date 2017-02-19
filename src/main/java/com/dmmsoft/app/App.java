@@ -3,6 +3,7 @@ package com.dmmsoft.app;
 
 import com.dmmsoft.app.AppConfiguration.AppConfiguration;
 import com.dmmsoft.app.FileIO.FilePath;
+import com.dmmsoft.app.Investment.Fund;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -11,7 +12,9 @@ public class App {
 
         // quick test of AppConfiguration (to remove)
 
-        AppConfiguration appCon = new AppConfiguration("Configuration.json");
+        AppConfiguration appCon = new AppConfiguration().Initialize("Configuration.json");
+
+        AppConfiguration configuration = AppConfiguration.Create("Configuration.json");
 
         System.out.println("\n*** Paths from AppConfiguration object:");
         for(FilePath fp : appCon.getFundFilePaths()) {
@@ -21,5 +24,6 @@ public class App {
             System.out.println(fp.getFilePath());
         }
     }
+
 
 }
