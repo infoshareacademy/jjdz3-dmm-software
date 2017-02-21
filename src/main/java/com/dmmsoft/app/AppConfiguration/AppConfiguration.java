@@ -24,9 +24,6 @@ public class AppConfiguration {
         return currencyFilePaths;
     }
 
-    public AppConfiguration() {
-        // Note! Do not remove this "dummy" constructor (com.fasterxml.jackson JSONMapper will stop working).
-    }
 
     public AppConfiguration initialize(String ConfigurationJSONFileName) {
         FileReader fileReader = new FileReader(ConfigurationJSONFileName);
