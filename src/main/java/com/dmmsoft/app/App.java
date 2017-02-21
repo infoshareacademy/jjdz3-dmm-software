@@ -11,7 +11,7 @@ public class App {
 
         // quick demo of AppConfiguration usage (to remove)
 
-        AppConfiguration appCon = new AppConfiguration().initialize("Configuration.json");
+        AppConfiguration appCon = new AppConfiguration().initialize();
 
         System.out.println("\n*** Paths from AppConfiguration object:");
         for (FilePath fp : appCon.getFundFilePaths())

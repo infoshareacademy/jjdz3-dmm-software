@@ -13,20 +13,21 @@ import java.util.List;
  */
 public class AppConfiguration {
 
+    private final String CONFIGURATION_FILE_PATH = "Configuration.json";
+
     private List<FilePath> fundFilePaths = new ArrayList<>();
     private List<FilePath> currencyFilePaths = new ArrayList<>();
 
     public List<FilePath> getFundFilePaths() {
         return fundFilePaths;
     }
-
     public List<FilePath> getCurrencyFilePaths() {
         return currencyFilePaths;
     }
 
 
-    public AppConfiguration initialize(String ConfigurationJSONFileName) {
-        FileReader fileReader = new FileReader(ConfigurationJSONFileName);
+    public AppConfiguration initialize() {
+        FileReader fileReader = new FileReader(CONFIGURATION_FILE_PATH);
         try {
             String jsonString = fileReader.getFileAsString();
             JSONMapper jsonMapper = new JSONMapper(jsonString);
