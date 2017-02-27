@@ -1,4 +1,4 @@
-package com.dmmsoft.app.AppConfiguration;
+package com.dmmsoft.app.AppConfigurationProvider;
 
 import com.dmmsoft.app.Exception.AppConfigurationException;
 import com.dmmsoft.app.FileIO.FilePath;
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* Created by Milo4321 on 2017-02-09.
- * reads configuration settings form Configuration.json and maps to AppConfiguration object
+ * reads configuration settings form Configuration.json and maps to AppConfigurationProvider object
  */
-public class AppConfiguration {
+public class AppConfigurationProvider {
 
     private final String CONFIGURATION_FILE_PATH = "Configuration.json";
 
@@ -26,7 +26,7 @@ public class AppConfiguration {
     }
 
 
-    public AppConfiguration initialize() {
+    public AppConfigurationProvider getConfiguration() {
         FileReader fileReader = new FileReader(CONFIGURATION_FILE_PATH);
         try {
             String jsonString = fileReader.getFileAsString();
@@ -38,7 +38,7 @@ public class AppConfiguration {
         } catch (IOException e) {
             System.out.println("Error reading the file: " + e.getMessage());
         } catch (AppConfigurationException e) {
-            System.out.println("Error creating the AppConfiguration: " + e.getMessage());
+            System.out.println("Error creating the AppConfigurationProvider: " + e.getMessage());
         }
         return this;
     }

@@ -1,4 +1,4 @@
-package com.dmmsoft.app.AppConfiguration;
+package com.dmmsoft.app.AppConfigurationProvider;
 
 import java.io.IOException;
 
@@ -14,10 +14,10 @@ public class JSONMapper {
         this.jsonString = jsonString;
     }
 
-    public AppConfiguration getAppConfigurationFromJson() throws AppConfigurationException {
+    public AppConfigurationProvider getAppConfigurationFromJson() throws AppConfigurationException {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.readValue(jsonString, AppConfiguration.class);
+            return objectMapper.readValue(jsonString, AppConfigurationProvider.class);
         } catch (IOException e) {
             throw new AppConfigurationException(e);
         }
