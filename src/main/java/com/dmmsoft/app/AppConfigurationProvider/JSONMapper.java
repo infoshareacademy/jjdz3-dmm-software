@@ -2,7 +2,7 @@ package com.dmmsoft.app.AppConfigurationProvider;
 
 import java.io.IOException;
 
-import com.dmmsoft.app.Exception.AppConfigurationException;
+import com.dmmsoft.app.Exception.AppConfigurationProviderException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -14,12 +14,12 @@ public class JSONMapper {
         this.jsonString = jsonString;
     }
 
-    public AppConfigurationProvider getAppConfigurationFromJson() throws AppConfigurationException {
+    public AppConfigurationProvider getAppConfigurationFromJson() throws AppConfigurationProviderException {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(jsonString, AppConfigurationProvider.class);
         } catch (IOException e) {
-            throw new AppConfigurationException(e);
+            throw new AppConfigurationProviderException(e);
         }
     }
 }

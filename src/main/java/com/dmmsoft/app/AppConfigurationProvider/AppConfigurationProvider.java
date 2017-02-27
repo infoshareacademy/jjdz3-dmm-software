@@ -1,6 +1,6 @@
 package com.dmmsoft.app.AppConfigurationProvider;
 
-import com.dmmsoft.app.Exception.AppConfigurationException;
+import com.dmmsoft.app.Exception.AppConfigurationProviderException;
 import com.dmmsoft.app.FileIO.FilePath;
 import com.dmmsoft.app.FileIO.FileReader;
 
@@ -37,7 +37,7 @@ public class AppConfigurationProvider {
 
         } catch (IOException e) {
             System.out.println("Error reading the file: " + e.getMessage());
-        } catch (AppConfigurationException e) {
+        } catch (AppConfigurationProviderException e) {
             System.out.println("Error creating the AppConfigurationProvider: " + e.getMessage());
         }
         return this;
