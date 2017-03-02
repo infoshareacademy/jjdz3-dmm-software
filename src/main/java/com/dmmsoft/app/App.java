@@ -10,7 +10,6 @@ public class App {
         System.out.println("Hello World!");
 
         // quick demo of AppConfigurationProvider usage (to remove)
-
         AppConfigurationProvider appCon = new AppConfigurationProvider().getConfiguration();
 
         System.out.println("\n*** Paths from AppConfigurationProvider object:");
