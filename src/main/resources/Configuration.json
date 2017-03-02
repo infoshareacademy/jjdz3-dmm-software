@@ -1,8 +1,6 @@
 {
   "fundFilePaths":[
-    {"filePath":"resources\\AGI043.txt"},
-    {"filePath":"resources\\AGI044.txt"},
-    {"filePath":"resources\\AGI045.txt"}
+    {"filePath":"/Users/Daniel/Desktop/AGI003.txt"}
   ],
   "currencyFilePaths":[
     {"filePath":"resources\\currencyExample.txt"}
