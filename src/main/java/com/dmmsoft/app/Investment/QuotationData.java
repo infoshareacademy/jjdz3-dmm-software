@@ -28,7 +28,6 @@ public class QuotationData {
 
 
 
-
     public void loadDataFromFile(String filepath) {
         try {
             Scanner scanner = new Scanner(new FileReader(filepath));
