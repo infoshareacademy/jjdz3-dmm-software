@@ -24,7 +24,7 @@ public class FundLoader {
         FundQuotations = new ArrayList<Quotation>();
     }
 
-    public int getNumberOfFunds()
+    public int GetNumberOfFunds()
     {
         return funds.size();
     }
