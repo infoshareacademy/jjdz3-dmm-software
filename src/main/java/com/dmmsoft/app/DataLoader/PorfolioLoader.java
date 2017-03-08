@@ -15,7 +15,6 @@ import static java.lang.System.out;
  */
 public class PorfolioLoader {
 
-
     public static Portfolio getPortfolio() {
 
         AppConfigurationProvider appCon = new AppConfigurationProvider().getConfiguration();
@@ -38,13 +37,11 @@ public class PorfolioLoader {
         temp.addAll(Currencies.getCurrencies());
         p.setInvestments(temp);
 
-        System.out.println("Loaded number of Funds from JSON:"+Funds.GetNumberOfFunds());
-        System.out.println("Loaded number of Currencies from JSON:"+Currencies.GetNumberOfCurrencies());
+        System.out.println("Loaded number of Funds from JSON:" + Funds.GetNumberOfFunds());
+        System.out.println("Loaded number of Currencies from JSON:" + Currencies.GetNumberOfCurrencies());
 
-        return  p;
+        return p;
     }
-
-
 
 
 }
