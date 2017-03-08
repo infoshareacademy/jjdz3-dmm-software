@@ -18,6 +18,8 @@ public class FundLoader {
     public ArrayList<Quotation> FundQuotations;
 
 
+
+
     public FundLoader()
     {
         funds = new ArrayList<Fund>();
@@ -29,8 +31,9 @@ public class FundLoader {
         return funds.size();
     }
 
-
-
+    public ArrayList<Fund> getFunds() {
+        return funds;
+    }  // added by Milo
 
 
     public void CreateFundsFromFile (String filePath) {
@@ -43,7 +46,7 @@ public class FundLoader {
             for (int i = 0; i < quotationData.getNumberOfQuotations(); i++) {
                 FundQuotations.add(quotationData.getQuotation(i));
             }
-            ;
+
             Fund fund = new Fund(id, name, FundQuotations);
             funds.add(fund);
 

@@ -18,6 +18,10 @@ public class CurrencyLoader{
     public ArrayList<Quotation> CurrencyQuotations;
 
 
+    public ArrayList<Currency> getCurrencies() {
+        return currencies;
+    }
+
     public CurrencyLoader()
     {
         currencies = new ArrayList<Currency>();
