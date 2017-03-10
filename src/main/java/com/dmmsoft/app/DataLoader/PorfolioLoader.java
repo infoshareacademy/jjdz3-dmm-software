@@ -15,9 +15,9 @@ import static java.lang.System.out;
  */
 public class PorfolioLoader {
 
-    public static Portfolio getPortfolio() {
+    public static Portfolio getPortfolio(AppConfigurationProvider appCon) {
 
-        AppConfigurationProvider appCon = new AppConfigurationProvider().getConfiguration();
+
         FundLoader Funds = new FundLoader();
         CurrencyLoader Currencies = new CurrencyLoader();
 
