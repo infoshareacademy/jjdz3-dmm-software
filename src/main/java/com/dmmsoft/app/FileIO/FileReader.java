@@ -1,13 +1,14 @@
 package com.dmmsoft.app.FileIO;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import com.sun.istack.internal.NotNull;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.util.List;
 
 public class FileReader {
 
-    private String resourceFilePath;
+    public String resourceFilePath;
 
     public FileReader(String resourceFilePath) {
         this.resourceFilePath = resourceFilePath;
@@ -24,4 +25,16 @@ public class FileReader {
         return stringBuilder.toString();
     }
 
+    public void readFile() throws IOException {
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        String filePath = classLoader.getResource(resourceFilePath).getFile();
+        File file = new File(filePath);
+
+        List<String> lines = Files.readAllLines(file.toPath());
+
+        for (String line : lines){
+            System.out.println(line);
+        }
+
+    }
 }

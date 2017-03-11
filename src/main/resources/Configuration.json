@@ -1,10 +1,9 @@
 {
   "fundFilePaths":[
-    {"filePath":"resources\\AGI043.txt"},
-    {"filePath":"resources\\AGI044.txt"},
-    {"filePath":"resources\\AGI045.txt"}
+    {"filePath":"/Users/AGI001.txt"},
+    {"filePath":"/Users/AGI001.txt"}
   ],
   "currencyFilePaths":[
-    {"filePath":"resources\\currencyExample.txt"}
+    {"filePath":"/Users/AGI001.txt"}
   ]
 }

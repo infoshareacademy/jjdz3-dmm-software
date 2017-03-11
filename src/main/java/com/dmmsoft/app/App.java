@@ -1,22 +1,19 @@
 package com.dmmsoft.app;
 
-
 import com.dmmsoft.app.AppConfigurationProvider.AppConfigurationProvider;
-import com.dmmsoft.app.FileIO.FilePath;
+import com.dmmsoft.app.DataLoader.PorfolioLoader;
+import com.dmmsoft.app.Investment.Portfolio;
 
 public class App {
     public static void main(String[] args) throws Exception {
 
-        System.out.println("Hello World!");
-
-        // quick demo of AppConfigurationProvider usage (to remove)
+        // Demo
         AppConfigurationProvider appCon = new AppConfigurationProvider().getConfiguration();
+        Portfolio p = PorfolioLoader.getPortfolio(appCon);
+        p.getInvestments().forEach(System.out::println);
 
-        System.out.println("\n*** Paths from AppConfigurationProvider object:");
-        for (FilePath fp : appCon.getFundFilePaths())
-            System.out.println(fp.getFilePath());
-
-        for (FilePath fp : appCon.getCurrencyFilePaths())
-            System.out.println(fp.getFilePath());
+        /**         ...as you have all data loaded and accessible form Portfolio
+         *          TODO Analyzer processing (extreme methods and other stuff...)
+         */
     }
 }

@@ -10,7 +10,7 @@ public abstract class Investment {
 
     public int Id;
     public String name;
-    public List<Quotation> quotations = new ArrayList<Quotation>();
+    public List<Quotation> quotations = new ArrayList<>();
 
     public int getId() {
         return Id;
@@ -41,18 +41,15 @@ public abstract class Investment {
         this.name = name;
         this.quotations = quotations;
 
+    }
 
-        /*for (Quotation quotation : this.quotations = quotations) {
-            quotation.getId();
-            quotation.getDate();
-            quotation.getOpen();
-            quotation.getHigh();
-            quotation.getLow();
-            quotation.getClose();
-            quotation.getVolume();
-        }
-        ;*/
-
+    @Override
+    public String toString() {
+        return "Investment{" +
+                "Id=" + Id +
+                ", name='" + name + '\'' +
+                ", quotations=" + quotations +
+                '}';
     }
 }
 

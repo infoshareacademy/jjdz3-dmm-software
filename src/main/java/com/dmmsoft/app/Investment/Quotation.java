@@ -7,21 +7,23 @@ import java.util.Date;
  */
 public class Quotation {
 
-    int Id;
     String name;
-    Date date;
+    String date;
     double open;
     double high;
     double low;
     double close;
     double volume;
 
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
+    public Quotation(String name, String date, double open, double high ,double low, double close, double volume)
+    {
+        this.name = name;
+        this.date = date;
+        this.open = open;
+        this.high = high;
+        this.low = low;
+        this.close = close;
+        this.volume = volume;
     }
 
     public String getName() {
@@ -32,11 +34,11 @@ public class Quotation {
         this.name = name;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -78,5 +80,11 @@ public class Quotation {
 
     public void setVolume(double volume) {
         this.volume = volume;
+    }
+
+    @Override
+    public String toString() {
+        return "Quotation [name=" + name + ", date=" + date + ", open="
+                + open + ", high=" + high + ", low=" +low+ ", close=" +close+" , volume=" +volume+ "]";
     }
 }
