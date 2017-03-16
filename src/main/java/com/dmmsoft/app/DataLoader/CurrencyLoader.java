@@ -2,11 +2,9 @@ package com.dmmsoft.app.DataLoader;
 
 import com.dmmsoft.app.Investment.Currency;
 import com.dmmsoft.app.Investment.Quotation;
-import com.dmmsoft.app.Investment.QuotationData;
+import com.dmmsoft.app.Investment.QuotationFactory;
 
 import java.util.ArrayList;
-
-import static java.lang.System.out;
 
 /**
  * Created by Daniel on 06.03.2017.
@@ -28,16 +26,15 @@ public class CurrencyLoader{
         CurrencyQuotations = new ArrayList<Quotation>();
     }
 
-    public int GetNumberOfCurrencies()
-    {
+    public int getNumberOfCurrencies() {
         return currencies.size();
     }
 
 
 
-    public void CreateCurrencysFromFile (String filePath) {
+    public void createCurrenciesFromFile(String filePath) {
         try {
-            QuotationData quotationData = new QuotationData();
+            QuotationFactory quotationData = new QuotationFactory();
             quotationData.loadDataFromFile(""+filePath);
 
             String name = quotationData.getQuotation(0).getName();

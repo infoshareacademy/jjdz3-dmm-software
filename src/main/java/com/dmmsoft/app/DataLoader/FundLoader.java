@@ -2,32 +2,16 @@ package com.dmmsoft.app.DataLoader;
 
 import com.dmmsoft.app.Investment.Fund;
 import com.dmmsoft.app.Investment.Quotation;
-import com.dmmsoft.app.Investment.QuotationData;
+import com.dmmsoft.app.Investment.QuotationFactory;
 
 import java.util.ArrayList;
 
-import static java.lang.System.out;
-
-/**
- * Created by Daniel on 06.03.2017.
- */
 public class FundLoader {
 
+    private ArrayList<Fund> funds = new ArrayList<>();
+    private ArrayList<Quotation> fundQuotations = new ArrayList<>();
 
-    private ArrayList<Fund> funds;
-    public ArrayList<Quotation> FundQuotations;
-
-
-
-
-    public FundLoader()
-    {
-        funds = new ArrayList<Fund>();
-        FundQuotations = new ArrayList<Quotation>();
-    }
-
-    public int GetNumberOfFunds()
-    {
+    public int getNumberOfFunds() {
         return funds.size();
     }
 
@@ -36,26 +20,21 @@ public class FundLoader {
     }  // added by Milo
 
 
-    public void CreateFundsFromFile (String filePath) {
+    public void createFundsFromFile(String filePath) {
         try {
-            QuotationData quotationData = new QuotationData();
+            QuotationFactory quotationData = new QuotationFactory();
             quotationData.loadDataFromFile(""+filePath);
 
             String name = quotationData.getQuotation(0).getName();
             int id = funds.size();
             for (int i = 0; i < quotationData.getNumberOfQuotations(); i++) {
-                FundQuotations.add(quotationData.getQuotation(i));
+                fundQuotations.add(quotationData.getQuotation(i));
             }
 
-            Fund fund = new Fund(id, name, FundQuotations);
+            Fund fund = new Fund(id, name, fundQuotations);
             funds.add(fund);
-
-
         } catch (Exception e) {
-        System.out.println("Error:" + e.getMessage());
+            System.out.println("Error:" + e.getMessage());
+        }
     }
-    }
-
-
-
 }
