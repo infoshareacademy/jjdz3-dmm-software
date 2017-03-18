@@ -1,10 +1,9 @@
 package com.dmmsoft.app.FileIO;
 
-import com.sun.istack.internal.NotNull;
-
-import java.io.*;
-import java.nio.file.Files;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class FileReader {
 
@@ -23,18 +22,5 @@ public class FileReader {
             stringBuilder.append(line);
         }
         return stringBuilder.toString();
-    }
-
-    public void readFile() throws IOException {
-        ClassLoader classLoader = this.getClass().getClassLoader();
-        String filePath = classLoader.getResource(resourceFilePath).getFile();
-        File file = new File(filePath);
-
-        List<String> lines = Files.readAllLines(file.toPath());
-
-        for (String line : lines){
-            System.out.println(line);
-        }
-
     }
 }

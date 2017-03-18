@@ -1,22 +1,18 @@
 package com.dmmsoft.app.Investment;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-/**
- * Created by Milo4321 on 2017-02-09.
- */
 public class Quotation {
 
-    String name;
-    String date;
-    double open;
-    double high;
-    double low;
-    double close;
-    double volume;
+    private String name;
+    private LocalDate date;
+    private double open;
+    private double high;
+    private double low;
+    private double close;
+    private double volume;
 
-    public Quotation(String name, String date, double open, double high ,double low, double close, double volume)
-    {
+    public Quotation(String name, LocalDate date, double open, double high , double low, double close, double volume) {
         this.name = name;
         this.date = date;
         this.open = open;
@@ -34,11 +30,11 @@ public class Quotation {
         this.name = name;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
