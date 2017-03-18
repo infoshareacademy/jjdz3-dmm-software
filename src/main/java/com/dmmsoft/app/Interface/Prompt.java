@@ -48,7 +48,8 @@ public class Prompt extends ConsoleInterface {
     private String getInputFromUser(String prompt) {
         String enteredString = "";
         while (enteredString.trim().isEmpty()) {
-            enteredString = console.readLine(prompt + " ");
+            output.print(prompt + " ");
+            enteredString = scanner.next();
         }
         return enteredString;
     }

@@ -58,7 +58,7 @@ public final class MainController {
             ExtremesResult globalExtremesResult = globalExtremes.getExtremes();
             interfaceStatement.printExtremesResult(globalExtremesResult, Extremes.TYPE.GLOBAL);
         } catch (NoDataForCriteria exception) {
-            System.out.printf(exception.getMessage());
+            System.out.printf(exception.getMessage() + "\n");
         }
     }
 
@@ -72,7 +72,7 @@ public final class MainController {
             ExtremesResult localExtremesResult = localExtremes.getExtremes();
             interfaceStatement.printExtremesResult(localExtremesResult, Extremes.TYPE.LOCAL);
         } catch (NoDataForCriteria exception) {
-            System.out.printf(exception.getMessage());
+            System.out.printf(exception.getMessage() + "\n");
         }
     }
 

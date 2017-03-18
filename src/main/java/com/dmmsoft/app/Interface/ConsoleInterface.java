@@ -1,16 +1,16 @@
 package com.dmmsoft.app.Interface;
 
-import java.io.Console;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 class ConsoleInterface {
 
-    Console console;
+    Scanner scanner;
     PrintStream output;
     PrintStream errorOutput;
 
     ConsoleInterface() {
-        console = System.console();
+        scanner = new Scanner(System.in);
         output = System.out;
         errorOutput = System.err;
     }
