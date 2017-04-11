@@ -1,8 +1,8 @@
 package com.dmmsoft.app.Analyzer.Extremes;
 
 import com.dmmsoft.app.Analyzer.Extremes.Exception.NoDataForCriteria;
-import com.dmmsoft.app.Investment.Investment;
-import com.dmmsoft.app.Investment.Quotation;
+import com.dmmsoft.app.POJO.Investment;
+import com.dmmsoft.app.POJO.Quotation;
 
 import java.util.*;
 

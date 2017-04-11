@@ -1,4 +1,4 @@
-package com.dmmsoft.app.Investment;
+package com.dmmsoft.app.POJO;
 
 import java.time.LocalDate;
 

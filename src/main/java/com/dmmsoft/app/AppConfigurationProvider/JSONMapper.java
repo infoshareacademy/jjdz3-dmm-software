@@ -2,7 +2,7 @@ package com.dmmsoft.app.AppConfigurationProvider;
 
 import java.io.IOException;
 
-import com.dmmsoft.app.Exception.AppConfigurationProviderException;
+import com.dmmsoft.app.AppConfigurationProvider.Exception.AppConfigurationProviderException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 

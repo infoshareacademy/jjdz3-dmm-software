@@ -1,4 +1,4 @@
-package com.dmmsoft.app.Interface.Menu;
+package com.dmmsoft.app.UserInterface.Menu;
 
 public enum ItemId {
     FUNDS,

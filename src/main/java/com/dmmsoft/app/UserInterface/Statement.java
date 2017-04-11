@@ -1,8 +1,8 @@
-package com.dmmsoft.app.Interface;
+package com.dmmsoft.app.UserInterface;
 
 import com.dmmsoft.app.Analyzer.Extremes.Extremes;
 import com.dmmsoft.app.Analyzer.Extremes.ExtremesResult;
-import com.dmmsoft.app.Investment.Portfolio;
+import com.dmmsoft.app.POJO.Portfolio;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

@@ -1,55 +1,59 @@
-package com.dmmsoft.app.Investment;
+package com.dmmsoft.app.POJO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Milo4321 on 2017-02-09.
  */
-public abstract class Investment {
 
-    public int Id;
-    public String name;
-    public List<Quotation> quotations = new ArrayList<>();
+public class Fund extends Investment {
+    int id;
+    String name;
+    List<Quotation> quotations;
 
+    public Fund(int id, String name, List<Quotation> quotations) {
+        super(id, name, quotations);
+        this.id = id;
+        this.name = name;
+        this.quotations = quotations;
+    }
+
+    @Override
     public int getId() {
-        return Id;
+        return id;
     }
 
+    @Override
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public List<Quotation> getQuotations() {
         return quotations;
     }
 
+    @Override
     public void setQuotations(List<Quotation> quotations) {
         this.quotations = quotations;
     }
 
-    public Investment(int id, String name, List<Quotation> quotations) {
-        Id = id;
-        this.name = name;
-        this.quotations = quotations;
-
-    }
-
     @Override
     public String toString() {
-        return "Investment{" +
-                "Id=" + Id +
+        return "Fund {" +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", quotations=" + quotations +
                 '}';
     }
 }
-

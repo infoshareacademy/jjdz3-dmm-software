@@ -1,4 +1,4 @@
-package com.dmmsoft.app.Interface;
+package com.dmmsoft.app.UserInterface;
 
 import java.io.PrintStream;
 import java.util.Scanner;

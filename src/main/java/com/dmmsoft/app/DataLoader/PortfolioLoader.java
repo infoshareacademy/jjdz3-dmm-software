@@ -2,10 +2,10 @@ package com.dmmsoft.app.DataLoader;
 
 import com.dmmsoft.app.AppConfigurationProvider.AppConfigurationProvider;
 import com.dmmsoft.app.FileIO.FilePath;
-import com.dmmsoft.app.Investment.Currency;
-import com.dmmsoft.app.Investment.Fund;
-import com.dmmsoft.app.Investment.Investment;
-import com.dmmsoft.app.Investment.Portfolio;
+import com.dmmsoft.app.POJO.Currency;
+import com.dmmsoft.app.POJO.Fund;
+import com.dmmsoft.app.POJO.Investment;
+import com.dmmsoft.app.POJO.Portfolio;
 
 import java.util.ArrayList;
 import java.util.List;

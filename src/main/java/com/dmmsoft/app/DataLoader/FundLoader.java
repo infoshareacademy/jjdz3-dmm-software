@@ -1,8 +1,8 @@
 package com.dmmsoft.app.DataLoader;
 
-import com.dmmsoft.app.Investment.Fund;
-import com.dmmsoft.app.Investment.Quotation;
-import com.dmmsoft.app.Investment.QuotationFactory;
+import com.dmmsoft.app.POJO.Fund;
+import com.dmmsoft.app.POJO.Quotation;
+import com.dmmsoft.app.POJO.QuotationFactory;
 
 import java.util.ArrayList;
 

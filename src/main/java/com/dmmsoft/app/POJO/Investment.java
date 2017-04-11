@@ -1,63 +1,55 @@
-package com.dmmsoft.app.Investment;
+package com.dmmsoft.app.POJO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Milo4321 on 2017-02-09.
  */
-public class Currency extends Investment {
+public abstract class Investment {
 
-    int id;
-    String name;
-    List<Quotation> quotations;
+    public int Id;
+    public String name;
+    public List<Quotation> quotations = new ArrayList<>();
 
-    public Currency(int id, String name, List<Quotation> quotations) {
-        super(id, name, quotations);
-        this.id = id;
-        this.name = name;
-        this.quotations = quotations;
-    }
-
-    @Override
     public int getId() {
-        return id;
+        return Id;
     }
 
-    @Override
     public void setId(int id) {
-        this.id = id;
+        Id = id;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }
 
-    @Override
     public List<Quotation> getQuotations() {
         return quotations;
     }
 
-    @Override
     public void setQuotations(List<Quotation> quotations) {
         this.quotations = quotations;
     }
 
+    public Investment(int id, String name, List<Quotation> quotations) {
+        Id = id;
+        this.name = name;
+        this.quotations = quotations;
+
+    }
+
     @Override
     public String toString() {
-        return "Currency {" +
-                "id=" + id +
+        return "POJO{" +
+                "Id=" + Id +
                 ", name='" + name + '\'' +
                 ", quotations=" + quotations +
                 '}';
     }
-
-
-
 }
 

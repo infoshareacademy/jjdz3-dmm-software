@@ -1,17 +1,17 @@
-package com.dmmsoft.app.Investment;
+package com.dmmsoft.app.POJO;
 
 import java.util.List;
 
 /**
  * Created by Milo4321 on 2017-02-09.
  */
+public class Currency extends Investment {
 
-public class Fund extends Investment {
     int id;
     String name;
     List<Quotation> quotations;
 
-    public Fund(int id, String name, List<Quotation> quotations) {
+    public Currency(int id, String name, List<Quotation> quotations) {
         super(id, name, quotations);
         this.id = id;
         this.name = name;
@@ -50,10 +50,14 @@ public class Fund extends Investment {
 
     @Override
     public String toString() {
-        return "Fund {" +
+        return "Currency {" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", quotations=" + quotations +
                 '}';
     }
+
+
+
 }
+

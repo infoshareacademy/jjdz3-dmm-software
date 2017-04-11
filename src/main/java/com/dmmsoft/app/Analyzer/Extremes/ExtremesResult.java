@@ -1,6 +1,6 @@
 package com.dmmsoft.app.Analyzer.Extremes;
 
-import com.dmmsoft.app.Investment.Quotation;
+import com.dmmsoft.app.POJO.Quotation;
 
 public class ExtremesResult {
 

@@ -7,10 +7,10 @@ import com.dmmsoft.app.Analyzer.Extremes.ExtremesResult;
 import com.dmmsoft.app.AppConfigurationProvider.AppConfigurationProvider;
 import com.dmmsoft.app.Controller.Exception.IllegalFlow;
 import com.dmmsoft.app.DataLoader.PortfolioLoader;
-import com.dmmsoft.app.Interface.Menu.*;
-import com.dmmsoft.app.Interface.Prompt;
-import com.dmmsoft.app.Interface.Statement;
-import com.dmmsoft.app.Investment.Portfolio;
+import com.dmmsoft.app.UserInterface.Menu.*;
+import com.dmmsoft.app.UserInterface.Prompt;
+import com.dmmsoft.app.UserInterface.Statement;
+import com.dmmsoft.app.POJO.Portfolio;
 import com.dmmsoft.app.ValueObject.DateRange;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.dmmsoft.app.AppConfigurationProvider;
 
-import com.dmmsoft.app.Exception.AppConfigurationProviderException;
+import com.dmmsoft.app.AppConfigurationProvider.Exception.AppConfigurationProviderException;
 import com.dmmsoft.app.FileIO.FilePath;
 import com.dmmsoft.app.FileIO.FileReader;
 
