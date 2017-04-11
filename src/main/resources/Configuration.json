@@ -1,9 +1,26 @@
 {
   "fundFilePaths":[
-    {"filePath":"/Users/AGI001.txt"},
-    {"filePath":"/Users/AGI001.txt"}
+    {"filePath":"/home/milo/Bossa/funds/AGI001.txt"},
+    {"filePath":"/home/milo/Bossa/funds/AIP001.txt"},
+    {"filePath":"/home/milo/Bossa/funds/ALL001.txt"},
+    {"filePath":"/home/milo/Bossa/funds/ALT001.txt"}
   ],
   "currencyFilePaths":[
-    {"filePath":"/Users/AGI001.txt"}
+    {"filePath":"/home/milo/Bossa/currencies/AUD.txt"},
+    {"filePath":"/home/milo/Bossa/currencies/CHF.txt"},
+    {"filePath":"/home/milo/Bossa/currencies/CAD.txt"},
+    {"filePath":"/home/milo/Bossa/currencies/CZK.txt"},
+    {"filePath":"/home/milo/Bossa/currencies/GBP.txt"},
+    {"filePath":"/home/milo/Bossa/currencies/HKD.txt"}
   ]
+
 }
+
+
+
+
+
+
+
+
+
