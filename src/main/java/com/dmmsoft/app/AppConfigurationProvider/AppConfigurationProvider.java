@@ -8,11 +8,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /* Created by Milo4321 on 2017-02-09.
  * reads configuration settings form Configuration.json and maps to AppConfigurationProvider object
  */
 public class AppConfigurationProvider {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AppConfigurationProvider.class);
     private final String CONFIGURATION_FILE_PATH = "Configuration.json";
 
     private List<FilePath> fundFilePaths = new ArrayList<>();
@@ -36,7 +40,8 @@ public class AppConfigurationProvider {
             this.currencyFilePaths = jsonMapper.getAppConfigurationFromJson().currencyFilePaths;
 
         } catch (IOException e) {
-            System.out.println("Error reading the file: " + e.getMessage());
+            // System.out.println("Error reading the file: " + e.getMessage());
+            LOGGER.info("Error reading the file: " + e.getMessage());
         } catch (AppConfigurationProviderException e) {
             System.out.println("Error creating the AppConfigurationProvider: " + e.getMessage());
         }
