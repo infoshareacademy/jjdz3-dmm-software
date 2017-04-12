@@ -40,10 +40,9 @@ public class AppConfigurationProvider {
             this.currencyFilePaths = jsonMapper.getAppConfigurationFromJson().currencyFilePaths;
 
         } catch (IOException e) {
-            // System.out.println("Error reading the file: " + e.getMessage());
             LOGGER.info("Error reading the file: " + e.getMessage());
         } catch (AppConfigurationProviderException e) {
-            System.out.println("Error creating the AppConfigurationProvider: " + e.getMessage());
+            LOGGER.info("Error creating the AppConfigurationProvider: " + e.getMessage());
         }
         return this;
     }

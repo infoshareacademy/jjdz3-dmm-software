@@ -13,16 +13,20 @@ In the compiled artifacts directory `target/`, run:
 
 ## csv data
 
-files to load available at:
+files to download available at:
 http://bossa.pl/notowania/pliki/eod/omega/
 
+```
 omegafun.zip (funds)
 
 omegabp.zip (currencies)
+```
 
 
-
-Default linux OS path examples:
+```
+path examples on linux:
 
 /home/<user_name>/Bossa/funds/AGI001.txt
+
 /home/<user_name>/Bossa/currencies/AUD.txt
+```

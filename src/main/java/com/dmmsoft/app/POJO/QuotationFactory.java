@@ -1,5 +1,9 @@
 package com.dmmsoft.app.POJO;
 
+import com.dmmsoft.app.AppConfigurationProvider.AppConfigurationProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,6 +14,7 @@ public class QuotationFactory {
     private static final String DATE_FORMAT = "yyyyMMdd";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
     private ArrayList<Quotation> quotations = new ArrayList<>();
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuotationFactory.class);
 
     public int getNumberOfQuotations() {
         return quotations.size();
@@ -37,7 +42,7 @@ public class QuotationFactory {
             }
             scanner.close();
         } catch (Exception e) {
-            System.out.println("Error:" + e.getMessage());
+            LOGGER.info("Error parsing csv files " + e.getMessage());
         }
     }
 }
