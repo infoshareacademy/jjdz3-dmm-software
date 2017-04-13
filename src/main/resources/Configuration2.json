@@ -1,9 +1,11 @@
 {
+  "fundFolderPath":{"folderPath":"/home/milo/bossa/funds/"},
+  "currencyFolderPath":{"folderPath":"/home/milo/bossa/currencies/"},
+
   "fundFilePaths":[
     {"filePath":"/home/milo/bossa/funds/AGI001.txt"},
-    {"filePath":"/home/milo/bossa/funds/AIP001.txt"},
-    {"filePath":"/home/milo/bossa/funds/ALL001.txt"},
-    {"filePath":"/home/milo/bossa/funds/ALT001.txt"}
+    {"filePath":"/home/milo/bossa/funds/AIP001.txt"}
+
   ],
   "currencyFilePaths":[
     {"filePath":"/home/milo/bossa/currencies/AUD.txt"},
@@ -13,6 +15,7 @@
     {"filePath":"/home/milo/bossa/currencies/GBP.txt"},
     {"filePath":"/home/milo/bossa/currencies/HKD.txt"}
   ]
+
 
 }
 

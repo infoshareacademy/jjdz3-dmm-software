@@ -4,7 +4,7 @@ import com.dmmsoft.app.Analyzer.Extremes.Exception.NoDataForCriteria;
 import com.dmmsoft.app.Analyzer.Extremes.Extremes;
 import com.dmmsoft.app.Analyzer.Extremes.LocalExtremes;
 import com.dmmsoft.app.Analyzer.Extremes.ExtremesResult;
-import com.dmmsoft.app.AppConfigurationProvider.AppConfigurationProvider;
+import com.dmmsoft.app.AppConfiguration.AppConfigurationProvider;
 import com.dmmsoft.app.Controller.Exception.IllegalFlow;
 import com.dmmsoft.app.DataLoader.PortfolioLoader;
 import com.dmmsoft.app.UserInterface.Menu.*;

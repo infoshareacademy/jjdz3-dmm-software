@@ -1,7 +1,7 @@
 package com.dmmsoft.app.DataLoader;
 
-import com.dmmsoft.app.AppConfigurationProvider.AppConfigurationProvider;
-import com.dmmsoft.app.FileIO.FilePath;
+import com.dmmsoft.app.AppConfiguration.AppConfigurationProvider;
+import com.dmmsoft.app.FileIO.Path.FilePath;
 import com.dmmsoft.app.POJO.Currency;
 import com.dmmsoft.app.POJO.Fund;
 import com.dmmsoft.app.POJO.Investment;

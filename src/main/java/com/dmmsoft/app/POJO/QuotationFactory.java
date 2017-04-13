@@ -1,6 +1,5 @@
 package com.dmmsoft.app.POJO;
 
-import com.dmmsoft.app.AppConfigurationProvider.AppConfigurationProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,8 +1,8 @@
-package com.dmmsoft.app.AppConfigurationProvider;
+package com.dmmsoft.app.AppConfiguration;
 
 import java.io.IOException;
 
-import com.dmmsoft.app.AppConfigurationProvider.Exception.AppConfigurationProviderException;
+import com.dmmsoft.app.AppConfiguration.Exception.AppConfigurationProviderException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -22,4 +22,6 @@ public class JSONMapper {
             throw new AppConfigurationProviderException(e);
         }
     }
+
+
 }
