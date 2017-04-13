@@ -1,7 +1,7 @@
 ### DMM-finance 
 ##### financial-app.jar library
 ---
-####gif Build
+#### Build
 Run Maven package command from the project root:
 ```bash
     mvn package
