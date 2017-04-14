@@ -1,8 +1,8 @@
 package com.dmmsoft.app.UserInterface;
 
-import com.dmmsoft.app.Analyzer.Extremes.Extremes;
-import com.dmmsoft.app.Analyzer.Extremes.ExtremesResult;
-import com.dmmsoft.app.POJO.Portfolio;
+import com.dmmsoft.app.Analyzer.C01Extremes.Extremes;
+import com.dmmsoft.app.Analyzer.C01Extremes.ExtremesResult;
+import com.dmmsoft.app.POJO.MainDataContainer;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -28,11 +28,11 @@ public class Statement extends ConsoleInterface {
         output.println(SPLASH_MESSAGE + "\n");
     }
 
-    public void printInvestmentCount(Portfolio portfolio) {
+    public void printInvestmentCount(MainDataContainer mainDataContainer) {
         output.printf(
             LOADED_INVESTMENTS_COUNT + "\n\n",
-            portfolio.getFundsCount(),
-            portfolio.getCurrenciesCount()
+            mainDataContainer.getFundsCount(),
+            mainDataContainer.getCurrenciesCount()
         );
     }
 

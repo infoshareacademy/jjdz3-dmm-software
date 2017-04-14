@@ -1,4 +1,4 @@
-package com.dmmsoft.app.Analyzer.Extremes;
+package com.dmmsoft.app.Analyzer.C01Extremes;
 
 import com.dmmsoft.app.POJO.Investment;
 import com.dmmsoft.app.POJO.Quotation;

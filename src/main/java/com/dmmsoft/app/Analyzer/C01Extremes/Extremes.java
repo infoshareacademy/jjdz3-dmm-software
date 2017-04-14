@@ -1,6 +1,6 @@
-package com.dmmsoft.app.Analyzer.Extremes;
+package com.dmmsoft.app.Analyzer.C01Extremes;
 
-import com.dmmsoft.app.Analyzer.Extremes.Exception.NoDataForCriteria;
+import com.dmmsoft.app.Analyzer.C01Extremes.Exception.NoDataForCriteria;
 import com.dmmsoft.app.POJO.Investment;
 import com.dmmsoft.app.POJO.Quotation;
 

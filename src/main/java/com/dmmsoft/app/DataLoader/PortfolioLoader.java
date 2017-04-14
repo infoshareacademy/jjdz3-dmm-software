@@ -5,7 +5,7 @@ import com.dmmsoft.app.FileIO.Path.FilePath;
 import com.dmmsoft.app.POJO.Currency;
 import com.dmmsoft.app.POJO.Fund;
 import com.dmmsoft.app.POJO.Investment;
-import com.dmmsoft.app.POJO.Portfolio;
+import com.dmmsoft.app.POJO.MainDataContainer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class PortfolioLoader {
     private List<Fund> funds = new ArrayList<>();
     private List<Currency> currencies = new ArrayList<>() ;
     private List<Investment> investments = new ArrayList<>();
-    private Portfolio portfolio = new Portfolio();
+    private MainDataContainer mainDataContainer = new MainDataContainer();
     private FundLoader fundLoader = new FundLoader();
     private CurrencyLoader currencyLoader = new CurrencyLoader();
 
@@ -40,10 +40,10 @@ public class PortfolioLoader {
         this.appCon = appCon;
     }
 
-    public Portfolio getPortfolio() {
-        portfolio.setInvestments(investments);
-        portfolio.setFundsCount(fundLoader.getNumberOfFunds());
-        portfolio.setCurrenciesCount(currencyLoader.getNumberOfCurrencies());
-        return portfolio;
+    public MainDataContainer getMainDataContainer() {
+        mainDataContainer.setInvestments(investments);
+        mainDataContainer.setFundsCount(fundLoader.getNumberOfFunds());
+        mainDataContainer.setCurrenciesCount(currencyLoader.getNumberOfCurrencies());
+        return mainDataContainer;
     }
 }

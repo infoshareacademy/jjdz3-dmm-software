@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Milo4321 on 2017-03-08.
  */
-public class Portfolio {
+public class MainDataContainer {
 
     private int fundsCount = 0;
     private int currenciesCount = 0;
@@ -39,7 +39,7 @@ public class Portfolio {
 
     @Override
     public String toString() {
-        return "Portfolio{" +
+        return "MainDataContainer{" +
                 "investments=" + investments +
                 '}';
     }
