@@ -1,13 +1,12 @@
 package com.dmmsoft.app.Analyzer;
 
 import com.dmmsoft.app.AppConfiguration.AppConfigurationProvider;
-import com.dmmsoft.app.DataLoader.PortfolioLoader;
+import com.dmmsoft.app.DataLoader.MainContainerLoader;
 import com.dmmsoft.app.FileIO.Path.FilePath;
 import com.dmmsoft.app.POJO.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,12 +18,12 @@ public class demo {
     public static void main(String[] args) {
 
         AppConfigurationProvider appCon = new AppConfigurationProvider().getConfiguration();
-        PortfolioLoader portfolioLoader = new PortfolioLoader(appCon);
+        MainContainerLoader mainContainerLoader = new MainContainerLoader(appCon);
 
-        portfolioLoader.loadFunds();
-        portfolioLoader.loadCurrencies();
+        mainContainerLoader.loadFunds();
+        mainContainerLoader.loadCurrencies();
 
-        MainDataContainer mdc = portfolioLoader.getMainDataContainer();
+        MainContainer mdc = mainContainerLoader.getMainContainer();
         List<Investment> investments = mdc.getInvestments();
 
         List<Quotation> filteredQuotations = new ArrayList<>();

@@ -6,8 +6,8 @@ import com.dmmsoft.app.Analyzer.C01Extremes.LocalExtremes;
 import com.dmmsoft.app.Analyzer.C01Extremes.ExtremesResult;
 import com.dmmsoft.app.AppConfiguration.AppConfigurationProvider;
 import com.dmmsoft.app.Controller.Exception.IllegalFlow;
-import com.dmmsoft.app.DataLoader.PortfolioLoader;
-import com.dmmsoft.app.POJO.MainDataContainer;
+import com.dmmsoft.app.DataLoader.MainContainerLoader;
+import com.dmmsoft.app.POJO.MainContainer;
 import com.dmmsoft.app.UserInterface.Menu.*;
 import com.dmmsoft.app.UserInterface.Prompt;
 import com.dmmsoft.app.UserInterface.Statement;
@@ -19,7 +19,7 @@ public final class MainController {
 
     private final Statement interfaceStatement = new Statement();
     private final Prompt interfacePrompt = new Prompt();
-    private MainDataContainer mainDataContainer;
+    private MainContainer mainContainer;
 
     public void init() {
         interfaceStatement.printSplashMessage();
@@ -29,18 +29,18 @@ public final class MainController {
 
     private void loadPortfolio() {
         AppConfigurationProvider appCon = new AppConfigurationProvider().getConfiguration();
-        PortfolioLoader portfolioLoader = new PortfolioLoader(appCon);
+        MainContainerLoader mainContainerLoader = new MainContainerLoader(appCon);
         ItemId typeOfInvestment = askForInputFromMenu(new SelectTypeOfInvestmentMenu());
         switch (typeOfInvestment) {
             case CURRENCIES:
-                portfolioLoader.loadCurrencies();
+                mainContainerLoader.loadCurrencies();
                 break;
             case FUNDS:
-                portfolioLoader.loadFunds();
+                mainContainerLoader.loadFunds();
                 break;
         }
-        mainDataContainer = portfolioLoader.getMainDataContainer();
-        interfaceStatement.printInvestmentCount(mainDataContainer);
+        mainContainer = mainContainerLoader.getMainContainer();
+        interfaceStatement.printInvestmentCount(mainContainer);
     }
 
 
@@ -53,7 +53,7 @@ public final class MainController {
     }
 
     private void getGlobalExtremes() {
-        Extremes globalExtremes = new Extremes(mainDataContainer.getInvestments());
+        Extremes globalExtremes = new Extremes(mainContainer.getInvestments());
         try {
             ExtremesResult globalExtremesResult = globalExtremes.getExtremes();
             interfaceStatement.printExtremesResult(globalExtremesResult, Extremes.TYPE.GLOBAL);
@@ -66,7 +66,7 @@ public final class MainController {
         Extremes localExtremes = new LocalExtremes(
             dateRange.getStartDate(),
             dateRange.getStopDate(),
-            mainDataContainer.getInvestments()
+            mainContainer.getInvestments()
         );
         try {
             ExtremesResult localExtremesResult = localExtremes.getExtremes();

@@ -5,18 +5,18 @@ import com.dmmsoft.app.FileIO.Path.FilePath;
 import com.dmmsoft.app.POJO.Currency;
 import com.dmmsoft.app.POJO.Fund;
 import com.dmmsoft.app.POJO.Investment;
-import com.dmmsoft.app.POJO.MainDataContainer;
+import com.dmmsoft.app.POJO.MainContainer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PortfolioLoader {
+public class MainContainerLoader {
 
     private AppConfigurationProvider appCon;
     private List<Fund> funds = new ArrayList<>();
     private List<Currency> currencies = new ArrayList<>() ;
     private List<Investment> investments = new ArrayList<>();
-    private MainDataContainer mainDataContainer = new MainDataContainer();
+    private MainContainer mainContainer = new MainContainer();
     private FundLoader fundLoader = new FundLoader();
     private CurrencyLoader currencyLoader = new CurrencyLoader();
 
@@ -36,14 +36,14 @@ public class PortfolioLoader {
         investments.addAll(currencies);
     }
 
-    public PortfolioLoader(AppConfigurationProvider appCon) {
+    public MainContainerLoader(AppConfigurationProvider appCon) {
         this.appCon = appCon;
     }
 
-    public MainDataContainer getMainDataContainer() {
-        mainDataContainer.setInvestments(investments);
-        mainDataContainer.setFundsCount(fundLoader.getNumberOfFunds());
-        mainDataContainer.setCurrenciesCount(currencyLoader.getNumberOfCurrencies());
-        return mainDataContainer;
+    public MainContainer getMainContainer() {
+        mainContainer.setInvestments(investments);
+        mainContainer.setFundsCount(fundLoader.getNumberOfFunds());
+        mainContainer.setCurrenciesCount(currencyLoader.getNumberOfCurrencies());
+        return mainContainer;
     }
 }

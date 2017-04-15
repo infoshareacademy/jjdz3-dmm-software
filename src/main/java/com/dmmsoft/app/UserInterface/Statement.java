@@ -2,7 +2,7 @@ package com.dmmsoft.app.UserInterface;
 
 import com.dmmsoft.app.Analyzer.C01Extremes.Extremes;
 import com.dmmsoft.app.Analyzer.C01Extremes.ExtremesResult;
-import com.dmmsoft.app.POJO.MainDataContainer;
+import com.dmmsoft.app.POJO.MainContainer;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -28,11 +28,11 @@ public class Statement extends ConsoleInterface {
         output.println(SPLASH_MESSAGE + "\n");
     }
 
-    public void printInvestmentCount(MainDataContainer mainDataContainer) {
+    public void printInvestmentCount(MainContainer mainContainer) {
         output.printf(
             LOADED_INVESTMENTS_COUNT + "\n\n",
-            mainDataContainer.getFundsCount(),
-            mainDataContainer.getCurrenciesCount()
+            mainContainer.getFundsCount(),
+            mainContainer.getCurrenciesCount()
         );
     }
 
