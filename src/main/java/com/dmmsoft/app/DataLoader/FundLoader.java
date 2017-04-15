@@ -2,39 +2,54 @@ package com.dmmsoft.app.DataLoader;
 
 import com.dmmsoft.app.POJO.Fund;
 import com.dmmsoft.app.POJO.Quotation;
-import com.dmmsoft.app.POJO.QuotationFactory;
+
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class FundLoader {
+public class FundLoader extends Loader {
 
-    private ArrayList<Fund> funds = new ArrayList<>();
-    private ArrayList<Quotation> fundQuotations = new ArrayList<>();
+    private List<Fund> funds = new ArrayList<>();
 
     public int getNumberOfFunds() {
         return funds.size();
     }
 
-    public ArrayList<Fund> getFunds() {
+    public List<Fund> getFunds() {
         return funds;
-    }  // added by Milo
+    }
 
 
     public void createFundsFromFile(String filePath) {
         try {
-            QuotationFactory quotationData = new QuotationFactory();
-            quotationData.loadDataFromFile(""+filePath);
-
-            String name = quotationData.getQuotation(0).getName();
+            List<Quotation> quotationList = this.getQuotationsList(filePath);
+            String name = quotationList.get(0).getName();
             int id = funds.size();
-            for (int i = 0; i < quotationData.getNumberOfQuotations(); i++) {
-                fundQuotations.add(quotationData.getQuotation(i));
-            }
 
-            Fund fund = new Fund(id, name, fundQuotations);
+            //....//
+
+            Fund fund = new Fund(id, name, quotationList);
             funds.add(fund);
+
         } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
         }
     }
 }
+
+
+
+            /*
+            QuotationFactory quotationData = new QuotationFactory();
+            quotationData.loadDataFromFile("" + filePath);
+
+            String name = quotationData.getQuotation(0).getName();
+            int id = funds.size();
+
+            ArrayList<Quotation> fundQuotations = new ArrayList<>();
+
+            for (int i = 0; i < quotationData.getNumberOfQuotations(); i++) {
+                fundQuotations.add(quotationData.getQuotation(i));
+            }
+            this.deltaValueOfClose(fundQuotations);
+            */

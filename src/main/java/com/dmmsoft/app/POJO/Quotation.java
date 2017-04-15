@@ -2,7 +2,7 @@ package com.dmmsoft.app.POJO;
 
 import java.time.LocalDate;
 
-public class Quotation {
+public class Quotation implements Comparable<Quotation> {
 
     private String name;
     private LocalDate date;
@@ -12,6 +12,9 @@ public class Quotation {
     private double close;
     private double volume;
 
+
+    private double deltaClose;
+
     public Quotation(String name, LocalDate date, double open, double high , double low, double close, double volume) {
         this.name = name;
         this.date = date;
@@ -19,6 +22,7 @@ public class Quotation {
         this.high = high;
         this.low = low;
         this.close = close;
+        // this.deltaClose =deltaClose;
         this.volume = volume;
     }
 
@@ -78,9 +82,32 @@ public class Quotation {
         this.volume = volume;
     }
 
+
+    public double getDeltaClose() {
+        return deltaClose;
+    }
+
+    public void setDeltaClose(double deltaClose) {
+        this.deltaClose = deltaClose;
+    }
+
+
+
+
+
     @Override
     public String toString() {
-        return "Quotation [name=" + name + ", date=" + date + ", open="
-                + open + ", high=" + high + ", low=" +low+ ", close=" +close+" , volume=" +volume+ "]";
+        return "\nQuotation [name=" + name + ", date=" + date + ", open="
+               + open + ", high=" + high + ", low=" +low+ ", close=" +close+" , volume=" +volume+", deltaClose="+deltaClose+"%]";
+            //    + open + ", high=" + high + ", low=" +low+ ", close=" +close+" , volume=" +volume+"]";
     }
+
+
+    @Override
+    public int compareTo(Quotation o) {
+        if (getDate() == null || o.getDate() == null)
+            return 0;
+        return getDate().compareTo(o.getDate());
+    }
+
 }

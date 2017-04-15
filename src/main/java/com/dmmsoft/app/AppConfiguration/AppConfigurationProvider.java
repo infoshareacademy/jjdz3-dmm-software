@@ -62,7 +62,7 @@ public class AppConfigurationProvider {
             this.currencyFolderPath = jsonMapper.getAppConfigurationFromJson().currencyFolderPath;
 
             if(fundFilePaths.isEmpty()||fundFilePaths==null) {
-                this.fundFilePaths = this.generateFilePaths(this.getFundFolderPath().getFolderPath(),
+                this.fundFilePaths = this.generateFilePaths(fundFolderPath.getFolderPath(),
                         this.getFileNameList(fundFolderPath.getFolderPath()));
             }
 

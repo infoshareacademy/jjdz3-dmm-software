@@ -5,54 +5,36 @@ import com.dmmsoft.app.POJO.Quotation;
 import com.dmmsoft.app.POJO.QuotationFactory;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Daniel on 06.03.2017.
  */
-public class CurrencyLoader{
+public class CurrencyLoader extends Loader {
 
-
-    private ArrayList<Currency> currencies;
-    public ArrayList<Quotation> CurrencyQuotations;
-
-
-    public ArrayList<Currency> getCurrencies() {
-        return currencies;
-    }
-
-    public CurrencyLoader()
-    {
-        currencies = new ArrayList<Currency>();
-        CurrencyQuotations = new ArrayList<Quotation>();
-    }
+    private List<Currency> currencies = new ArrayList<>();
 
     public int getNumberOfCurrencies() {
         return currencies.size();
     }
 
-
+    public List<Currency> getCurrencies() {
+        return currencies;
+    }
 
     public void createCurrenciesFromFile(String filePath) {
         try {
-            QuotationFactory quotationData = new QuotationFactory();
-            quotationData.loadDataFromFile(""+filePath);
-
-            String name = quotationData.getQuotation(0).getName();
+            List<Quotation> quotationList = this.getQuotationsList(filePath);
+            String name = quotationList.get(0).getName();
             int id = currencies.size();
-            for (int i = 0; i < quotationData.getNumberOfQuotations(); i++) {
-                CurrencyQuotations.add(quotationData.getQuotation(i));
-            }
-            ;
-            Currency currency = new Currency(id, name, CurrencyQuotations);
+
+            Currency currency = new Currency(id, name, quotationList);
             currencies.add(currency);
-
-
 
         } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
         }
     }
-
 
 
 }

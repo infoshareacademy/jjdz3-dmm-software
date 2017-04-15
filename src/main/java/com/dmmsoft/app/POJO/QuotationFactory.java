@@ -12,7 +12,7 @@ public class QuotationFactory {
 
     private static final String DATE_FORMAT = "yyyyMMdd";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-    private ArrayList<Quotation> quotations = new ArrayList<>();
+    private List<Quotation> quotations = new ArrayList<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(QuotationFactory.class);
 
     public int getNumberOfQuotations() {
@@ -36,12 +36,19 @@ public class QuotationFactory {
                 double low = Double.parseDouble(data[4]);
                 double close = Double.parseDouble(data[5]);
                 double volume = Double.parseDouble(data[6]);
+
                 Quotation quotation = new Quotation(name, date, open, high, low, close, volume);
                 quotations.add(quotation);
+
             }
-            scanner.close();
+
+        scanner.close();
+
         } catch (Exception e) {
             LOGGER.info("Error parsing csv files " + e.getMessage());
+        }
+        finally {
+
         }
     }
 }
