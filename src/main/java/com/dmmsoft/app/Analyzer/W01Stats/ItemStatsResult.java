@@ -10,13 +10,31 @@ public class ItemStatsResult {
 
 
     private String name;
-    private Quotation actualValue;
+    private Quotation firstQuotation;
+    private Quotation lastQuotation;
     private Quotation maxValueQuotation;
     private Quotation minValueQuotation;
-    private Quotation maxDeltaMinus;
     private Quotation maxDeltaPlus;
-    private DateTime firstQuotationDate;
+    private Quotation maxDeltaMinus;
+    private Quotation actualValue;
+
     private boolean isStillQuotable;
+
+    public Quotation getFirstQuotation() {
+        return firstQuotation;
+    }
+
+    public void setFirstQuotation(Quotation firstQuotation) {
+        this.firstQuotation = firstQuotation;
+    }
+
+    public Quotation getLastQuotation() {
+        return lastQuotation;
+    }
+
+    public void setLastQuotation(Quotation lastQuotation) {
+        this.lastQuotation = lastQuotation;
+    }
 
     public String getName() {
         return name;
@@ -58,13 +76,6 @@ public class ItemStatsResult {
         this.maxDeltaPlus = maxDeltaPlus;
     }
 
-    public DateTime getFirstQuotationDate() {
-        return firstQuotationDate;
-    }
-
-    public void setFirstQuotationDate(DateTime firstQuotationDate) {
-        this.firstQuotationDate = firstQuotationDate;
-    }
 
     public boolean isStillQuotable() {
         return isStillQuotable;
@@ -81,4 +92,21 @@ public class ItemStatsResult {
     public void setMinValueQuotation(Quotation minValueQuotation) {
         this.minValueQuotation = minValueQuotation;
     }
+
+
+    @Override
+    public String toString() {
+        return "ItemStatsResult{" +
+                "name='" + name + '\'' +
+                ", \nfirstQuotation=" + firstQuotation +
+                ", \nlastQuotation=" + lastQuotation +
+                ", \nmaxValueQuotation=" + maxValueQuotation +
+                ", \nminValueQuotation=" + minValueQuotation +
+                ", \nmaxDeltaPlus=" + maxDeltaPlus +
+                ", \nmaxDeltaMinus=" + maxDeltaMinus +
+                ", \nactualValue=" + actualValue +
+                ", \nisStillQuotable=" + isStillQuotable +
+                '}';
+    }
 }
+

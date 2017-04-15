@@ -1,5 +1,7 @@
 package com.dmmsoft.app.Analyzer;
 
+import com.dmmsoft.app.Analyzer.W01Stats.ItemStats;
+import com.dmmsoft.app.Analyzer.W01Stats.ItemStatsResult;
 import com.dmmsoft.app.AppConfiguration.AppConfigurationProvider;
 import com.dmmsoft.app.DataLoader.MainContainerLoader;
 import com.dmmsoft.app.FileIO.Path.FilePath;
@@ -49,13 +51,19 @@ public class demo {
 
         investments.forEach((Investment investment) -> {
             List<Quotation> quotationsPerInvestment = investment.getQuotations().stream()
-                    .filter(x -> x.getName().equals("AUD"))
+                    .filter(x -> x.getName().equals("AGI001"))
                     .collect(Collectors.toList());
             filteredQuotations.addAll(quotationsPerInvestment);
             Collections.sort(filteredQuotations);
         });
 
         System.out.println(filteredQuotations);
+
+
+        // Example of Analyzer usage (ItemStats)
+
+        ItemStatsResult s = new ItemStats().getResult(investments, "AIP001");
+        System.out.println(s.toString());
 
     }
 

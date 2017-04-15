@@ -97,9 +97,14 @@ public class Quotation implements Comparable<Quotation> {
 
     @Override
     public String toString() {
-        return "\nQuotation [name=" + name + ", date=" + date + ", open="
-               + open + ", high=" + high + ", low=" +low+ ", close=" +close+" , volume=" +volume+", deltaClose="+deltaClose+"%]";
-            //    + open + ", high=" + high + ", low=" +low+ ", close=" +close+" , volume=" +volume+"]";
+        return "Quotation [name=" + name + ", date=" + date +
+              //  ", open=" + open +
+              //  ", high=" + high +
+              //  ", low=" +low+
+                ", " + "close=" +close+
+               // " , volume=" +volume+
+                ", deltaClose="+deltaClose+"%] \n";
+
     }
 
 
