@@ -1,7 +1,7 @@
 package com.dmmsoft.app.Analyzer;
 
-import com.dmmsoft.app.Analyzer.W01Stats.ItemStats;
-import com.dmmsoft.app.Analyzer.W01Stats.ItemStatsResult;
+import com.dmmsoft.app.Analyzer.Analysis.Stats.ItemStats;
+import com.dmmsoft.app.Analyzer.Analysis.Stats.ItemStatsResult;
 import com.dmmsoft.app.AppConfiguration.AppConfigurationProvider;
 import com.dmmsoft.app.DataLoader.MainContainerLoader;
 import com.dmmsoft.app.FileIO.Path.FilePath;

@@ -33,7 +33,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>com.dmmsoft.app.App</mainClass>
+              <mainClass>com.dmmsoft.app.ConsoleApp.App</mainClass>
             </manifest>
           </archive>
         </configuration>

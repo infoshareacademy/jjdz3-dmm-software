@@ -19,7 +19,7 @@
         <Logger name="com.dmmsoft.app.AppConfiguration" level="TRACE">
             <AppenderRef ref="MainLogger"/>
         </Logger>
-        <Logger name="com.dmmsoft.app.App" level="TRACE">
+        <Logger name="com.dmmsoft.app.ConsoleApp.App" level="TRACE">
             <AppenderRef ref="Console"/>
         </Logger>
         <Root level="trace">

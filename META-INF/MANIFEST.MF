@@ -1,3 +1,3 @@
 Class-Path: .
-Main-Class: com.dmmsoft.app.App
+Main-Class: com.dmmsoft.app.ConsoleApp.App
 
