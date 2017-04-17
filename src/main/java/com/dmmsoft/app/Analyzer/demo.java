@@ -1,12 +1,18 @@
 package com.dmmsoft.app.Analyzer;
 
+import com.dmmsoft.app.Analyzer.Analysis.Revenue.InvestmentRevenue;
+import com.dmmsoft.app.Analyzer.Analysis.Revenue.InvestmentRevenueQuery;
+import com.dmmsoft.app.Analyzer.Analysis.Revenue.InvestmentRevenureResult;
 import com.dmmsoft.app.Analyzer.Analysis.Stats.ItemStats;
+import com.dmmsoft.app.Analyzer.Analysis.Stats.ItemStatsQuery;
 import com.dmmsoft.app.Analyzer.Analysis.Stats.ItemStatsResult;
 import com.dmmsoft.app.AppConfiguration.AppConfigurationProvider;
 import com.dmmsoft.app.DataLoader.MainContainerLoader;
 import com.dmmsoft.app.FileIO.Path.FilePath;
 import com.dmmsoft.app.POJO.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,51 +25,40 @@ public class demo {
 
     public static void main(String[] args) {
 
+        // test values
+        Double capital = 10000.00;
+        DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
+        LocalDate BUY_DATE = LocalDate.parse("20090910", formatter);
+        LocalDate SELL_DATE = LocalDate.parse("20120530", formatter);
+        String InvestmentName = "CHF";
+
         AppConfigurationProvider appCon = new AppConfigurationProvider().getConfiguration();
         MainContainerLoader mainContainerLoader = new MainContainerLoader(appCon);
 
         mainContainerLoader.loadFunds();
         mainContainerLoader.loadCurrencies();
 
-        MainContainer mdc = mainContainerLoader.getMainContainer();
-        List<Investment> investments = mdc.getInvestments();
-
-        List<Quotation> filteredQuotations = new ArrayList<>();
-
-        // to test choose investment id:
-
-        Investment f = (Investment) investments.get(5);
-        List<Quotation> quots = f.getQuotations();
-        Quotation q = quots.get(0);
 
         for (FilePath item : appCon.getFundFilePaths()) {
             System.out.println(item.getFilePath());
         }
-
         for (FilePath item : appCon.getCurrencyFilePaths()) {
             System.out.println(item.getFilePath());
         }
 
+        MainContainer mc = mainContainerLoader.getMainContainer();
+
+        List<Investment> investments = mc.getInvestments();
+
         System.out.println("1. number of Investments loaded: " + investments.size());
-        System.out.println("2. name of first Investment: " + f.getName());
-        System.out.println("3. number of Quotations of first Investment: " + quots.size());
-        System.out.println("4. name of Investment extracted form Quotation: " + q.getName());
 
-        investments.forEach((Investment investment) -> {
-            List<Quotation> quotationsPerInvestment = investment.getQuotations().stream()
-                    .filter(x -> x.getName().equals("AGI001"))
-                    .collect(Collectors.toList());
-            filteredQuotations.addAll(quotationsPerInvestment);
-            Collections.sort(filteredQuotations);
-        });
+        // ItemStatsResult s = new ItemStats().getResult(investments, new ItemStatsQuery("AIP001"));
 
-        System.out.println(filteredQuotations);
+        InvestmentRevenueQuery q = new InvestmentRevenueQuery(capital, BUY_DATE, SELL_DATE, InvestmentName);
+        InvestmentRevenureResult ir = new InvestmentRevenue(mc).getEstimatedRevenue(q);
 
-
-        // Example of Analyzer usage (ItemStats)
-
-        ItemStatsResult s = new ItemStats().getResult(investments, "AIP001");
-        System.out.println(s.toString());
+        System.out.println(ir.getCapitalRevenueValue());
+        System.out.println(ir.getCapitalRevenueDeltaPrecentValue());
 
     }
 

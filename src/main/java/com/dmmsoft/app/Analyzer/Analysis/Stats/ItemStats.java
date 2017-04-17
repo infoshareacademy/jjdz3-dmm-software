@@ -14,10 +14,10 @@ public class ItemStats {
 
     private final int DAYS_SINCE_LAST_QUOTATION = 7;
 
-    public ItemStatsResult getResult(List<Investment> invList, String investmentName) {
+    public ItemStatsResult getResult(List<Investment> invList, ItemStatsQuery query) {
 
 
-        Predicate<Investment> investmentPredicate = x -> x.getName().equals(investmentName);
+        Predicate<Investment> investmentPredicate = x -> x.getName().equals(query.getName());
 
         Investment invToProcess = invList.stream()
                 .filter(investmentPredicate)
