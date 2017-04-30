@@ -1,0 +1,57 @@
+package com.dmmsoft.app.consoleapp.userinterface;
+
+import com.dmmsoft.app.consoleapp.userinterface.menu.Menu;
+import com.dmmsoft.app.consoleapp.userinterface.menu.MenuItem;
+import com.dmmsoft.app.consoleapp.validator.AccessKeyValidator;
+import com.dmmsoft.app.consoleapp.validator.DateRangeValidator;
+import com.dmmsoft.app.consoleapp.valueobject.DateRange;
+
+import java.util.Optional;
+
+public class Prompt extends ConsoleInterface {
+
+    private static final String USER_DATE_FORMAT = "RRRR-MM-DD";
+    private static final String ENTER_START_DATE = "Podaj datę rozpoczęcia notowań (" + USER_DATE_FORMAT + "):";
+    private static final String ENTER_STOP_DATE = "Podaj datę zakończenia notowań (" + USER_DATE_FORMAT + "):";
+
+    public Prompt() {
+        super();
+    }
+
+    public DateRange askForStartStopDates() {
+        DateRangeValidator validator = new DateRangeValidator();
+        while (true) {
+            validator.clearMessages();
+            validator.setStartDate(getInputFromUser(ENTER_START_DATE))
+                .setStopDate(getInputFromUser(ENTER_STOP_DATE));
+            if (validator.validate()) {
+                return new DateRange(validator.getStartDate(), validator.getStopDate());
+            }
+            validator.getMessages().forEach(errorOutput::println);
+        }
+    }
+
+    public Optional<MenuItem> askForInputFromMenu(Menu menu) {
+        AccessKeyValidator validator = new AccessKeyValidator();
+        validator.setAllowedAccessKeys(menu.getAccessKeys());
+        output.println(menu.getPromptMessage());
+        while (true) {
+            String enteredString = getInputFromUser(menu.getPrintableMenu()).trim();
+            validator.clearMessages();
+            validator.setEnteredString(enteredString);
+            if (validator.validate()) {
+                return menu.getItemByAccessKey(enteredString);
+            }
+            validator.getMessages().forEach(errorOutput::println);
+        }
+    }
+
+    private String getInputFromUser(String prompt) {
+        String enteredString = "";
+        while (enteredString.trim().isEmpty()) {
+            output.print(prompt + " ");
+            enteredString = scanner.next();
+        }
+        return enteredString;
+    }
+}

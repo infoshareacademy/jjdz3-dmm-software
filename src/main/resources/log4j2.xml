@@ -16,10 +16,10 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="com.dmmsoft.app.AppConfiguration" level="TRACE">
+        <Logger name="com.dmmsoft.app.appconfiguration" level="TRACE">
             <AppenderRef ref="MainLogger"/>
         </Logger>
-        <Logger name="com.dmmsoft.app.ConsoleApp.App" level="TRACE">
+        <Logger name="com.dmmsoft.app.consoleapp.App" level="TRACE">
             <AppenderRef ref="Console"/>
         </Logger>
         <Root level="trace">
