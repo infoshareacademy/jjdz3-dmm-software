@@ -6,6 +6,14 @@ package com.dmmsoft.app.analyzer.analyses;
 public class AnalysisInput {
 
     protected String investmentName;
+    protected Boolean isFavourite;
+
+    public Boolean getFavourite() {
+        return isFavourite;
+    }
+    public void setFavourite(Boolean favourite) {
+        isFavourite = favourite;
+    }
 
     public String getInvestmentName() {
         return investmentName;

@@ -8,6 +8,8 @@ public interface IResult {
 
    AnalysisResult getResult();
 
+ //  AnalysisResult getAlternativeResult();
+
 
 
 }

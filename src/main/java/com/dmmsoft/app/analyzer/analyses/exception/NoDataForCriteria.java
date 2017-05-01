@@ -1,4 +1,4 @@
-package com.dmmsoft.app.analyzer.analyses.extremes.exception;
+package com.dmmsoft.app.analyzer.analyses.exception;
 
 public class NoDataForCriteria extends RuntimeException {
 

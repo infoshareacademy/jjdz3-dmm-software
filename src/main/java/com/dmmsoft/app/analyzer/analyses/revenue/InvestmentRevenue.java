@@ -1,49 +1,90 @@
 package com.dmmsoft.app.analyzer.analyses.revenue;
 
-import com.dmmsoft.app.analyzer.analyses.AnalysisInput;
+import com.dmmsoft.app.analyzer.analyses.Analysis;
 import com.dmmsoft.app.analyzer.analyses.IResult;
+import com.dmmsoft.app.analyzer.analyses.exception.NoDataForCriteria;
 import com.dmmsoft.app.pojo.Investment;
 import com.dmmsoft.app.pojo.MainContainer;
 import com.dmmsoft.app.pojo.Quotation;
 
+
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by milo on 14.04.17.
  */
-public class InvestmentRevenue implements IResult {
+public class InvestmentRevenue extends Analysis implements IResult {
 
-    private MainContainer mainContainer;
     private InvestmentRevenueInput input;
-
-
-
+    private InvestmentRevenueInput finalInput;
 
     public InvestmentRevenue(MainContainer mainContainer, InvestmentRevenueInput input) {
-        this.mainContainer = mainContainer;
+        this.mainContainer = mainContainer;     // what if super.mainContainer
         this.input = input;
+        finalInput = new InvestmentRevenueInput(input);
     }
 
-    public InvestmentRevenureResult getResult() {
+    public InvestmentRevenueResult getResult() throws NoDataForCriteria {
 
-        Investment filteredInvestments = mainContainer.getInvestments().stream()
-                .filter(x -> x.getName().equals(input.getInvestmentName()))
-                .findFirst().get();
+        Investment filteredInvestments = getFilteredInvestment();
+        if (filteredInvestments == null) {
+            throw new NoDataForCriteria();
+        }
 
         List<Quotation> quotations = filteredInvestments.getQuotations();
+        if (quotations.isEmpty()) {
+            throw new NoDataForCriteria();
+        }
 
-        Quotation buyQuot = quotations.stream()
-                .filter(x -> x.getDate().equals(input.getBuyDate()))
+        Optional<Quotation> buyQuot = getBuyQuotation(quotations);
+        Optional<Quotation> sellQuot = getSellQuotation(quotations);
+        if (!buyQuot.isPresent() || !sellQuot.isPresent()) {
+            throw new NoDataForCriteria();
+        }
+
+        Double deltaPrice = ((sellQuot.get().getClose() - buyQuot.get().getClose()) / buyQuot.get().getClose()) * 100;
+        Double revenueValue = (deltaPrice / 100) * input.getInvestedCapital();
+
+        return new InvestmentRevenueResult(revenueValue, deltaPrice, finalInput);
+    }
+
+    private Investment getFilteredInvestment() {
+        return mainContainer.getInvestments().stream()
+                .filter(x -> x.getName().equals(input.getInvestmentName()))
                 .findFirst().get();
+    }
 
-        Quotation sellQuot = quotations.stream()
+    private Optional<Quotation> getSellQuotation(List<Quotation> quotations) {
+
+        Optional<Quotation> quotation = quotations.stream()
                 .filter(x -> x.getDate().equals(input.getSellDate()))
-                .findFirst().get();
+                .limit(1)
+                .findFirst();
 
-        Double deltaPrice = ((sellQuot.getClose() - buyQuot.getClose()) / buyQuot.getClose())*100;
-        Double revenueValue = (deltaPrice/100) * input.getInvestedCapital();
+        if (!quotation.isPresent()) {
+            quotation = suggester.getNearestQuotation(quotations, input.getSellDate());
 
-        return new InvestmentRevenureResult(revenueValue, deltaPrice);
+            //TODO message processing that imput vales were invalid and were changed to nrearest vlalid
+            finalInput.setSellDate(quotation.get().getDate());
+        }
+        return quotation;
+    }
+
+    private Optional<Quotation> getBuyQuotation(List<Quotation> quotations) {
+
+        Optional<Quotation> quotation = quotations.stream()
+                .filter(x -> x.getDate().equals(input.getBuyDate()))
+                .limit(1)
+                .findFirst();
+
+        if (!quotation.isPresent()) {
+            quotation = suggester.getNearestQuotation(quotations, input.getBuyDate());
+
+            //TODO message processing that imput vales were invalid and were changed to nrearest vlalid
+            finalInput.setBuyDate(quotation.get().getDate());
+        }
+        return quotation;
     }
 
 

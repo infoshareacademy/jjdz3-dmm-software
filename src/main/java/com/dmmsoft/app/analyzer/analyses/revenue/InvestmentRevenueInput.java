@@ -28,7 +28,15 @@ public class InvestmentRevenueInput extends AnalysisInput {
         return sellDate;
     }
 
+    public void setSellDate(LocalDate sellDate) {
+        this.sellDate = sellDate;
+    }
+    public void setBuyDate(LocalDate buyDate) {
+        this.buyDate = buyDate;
+    }
 
+    public InvestmentRevenueInput() {
+    }
 
     public InvestmentRevenueInput(Double investedCapital, LocalDate buyDate, LocalDate sellDate, String investmentName) {
         this.investedCapital = investedCapital;
@@ -36,4 +44,12 @@ public class InvestmentRevenueInput extends AnalysisInput {
         this.sellDate = sellDate;
         this.investmentName = investmentName;
     }
+
+    public InvestmentRevenueInput(InvestmentRevenueInput copy) {
+        this.investedCapital = copy.investedCapital;
+        this.buyDate = copy.buyDate;
+        this.sellDate = copy.sellDate;
+        this.investmentName = copy.investmentName;
+    }
+
 }

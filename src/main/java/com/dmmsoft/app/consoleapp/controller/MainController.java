@@ -1,6 +1,6 @@
 package com.dmmsoft.app.consoleapp.controller;
 
-import com.dmmsoft.app.analyzer.analyses.extremes.exception.NoDataForCriteria;
+import com.dmmsoft.app.analyzer.analyses.exception.NoDataForCriteria;
 import com.dmmsoft.app.analyzer.analyses.extremes.Extremes;
 import com.dmmsoft.app.analyzer.analyses.extremes.LocalExtremes;
 import com.dmmsoft.app.analyzer.analyses.extremes.ExtremesResult;
