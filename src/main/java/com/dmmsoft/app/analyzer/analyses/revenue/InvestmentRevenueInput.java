@@ -1,5 +1,6 @@
 package com.dmmsoft.app.analyzer.analyses.revenue;
 
+import com.dmmsoft.app.analyzer.analyses.AnalysisInput;
 import com.dmmsoft.app.pojo.MainContainer;
 
 import java.time.LocalDate;
@@ -7,13 +8,13 @@ import java.time.LocalDate;
 /**
  * Created by milo on 17.04.17.
  */
-public class InvestmentRevenueQuery {
+public class InvestmentRevenueInput extends AnalysisInput {
 
-    private MainContainer mc;
+
     private Double investedCapital;
     private LocalDate buyDate;
     private LocalDate sellDate;
-    private String investmentName;
+
 
     public double getInvestedCapital() {
         return investedCapital;
@@ -27,11 +28,9 @@ public class InvestmentRevenueQuery {
         return sellDate;
     }
 
-    public String getInvestmentName() {
-        return investmentName;
-    }
 
-    public InvestmentRevenueQuery(Double investedCapital, LocalDate buyDate, LocalDate sellDate, String investmentName) {
+
+    public InvestmentRevenueInput(Double investedCapital, LocalDate buyDate, LocalDate sellDate, String investmentName) {
         this.investedCapital = investedCapital;
         this.buyDate = buyDate;
         this.sellDate = sellDate;
