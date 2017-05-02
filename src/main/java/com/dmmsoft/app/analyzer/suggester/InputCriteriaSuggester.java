@@ -16,22 +16,19 @@ public class InputSuggester {
 
     public Optional<Quotation> getNearestQuotation(List<Quotation> quotations, LocalDate targetDate) {
 
-
         List<LocalDate> dateList = new ArrayList<>();
         for (Quotation quotation : quotations) {
             dateList.add(quotation.getDate());
         }
-
-        LocalDate nearestDate = this.getNearestDate(dateList, targetDate);
+        LocalDate nearestDate = this.getNearestPreviousDate(dateList, targetDate);
 
         return quotations.stream()
                 .filter(x -> x.getDate().equals(nearestDate))
                 .limit(1)
                 .findFirst();
-
     }
 
-    private LocalDate getNearestDate(List<LocalDate> dates, LocalDate targetDate) {
+    private LocalDate getNearestPreviousDate(List<LocalDate> dates, LocalDate targetDate) {
         return new TreeSet<LocalDate>(dates).lower(targetDate);
     }
 
