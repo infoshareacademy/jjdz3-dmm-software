@@ -1,7 +1,7 @@
 package com.dmmsoft.app.analyzer.analyses;
 
 
-import com.dmmsoft.app.analyzer.suggester.InputSuggester;
+import com.dmmsoft.app.analyzer.suggester.InputCriteriaSuggester;
 import com.dmmsoft.app.pojo.MainContainer;
 
 /**
@@ -10,7 +10,7 @@ import com.dmmsoft.app.pojo.MainContainer;
 public abstract class Analysis {
 
     protected MainContainer mainContainer;
-    protected InputSuggester suggester = new InputSuggester();
+    protected InputCriteriaSuggester suggester = new InputCriteriaSuggester();
 
     public MainContainer getMainContainer() {
         return mainContainer;

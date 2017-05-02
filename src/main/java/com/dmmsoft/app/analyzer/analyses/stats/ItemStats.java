@@ -14,7 +14,7 @@ public class ItemStats {
 
     private final int DAYS_SINCE_LAST_QUOTATION = 7;
 
-    public ItemStatsResult getResult(List<Investment> invList, ItemStatsQuery query) {
+    public ItemStatsResult getResult(List<Investment> invList, ItemStatsInput query) {
 
 
         Predicate<Investment> investmentPredicate = x -> x.getName().equals(query.getName());

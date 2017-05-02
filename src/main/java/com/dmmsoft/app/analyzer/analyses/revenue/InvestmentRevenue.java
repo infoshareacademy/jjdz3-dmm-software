@@ -16,13 +16,13 @@ import java.util.Optional;
  */
 public class InvestmentRevenue extends Analysis implements IResult {
 
-    private InvestmentRevenueInput input;
-    private InvestmentRevenueInput finalInput;
+    private InvestmentRevenueCriteria inputCriteria;
+    private InvestmentRevenueCriteria finalInputCriteria;
 
-    public InvestmentRevenue(MainContainer mainContainer, InvestmentRevenueInput input) {
-        this.mainContainer = mainContainer;     // what if super.mainContainer
-        this.input = input;
-        finalInput = new InvestmentRevenueInput(input);
+    public InvestmentRevenue(MainContainer mainContainer, InvestmentRevenueCriteria inputCriteria) {
+        this.mainContainer = mainContainer;
+        this.inputCriteria = inputCriteria;
+        finalInputCriteria = new InvestmentRevenueCriteria(inputCriteria);
     }
 
     public InvestmentRevenueResult getResult() throws NoDataForCriteria {
@@ -39,34 +39,35 @@ public class InvestmentRevenue extends Analysis implements IResult {
 
         Optional<Quotation> buyQuot = getBuyQuotation(quotations);
         Optional<Quotation> sellQuot = getSellQuotation(quotations);
+
         if (!buyQuot.isPresent() || !sellQuot.isPresent()) {
             throw new NoDataForCriteria();
         }
 
         Double deltaPrice = ((sellQuot.get().getClose() - buyQuot.get().getClose()) / buyQuot.get().getClose()) * 100;
-        Double revenueValue = (deltaPrice / 100) * input.getInvestedCapital();
+        Double revenueValue = (deltaPrice / 100) * inputCriteria.getInvestedCapital();
 
-        return new InvestmentRevenueResult(revenueValue, deltaPrice, finalInput);
+        doCheckFinalInput();
+
+        return new InvestmentRevenueResult(revenueValue, deltaPrice, finalInputCriteria);
     }
 
     private Investment getFilteredInvestment() {
         return mainContainer.getInvestments().stream()
-                .filter(x -> x.getName().equals(input.getInvestmentName()))
+                .filter(x -> x.getName().equals(inputCriteria.getInvestmentName()))
                 .findFirst().get();
     }
 
     private Optional<Quotation> getSellQuotation(List<Quotation> quotations) {
 
         Optional<Quotation> quotation = quotations.stream()
-                .filter(x -> x.getDate().equals(input.getSellDate()))
+                .filter(x -> x.getDate().equals(inputCriteria.getSellDate()))
                 .limit(1)
                 .findFirst();
 
         if (!quotation.isPresent()) {
-            quotation = suggester.getNearestQuotation(quotations, input.getSellDate());
-
-            //TODO message processing that imput vales were invalid and were changed to nrearest vlalid
-            finalInput.setSellDate(quotation.get().getDate());
+            quotation = suggester.getNearestQuotation(quotations, inputCriteria.getSellDate());
+            finalInputCriteria.setSellDate(quotation.get().getDate());
         }
         return quotation;
     }
@@ -74,17 +75,21 @@ public class InvestmentRevenue extends Analysis implements IResult {
     private Optional<Quotation> getBuyQuotation(List<Quotation> quotations) {
 
         Optional<Quotation> quotation = quotations.stream()
-                .filter(x -> x.getDate().equals(input.getBuyDate()))
+                .filter(x -> x.getDate().equals(inputCriteria.getBuyDate()))
                 .limit(1)
                 .findFirst();
 
         if (!quotation.isPresent()) {
-            quotation = suggester.getNearestQuotation(quotations, input.getBuyDate());
-
-            //TODO message processing that imput vales were invalid and were changed to nrearest vlalid
-            finalInput.setBuyDate(quotation.get().getDate());
+            quotation = suggester.getNearestQuotation(quotations, inputCriteria.getBuyDate());
+            finalInputCriteria.setBuyDate(quotation.get().getDate());
         }
         return quotation;
+    }
+
+    private void doCheckFinalInput(){
+        if (!this.inputCriteria.equals(this.finalInputCriteria)){
+            this.finalInputCriteria.setModifiedBySuggester(true);
+        }
     }
 
 

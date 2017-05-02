@@ -1,6 +1,6 @@
 package com.dmmsoft.app.analyzer.analyses.revenue;
 
-import com.dmmsoft.app.analyzer.analyses.AnalysisInput;
+import com.dmmsoft.app.analyzer.analyses.AnalysisCriteria;
 import com.dmmsoft.app.analyzer.analyses.AnalysisResult;
 
 /**
@@ -19,7 +19,7 @@ public class InvestmentRevenueResult extends AnalysisResult {
         return capitalRevenueDeltaPrecentValue;
     }
 
-    public InvestmentRevenueResult(double capitalRevenueValue, double capitalRevenueDeltaPrecentValue, AnalysisInput evaluatedInput) {
+    public InvestmentRevenueResult(double capitalRevenueValue, double capitalRevenueDeltaPrecentValue, AnalysisCriteria evaluatedInput) {
         this.capitalRevenueValue = capitalRevenueValue;
         this.capitalRevenueDeltaPrecentValue = capitalRevenueDeltaPrecentValue;
         super.finallyEvaluatedInput = evaluatedInput;

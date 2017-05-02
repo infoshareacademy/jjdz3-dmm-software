@@ -6,13 +6,14 @@ package com.dmmsoft.app.analyzer.analyses;
 public abstract class AnalysisResult {
 
     protected String returnMessage;
-    protected AnalysisInput finallyEvaluatedInput;
+    protected AnalysisCriteria finallyEvaluatedInput;
 
-    public AnalysisInput getFinallyEvaluatedInput() {
+
+    public AnalysisCriteria getFinallyEvaluatedInput() {
         return finallyEvaluatedInput;
     }
 
-    public void setFinallyEvaluatedInput(AnalysisInput finallyEvaluatedInput) {
+    public void setFinallyEvaluatedInput(AnalysisCriteria finallyEvaluatedInput) {
         this.finallyEvaluatedInput = finallyEvaluatedInput;
     }
 

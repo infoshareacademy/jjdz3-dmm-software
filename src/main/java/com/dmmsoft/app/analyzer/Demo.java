@@ -1,7 +1,7 @@
 package com.dmmsoft.app.analyzer;
 
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenue;
-import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueInput;
+import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueCriteria;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueResult;
 import com.dmmsoft.app.appconfiguration.AppConfigurationProvider;
 import com.dmmsoft.app.dataloader.MainContainerLoader;
@@ -38,19 +38,22 @@ public class Demo {
         List<Investment> investments = mc.getInvestments();
 
         // example analysis usage
-        InvestmentRevenueInput input = new InvestmentRevenueInput(capital, BUY_DATE, SELL_DATE, InvestmentName);
+        InvestmentRevenueCriteria input = new InvestmentRevenueCriteria(capital, BUY_DATE, SELL_DATE, InvestmentName, false);
         InvestmentRevenueResult ir = new InvestmentRevenue(mc, input).getResult();
 
         System.out.println("inputValues(buy date, sell date)");
         System.out.println(input.getBuyDate());
         System.out.println(input.getSellDate());
+        System.out.println(input.getModifiedBySuggester());
+        System.out.println(input.getFavourite());
 
         System.out.println("resultValues(buy date, sell date)");
-        InvestmentRevenueInput finallyEvaluatedInput =(InvestmentRevenueInput)ir.getFinallyEvaluatedInput();
+        InvestmentRevenueCriteria finallyEvaluatedInput =(InvestmentRevenueCriteria)ir.getFinallyEvaluatedInput();
 
         System.out.println(finallyEvaluatedInput.getBuyDate());
         System.out.println(finallyEvaluatedInput.getSellDate());
-
+        System.out.println(finallyEvaluatedInput.getModifiedBySuggester());
+        System.out.println(input.getFavourite());
 
         System.out.println(ir.getCapitalRevenueValue());
         System.out.println(ir.getCapitalRevenueDeltaPrecentValue());
@@ -78,7 +81,7 @@ public class Demo {
 
 
     // System.out.println("1. number of Investments loaded: " + investments.size());
-    // ItemStatsResult s = new ItemStats().getResult(investments, new ItemStatsQuery("AIP001"));
+    // ItemStatsResult s = new ItemStats().getResult(investments, new ItemStatsInput("AIP001"));
 
     /*
         for (FilePath item : appCon.getFundFilePaths()) {

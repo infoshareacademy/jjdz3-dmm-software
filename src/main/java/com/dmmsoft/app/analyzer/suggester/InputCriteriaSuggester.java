@@ -11,7 +11,7 @@ import java.util.TreeSet;
 /**
  * Created by milo on 01.05.17.
  */
-public class InputSuggester {
+public class InputCriteriaSuggester {
 
 
     public Optional<Quotation> getNearestQuotation(List<Quotation> quotations, LocalDate targetDate) {

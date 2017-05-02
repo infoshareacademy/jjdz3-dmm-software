@@ -1,14 +1,13 @@
 package com.dmmsoft.app.analyzer.analyses.revenue;
 
-import com.dmmsoft.app.analyzer.analyses.AnalysisInput;
-import com.dmmsoft.app.pojo.MainContainer;
+import com.dmmsoft.app.analyzer.analyses.AnalysisCriteria;
 
 import java.time.LocalDate;
 
 /**
  * Created by milo on 17.04.17.
  */
-public class InvestmentRevenueInput extends AnalysisInput {
+public class InvestmentRevenueCriteria extends AnalysisCriteria {
 
 
     private Double investedCapital;
@@ -31,25 +30,48 @@ public class InvestmentRevenueInput extends AnalysisInput {
     public void setSellDate(LocalDate sellDate) {
         this.sellDate = sellDate;
     }
+
     public void setBuyDate(LocalDate buyDate) {
         this.buyDate = buyDate;
     }
 
-    public InvestmentRevenueInput() {
+    public InvestmentRevenueCriteria() {
     }
 
-    public InvestmentRevenueInput(Double investedCapital, LocalDate buyDate, LocalDate sellDate, String investmentName) {
+    public InvestmentRevenueCriteria(Double investedCapital, LocalDate buyDate, LocalDate sellDate, String investmentName, Boolean isFavourite) {
+        this.investmentName = investmentName;
         this.investedCapital = investedCapital;
         this.buyDate = buyDate;
         this.sellDate = sellDate;
-        this.investmentName = investmentName;
+        this.isFavourite = isFavourite;
+
     }
 
-    public InvestmentRevenueInput(InvestmentRevenueInput copy) {
-        this.investedCapital = copy.investedCapital;
-        this.buyDate = copy.buyDate;
-        this.sellDate = copy.sellDate;
-        this.investmentName = copy.investmentName;
+    public InvestmentRevenueCriteria(InvestmentRevenueCriteria itemToCopy) {
+        this.investmentName = itemToCopy.investmentName;
+        this.investedCapital = itemToCopy.investedCapital;
+        this.buyDate = itemToCopy.buyDate;
+        this.sellDate = itemToCopy.sellDate;
+        this.isModifiedBySuggester = itemToCopy.isModifiedBySuggester;
+        this.isFavourite = itemToCopy.isFavourite;
+
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (!(obj instanceof InvestmentRevenueCriteria))
+            return false;
+
+        InvestmentRevenueCriteria criteria = (InvestmentRevenueCriteria) obj;
+
+        return (this.investmentName.equals(criteria.investmentName) &&
+                this.investedCapital.equals(criteria.investedCapital) &&
+                this.buyDate.equals(criteria.buyDate) &&
+                this.sellDate.equals(criteria.sellDate) &&
+                this.isFavourite.equals(criteria.isFavourite) &&
+                this.isModifiedBySuggester.equals(criteria.isModifiedBySuggester));
+
     }
 
 }
