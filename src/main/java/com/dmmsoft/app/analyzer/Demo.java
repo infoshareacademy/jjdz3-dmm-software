@@ -81,7 +81,7 @@ public class Demo {
 
 
     // System.out.println("1. number of Investments loaded: " + investments.size());
-    // ItemStatsResult s = new ItemStats().getResult(investments, new ItemStatsInput("AIP001"));
+    // ItemStatsResult s = new ItemStats().getResult(investments, new ItemStatsCriteria("AIP001"));
 
     /*
         for (FilePath item : appCon.getFundFilePaths()) {
