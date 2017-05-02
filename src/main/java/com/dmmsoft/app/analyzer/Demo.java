@@ -61,19 +61,4 @@ public class Demo {
     }
 
 
-
-
-    // System.out.println("1. number of Investments loaded: " + investments.size());
-    // ItemStatsResult s = new ItemStats().getResult(investments, new ItemStatsCriteria("AIP001"));
-
-    /*
-        for (FilePath item : appCon.getFundFilePaths()) {
-        System.out.println(item.getFilePath());
-    }
-        for (FilePath item : appCon.getCurrencyFilePaths()) {
-        System.out.println(item.getFilePath());
-    }*/
-
-
-
 }

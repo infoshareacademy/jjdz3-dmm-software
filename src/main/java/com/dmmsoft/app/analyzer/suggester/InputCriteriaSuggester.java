@@ -29,6 +29,7 @@ public class InputCriteriaSuggester {
     }
 
     private LocalDate getNearestPreviousDate(List<LocalDate> dates, LocalDate targetDate) {
+
         return new TreeSet<LocalDate>(dates).lower(targetDate);
     }
 

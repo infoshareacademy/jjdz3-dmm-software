@@ -27,35 +27,38 @@ public class InvestmentRevenue extends Analysis implements IResult {
 
     public InvestmentRevenueResult getResult() throws NoDataForCriteria {
 
-        Investment filteredInvestments = getFilteredInvestment();
-        if (filteredInvestments == null) {
+        Optional<Investment> filteredInvestment = getFilteredInvestment();
+        if (!filteredInvestment.isPresent()) {
             throw new NoDataForCriteria();
         }
 
-        List<Quotation> quotations = filteredInvestments.getQuotations();
-        if (quotations.isEmpty()) {
+        List<Quotation> quotations = filteredInvestment.get().getQuotations();
+        if (quotations == null || quotations.isEmpty()) {
             throw new NoDataForCriteria();
         }
 
         Optional<Quotation> buyQuot = getBuyQuotation(quotations);
         Optional<Quotation> sellQuot = getSellQuotation(quotations);
 
-        if (!buyQuot.isPresent() || !sellQuot.isPresent()) {
+        //TODO check for proper Quotation dates order (should be: buyQuot.date < sellQuot.date)
+
+        if (buyQuot.isPresent() && sellQuot.isPresent()) {
+            Double deltaPrice = ((sellQuot.get().getClose() - buyQuot.get().getClose()) / buyQuot.get().getClose()) * 100;
+            Double revenueValue = (deltaPrice / 100) * inputCriteria.getInvestedCapital();
+
+            doCheckFinalInput();
+            return new InvestmentRevenueResult(revenueValue, deltaPrice, finalInputCriteria);
+
+        } else {
             throw new NoDataForCriteria();
         }
-
-        Double deltaPrice = ((sellQuot.get().getClose() - buyQuot.get().getClose()) / buyQuot.get().getClose()) * 100;
-        Double revenueValue = (deltaPrice / 100) * inputCriteria.getInvestedCapital();
-
-        doCheckFinalInput();
-
-        return new InvestmentRevenueResult(revenueValue, deltaPrice, finalInputCriteria);
     }
 
-    private Investment getFilteredInvestment() {
+    private Optional<Investment> getFilteredInvestment() {
+
         return mainContainer.getInvestments().stream()
                 .filter(x -> x.getName().equals(inputCriteria.getInvestmentName()))
-                .findFirst().get();
+                .findFirst();
     }
 
     private Optional<Quotation> getSellQuotation(List<Quotation> quotations) {
@@ -67,7 +70,8 @@ public class InvestmentRevenue extends Analysis implements IResult {
 
         if (!quotation.isPresent()) {
             quotation = suggester.getNearestQuotation(quotations, inputCriteria.getSellDate());
-            finalInputCriteria.setSellDate(quotation.get().getDate());
+            if (quotation.isPresent())
+                finalInputCriteria.setSellDate(quotation.get().getDate());
         }
         return quotation;
     }
@@ -81,16 +85,16 @@ public class InvestmentRevenue extends Analysis implements IResult {
 
         if (!quotation.isPresent()) {
             quotation = suggester.getNearestQuotation(quotations, inputCriteria.getBuyDate());
-            finalInputCriteria.setBuyDate(quotation.get().getDate());
+            if (quotation.isPresent())
+                finalInputCriteria.setBuyDate(quotation.get().getDate());
         }
         return quotation;
     }
 
-    private void doCheckFinalInput(){
-        if (!this.inputCriteria.equals(this.finalInputCriteria)){
+    private void doCheckFinalInput() {
+        if (!this.inputCriteria.equals(this.finalInputCriteria)) {
             this.finalInputCriteria.setModifiedBySuggester(true);
         }
     }
-
 
 }
