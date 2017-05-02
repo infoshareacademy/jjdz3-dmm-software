@@ -58,23 +58,6 @@ public class Demo {
         System.out.println(ir.getCapitalRevenueValue());
         System.out.println(ir.getCapitalRevenueDeltaPrecentValue());
 
-
-
-
-        System.out.println("oryginal mc hashcode"+mc.hashCode());
-        System.out.println("oryginal mc fundcount "+mc.getFundsCount());
-
-        Test t = new Test(mc);
-        t.getHash();
-
-        Boolean b = mc.equals(t.getHash());
-
-        System.out.println("czy są rowne " +b);
-
-        System.out.println("oryginal mc hashcode after try of change fundcount:"+mc.getFundsCount());
-
-
-
     }
 
 
