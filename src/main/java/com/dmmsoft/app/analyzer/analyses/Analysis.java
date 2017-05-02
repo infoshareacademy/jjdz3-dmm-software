@@ -12,11 +12,4 @@ public abstract class Analysis {
     protected MainContainer mainContainer;
     protected InputCriteriaSuggester suggester = new InputCriteriaSuggester();
 
-    public MainContainer getMainContainer() {
-        return mainContainer;
-    }
-    public void setMainContainer(MainContainer mainContainer) {
-        this.mainContainer = mainContainer;
-    }
-
 }

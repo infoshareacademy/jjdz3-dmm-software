@@ -6,8 +6,8 @@ package com.dmmsoft.app.analyzer.analyses;
 public class AnalysisCriteria {
 
     protected String investmentName;
-    protected Boolean isFavourite=false;
-    protected Boolean isModifiedBySuggester=false;
+    protected Boolean isFavourite = false;
+    protected Boolean isModifiedBySuggester = false;
 
 
     public Boolean getModifiedBySuggester() {
@@ -21,17 +21,12 @@ public class AnalysisCriteria {
     public Boolean getFavourite() {
         return isFavourite;
     }
-    public void setFavourite(Boolean favourite) {
-        isFavourite = favourite;
-    }
 
     public String getInvestmentName() {
         return investmentName;
     }
 
-    public void setInvestmentName(String investmentName) {
-        this.investmentName = investmentName;
-    }
+
 
 
 
