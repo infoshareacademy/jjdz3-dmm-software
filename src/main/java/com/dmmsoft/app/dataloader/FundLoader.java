@@ -1,7 +1,7 @@
 package com.dmmsoft.app.dataloader;
 
-import com.dmmsoft.app.pojo.Fund;
-import com.dmmsoft.app.pojo.Quotation;
+import com.dmmsoft.app.model.Fund;
+import com.dmmsoft.app.model.Quotation;
 
 
 import java.util.ArrayList;

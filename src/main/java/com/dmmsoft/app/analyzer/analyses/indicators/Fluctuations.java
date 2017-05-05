@@ -1,6 +1,6 @@
 package com.dmmsoft.app.analyzer.analyses.indicators;
 
-import com.dmmsoft.app.pojo.Investment;
+import com.dmmsoft.app.model.Investment;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

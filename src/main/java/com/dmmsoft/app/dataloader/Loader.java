@@ -1,7 +1,7 @@
 package com.dmmsoft.app.dataloader;
 
-import com.dmmsoft.app.pojo.Quotation;
-import com.dmmsoft.app.pojo.QuotationFactory;
+import com.dmmsoft.app.model.Quotation;
+import com.dmmsoft.app.model.QuotationFactory;
 
 import java.util.ArrayList;
 import java.util.List;

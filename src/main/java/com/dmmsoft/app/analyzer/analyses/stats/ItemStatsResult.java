@@ -1,6 +1,6 @@
 package com.dmmsoft.app.analyzer.analyses.stats;
 
-import com.dmmsoft.app.pojo.Quotation;
+import com.dmmsoft.app.model.Quotation;
 
 /**
  * Created by milo on 14.04.17.

@@ -1,6 +1,6 @@
 package com.dmmsoft.app.analyzer.suggester;
 
-import com.dmmsoft.app.pojo.Quotation;
+import com.dmmsoft.app.model.Quotation;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

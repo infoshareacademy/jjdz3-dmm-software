@@ -3,9 +3,12 @@ package com.dmmsoft.app.analyzer.analyses.revenue;
 import com.dmmsoft.app.analyzer.analyses.Analysis;
 import com.dmmsoft.app.analyzer.analyses.IResult;
 import com.dmmsoft.app.analyzer.analyses.exception.NoDataForCriteria;
-import com.dmmsoft.app.pojo.Investment;
-import com.dmmsoft.app.pojo.MainContainer;
-import com.dmmsoft.app.pojo.Quotation;
+
+import com.dmmsoft.app.model.Investment;
+import com.dmmsoft.app.model.MainContainer;
+import com.dmmsoft.app.model.Quotation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.util.List;
@@ -18,6 +21,7 @@ public class InvestmentRevenue extends Analysis implements IResult {
 
     private InvestmentRevenueCriteria inputCriteria;
     private InvestmentRevenueCriteria finalInputCriteria;
+    private static final Logger LOGGER = LoggerFactory.getLogger(InvestmentRevenue.class);
 
     public InvestmentRevenue(MainContainer mainContainer, InvestmentRevenueCriteria inputCriteria) {
         this.mainContainer = mainContainer;
@@ -29,11 +33,13 @@ public class InvestmentRevenue extends Analysis implements IResult {
 
         Optional<Investment> filteredInvestment = getFilteredInvestment();
         if (!filteredInvestment.isPresent()) {
+            LOGGER.error("No investment for current criteria");
             throw new NoDataForCriteria();
         }
 
         List<Quotation> quotations = filteredInvestment.get().getQuotations();
         if (quotations == null || quotations.isEmpty()) {
+            LOGGER.error("No quotations for current criteria");
             throw new NoDataForCriteria();
         }
 
@@ -50,6 +56,7 @@ public class InvestmentRevenue extends Analysis implements IResult {
             return new InvestmentRevenueResult(revenueValue, deltaPrice, finalInputCriteria);
 
         } else {
+            LOGGER.error("No quotations for current criteria");
             throw new NoDataForCriteria();
         }
     }

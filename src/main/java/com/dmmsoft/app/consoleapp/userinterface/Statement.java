@@ -2,7 +2,7 @@ package com.dmmsoft.app.consoleapp.userinterface;
 
 import com.dmmsoft.app.analyzer.analyses.extremes.Extremes;
 import com.dmmsoft.app.analyzer.analyses.extremes.ExtremesResult;
-import com.dmmsoft.app.pojo.MainContainer;
+import com.dmmsoft.app.model.MainContainer;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

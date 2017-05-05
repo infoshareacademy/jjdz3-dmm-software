@@ -1,4 +1,4 @@
-package com.dmmsoft.app.pojo;
+package com.dmmsoft.app.model;
 
 import java.util.ArrayList;
 import java.util.List;

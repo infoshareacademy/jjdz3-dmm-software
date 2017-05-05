@@ -8,7 +8,7 @@ import com.dmmsoft.app.appconfiguration.AppConfigurationProvider;
 import com.dmmsoft.app.consoleapp.controller.exception.IllegalFlow;
 import com.dmmsoft.app.consoleapp.userinterface.menu.*;
 import com.dmmsoft.app.dataloader.MainContainerLoader;
-import com.dmmsoft.app.pojo.MainContainer;
+import com.dmmsoft.app.model.MainContainer;
 import com.dmmsoft.app.consoleapp.userinterface.Prompt;
 import com.dmmsoft.app.consoleapp.userinterface.Statement;
 import com.dmmsoft.app.consoleapp.valueobject.DateRange;

@@ -5,7 +5,7 @@ import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueCriteria;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueResult;
 import com.dmmsoft.app.appconfiguration.AppConfigurationProvider;
 import com.dmmsoft.app.dataloader.MainContainerLoader;
-import com.dmmsoft.app.pojo.*;
+import com.dmmsoft.app.model.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -30,8 +30,8 @@ public class Demo {
         MainContainerLoader mainContainerLoader = new MainContainerLoader(appCon);
 
         // loading data
-        mainContainerLoader.loadFunds();
-        mainContainerLoader.loadCurrencies();
+       // mainContainerLoader.loadFunds();
+     //   mainContainerLoader.loadCurrencies();
         MainContainer mc = mainContainerLoader.getMainContainer();
 
         // extracting investments

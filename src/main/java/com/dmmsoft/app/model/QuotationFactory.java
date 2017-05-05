@@ -1,4 +1,4 @@
-package com.dmmsoft.app.pojo;
+package com.dmmsoft.app.model;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

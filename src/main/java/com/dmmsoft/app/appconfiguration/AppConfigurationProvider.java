@@ -1,16 +1,16 @@
 package com.dmmsoft.app.appconfiguration;
 
 import com.dmmsoft.app.appconfiguration.exception.AppConfigurationProviderException;
-import com.dmmsoft.app.fileIO.*;
+import com.dmmsoft.app.file.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dmmsoft.app.fileIO.path.CurrencyFolderPath;
-import com.dmmsoft.app.fileIO.path.FilePath;
-import com.dmmsoft.app.fileIO.path.FundFolderPath;
+import com.dmmsoft.app.file.path.CurrencyFolderPath;
+import com.dmmsoft.app.file.path.FilePath;
+import com.dmmsoft.app.file.path.FundFolderPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

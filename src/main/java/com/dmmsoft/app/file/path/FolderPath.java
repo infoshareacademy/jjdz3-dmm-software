@@ -1,4 +1,4 @@
-package com.dmmsoft.app.fileIO.path;
+package com.dmmsoft.app.file.path;
 
 /**
  * Created by milo on 13.04.17.

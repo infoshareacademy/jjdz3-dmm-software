@@ -1,4 +1,4 @@
-package com.dmmsoft.app.fileIO;
+package com.dmmsoft.app.file;
 
 import java.io.BufferedReader;
 import java.io.IOException;

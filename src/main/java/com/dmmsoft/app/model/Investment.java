@@ -1,4 +1,4 @@
-package com.dmmsoft.app.pojo;
+package com.dmmsoft.app.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ public abstract class Investment {
 
     @Override
     public String toString() {
-        return "pojo{" +
+        return "model{" +
                 "Id=" + Id +
                 ", name='" + name + '\'' +
                 ", quotations=" + quotations +

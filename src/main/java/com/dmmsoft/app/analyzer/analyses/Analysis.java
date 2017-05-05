@@ -2,7 +2,7 @@ package com.dmmsoft.app.analyzer.analyses;
 
 
 import com.dmmsoft.app.analyzer.suggester.InputCriteriaSuggester;
-import com.dmmsoft.app.pojo.MainContainer;
+import com.dmmsoft.app.model.MainContainer;
 
 /**
  * Created by milo on 01.05.17.

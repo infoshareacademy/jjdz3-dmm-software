@@ -1,7 +1,7 @@
 package com.dmmsoft.app.analyzer.analyses.simplification;
 
-import com.dmmsoft.app.pojo.Fund;
-import com.dmmsoft.app.pojo.Quotation;
+import com.dmmsoft.app.model.Fund;
+import com.dmmsoft.app.model.Quotation;
 import org.joda.time.DateTime;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
