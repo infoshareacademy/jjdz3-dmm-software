@@ -32,12 +32,12 @@ public class InvestmentRevenue extends Analysis implements IResult {
     public InvestmentRevenueResult getResult() throws NoDataForCriteria {
 
         try {
-            Optional<Investment> filteredInvestment = getInvestment();
+            Investment filteredInvestment = getInvestment();
 
             List<Quotation> quotations = getQuotations(filteredInvestment);
 
-            Optional<Quotation> buyQuot = getBuyQuotation(quotations);
-            Optional<Quotation> sellQuot = getSellQuotation(quotations);
+            Quotation buyQuot = getBuyQuotation(quotations);
+            Quotation sellQuot = getSellQuotation(quotations);
             checkQuotationOrder(buyQuot, sellQuot);
 
             return getInvestmentRevenueResult(buyQuot, sellQuot);
@@ -52,7 +52,7 @@ public class InvestmentRevenue extends Analysis implements IResult {
         }
     }
 
-    private Optional<Investment> getInvestment() {
+    private Investment getInvestment() {
         Optional<Investment> filteredInvestment = mainContainer.getInvestments().stream()
                 .filter(x -> x.getName().equals(inputCriteria.getInvestmentName()))
                 .findFirst();
@@ -60,18 +60,18 @@ public class InvestmentRevenue extends Analysis implements IResult {
         if (!filteredInvestment.isPresent()) {
             throw new NoDataForCriteria();
         }
-        return filteredInvestment;
+        return filteredInvestment.get();
     }
 
-    private List<Quotation> getQuotations(Optional<Investment> filteredInvestment) {
-        List<Quotation> quotations = filteredInvestment.get().getQuotations();
+    private List<Quotation> getQuotations(Investment filteredInvestment) {
+        List<Quotation> quotations = filteredInvestment.getQuotations();
         if (quotations == null || quotations.isEmpty()) {
             throw new NoDataForCriteria();
         }
         return quotations;
     }
 
-    private Optional<Quotation> getBuyQuotation(List<Quotation> quotations) {
+    private Quotation getBuyQuotation(List<Quotation> quotations) {
 
         Optional<Quotation> quotation = quotations.stream()
                 .filter(x -> x.getDate().equals(inputCriteria.getBuyDate()))
@@ -83,10 +83,10 @@ public class InvestmentRevenue extends Analysis implements IResult {
             if (quotation.isPresent())
                 finalInputCriteria.setBuyDate(quotation.get().getDate());
         }
-        return quotation;
+        return quotation.get();
     }
 
-    private Optional<Quotation> getSellQuotation(List<Quotation> quotations) {
+    private Quotation getSellQuotation(List<Quotation> quotations) {
 
         Optional<Quotation> quotation = quotations.stream()
                 .filter(x -> x.getDate().equals(inputCriteria.getSellDate()))
@@ -98,22 +98,22 @@ public class InvestmentRevenue extends Analysis implements IResult {
             if (quotation.isPresent())
                 finalInputCriteria.setSellDate(quotation.get().getDate());
         }
-        return quotation;
+        return quotation.get();
     }
 
-    private void checkQuotationOrder(Optional<Quotation> buyQuot,Optional <Quotation> sellQuot){
-        if (sellQuot.isPresent()&&buyQuot.isPresent())
-            if (sellQuot.get().getDate().isBefore(buyQuot.get().getDate())){
+    private void checkQuotationOrder(Quotation buyQuot,Quotation sellQuot){
+
+            if (sellQuot.getDate().isBefore(buyQuot.getDate())){
                 throw  new IllegalArgumentException();
             }
     }
 
-    private InvestmentRevenueResult getInvestmentRevenueResult(Optional<Quotation> buyQuot, Optional<Quotation> sellQuot) {
-        if (buyQuot.isPresent() && sellQuot.isPresent()) {
-            Double deltaPrice = ((sellQuot.get().getClose() - buyQuot.get().getClose()) / buyQuot.get().getClose()) * 100;
+    private InvestmentRevenueResult getInvestmentRevenueResult(Quotation buyQuot, Quotation sellQuot) {
+        if (buyQuot!=null && sellQuot!=null) {
+            Double deltaPrice = ((sellQuot.getClose() - buyQuot.getClose()) / buyQuot.getClose()) * 100;
             Double revenueValue = (deltaPrice / 100) * inputCriteria.getInvestedCapital();
 
-            doCheckFinalInput();
+            doCheckIfInputWasModeratedBySuggester();
             return new InvestmentRevenueResult(revenueValue, deltaPrice, finalInputCriteria);
 
         } else {
@@ -121,7 +121,7 @@ public class InvestmentRevenue extends Analysis implements IResult {
         }
     }
 
-    private void doCheckFinalInput() {
+    private void doCheckIfInputWasModeratedBySuggester() {
         if (!this.inputCriteria.equals(this.finalInputCriteria)) {
             this.finalInputCriteria.setModifiedBySuggester(true);
         }
