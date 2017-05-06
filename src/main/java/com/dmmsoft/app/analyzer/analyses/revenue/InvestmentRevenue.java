@@ -31,41 +31,59 @@ public class InvestmentRevenue extends Analysis implements IResult {
 
     public InvestmentRevenueResult getResult() throws NoDataForCriteria {
 
-        Optional<Investment> filteredInvestment = getFilteredInvestment();
-        if (!filteredInvestment.isPresent()) {
-            LOGGER.error("No investment for current criteria");
+        try {
+            Optional<Investment> filteredInvestment = getInvestment();
+
+            List<Quotation> quotations = getQuotations(filteredInvestment);
+
+            Optional<Quotation> buyQuot = getBuyQuotation(quotations);
+            Optional<Quotation> sellQuot = getSellQuotation(quotations);
+            checkQuotationOrder(buyQuot, sellQuot);
+
+            return getInvestmentRevenueResult(buyQuot, sellQuot);
+
+        } catch (NoDataForCriteria exception) {
+            LOGGER.error("InvestmentRevelnue failure.", exception);
             throw new NoDataForCriteria();
         }
-
-        List<Quotation> quotations = filteredInvestment.get().getQuotations();
-        if (quotations == null || quotations.isEmpty()) {
-            LOGGER.error("No quotations for current criteria");
-            throw new NoDataForCriteria();
-        }
-
-        Optional<Quotation> buyQuot = getBuyQuotation(quotations);
-        Optional<Quotation> sellQuot = getSellQuotation(quotations);
-
-        //TODO check for proper Quotation dates order (should be: buyQuot.date < sellQuot.date)
-
-        if (buyQuot.isPresent() && sellQuot.isPresent()) {
-            Double deltaPrice = ((sellQuot.get().getClose() - buyQuot.get().getClose()) / buyQuot.get().getClose()) * 100;
-            Double revenueValue = (deltaPrice / 100) * inputCriteria.getInvestedCapital();
-
-            doCheckFinalInput();
-            return new InvestmentRevenueResult(revenueValue, deltaPrice, finalInputCriteria);
-
-        } else {
-            LOGGER.error("No quotations for current criteria");
-            throw new NoDataForCriteria();
+        catch (IllegalArgumentException exception){
+            LOGGER.error("sellDate cannot be before buyDate", exception);
+            throw new IllegalArgumentException();
         }
     }
 
-    private Optional<Investment> getFilteredInvestment() {
-
-        return mainContainer.getInvestments().stream()
+    private Optional<Investment> getInvestment() {
+        Optional<Investment> filteredInvestment = mainContainer.getInvestments().stream()
                 .filter(x -> x.getName().equals(inputCriteria.getInvestmentName()))
                 .findFirst();
+
+        if (!filteredInvestment.isPresent()) {
+            throw new NoDataForCriteria();
+        }
+        return filteredInvestment;
+    }
+
+    private List<Quotation> getQuotations(Optional<Investment> filteredInvestment) {
+        List<Quotation> quotations = filteredInvestment.get().getQuotations();
+        if (quotations == null || quotations.isEmpty()) {
+            throw new NoDataForCriteria();
+        }
+        return quotations;
+    }
+
+    private Optional<Quotation> getBuyQuotation(List<Quotation> quotations) {
+
+        Optional<Quotation> quotation = quotations.stream()
+                .filter(x -> x.getDate().equals(inputCriteria.getBuyDate()))
+                .limit(1)
+                .findFirst();
+
+        if (!quotation.isPresent()) {
+            quotation = suggester.getNearestQuotation(quotations, inputCriteria.getBuyDate());
+            if (quotation.isPresent())
+                finalInputCriteria.setBuyDate(quotation.get().getDate());
+        }
+        return quotation;
     }
 
     private Optional<Quotation> getSellQuotation(List<Quotation> quotations) {
@@ -83,19 +101,24 @@ public class InvestmentRevenue extends Analysis implements IResult {
         return quotation;
     }
 
-    private Optional<Quotation> getBuyQuotation(List<Quotation> quotations) {
+    private void checkQuotationOrder(Optional<Quotation> buyQuot,Optional <Quotation> sellQuot){
+        if (sellQuot.isPresent()&&buyQuot.isPresent())
+            if (sellQuot.get().getDate().isBefore(buyQuot.get().getDate())){
+                throw  new IllegalArgumentException();
+            }
+    }
 
-        Optional<Quotation> quotation = quotations.stream()
-                .filter(x -> x.getDate().equals(inputCriteria.getBuyDate()))
-                .limit(1)
-                .findFirst();
+    private InvestmentRevenueResult getInvestmentRevenueResult(Optional<Quotation> buyQuot, Optional<Quotation> sellQuot) {
+        if (buyQuot.isPresent() && sellQuot.isPresent()) {
+            Double deltaPrice = ((sellQuot.get().getClose() - buyQuot.get().getClose()) / buyQuot.get().getClose()) * 100;
+            Double revenueValue = (deltaPrice / 100) * inputCriteria.getInvestedCapital();
 
-        if (!quotation.isPresent()) {
-            quotation = suggester.getNearestQuotation(quotations, inputCriteria.getBuyDate());
-            if (quotation.isPresent())
-                finalInputCriteria.setBuyDate(quotation.get().getDate());
+            doCheckFinalInput();
+            return new InvestmentRevenueResult(revenueValue, deltaPrice, finalInputCriteria);
+
+        } else {
+            throw new NoDataForCriteria();
         }
-        return quotation;
     }
 
     private void doCheckFinalInput() {

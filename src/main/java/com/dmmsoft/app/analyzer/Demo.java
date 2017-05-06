@@ -31,7 +31,7 @@ public class Demo {
 
         // loading data
        // mainContainerLoader.loadFunds();
-     //   mainContainerLoader.loadCurrencies();
+       // mainContainerLoader.loadCurrencies();
         MainContainer mc = mainContainerLoader.getMainContainer();
 
         // extracting investments
