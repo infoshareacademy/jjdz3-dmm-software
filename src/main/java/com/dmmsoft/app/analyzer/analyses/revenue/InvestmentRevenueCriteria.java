@@ -58,20 +58,44 @@ public class InvestmentRevenueCriteria extends AnalysisCriteria {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
-        if (!(obj instanceof InvestmentRevenueCriteria))
-            return false;
+        InvestmentRevenueCriteria that = (InvestmentRevenueCriteria) o;
 
-        InvestmentRevenueCriteria criteria = (InvestmentRevenueCriteria) obj;
-
-        return (this.investmentName.equals(criteria.investmentName) &&
-                this.investedCapital.equals(criteria.investedCapital) &&
-                this.buyDate.equals(criteria.buyDate) &&
-                this.sellDate.equals(criteria.sellDate) &&
-                this.isFavourite.equals(criteria.isFavourite) &&
-                this.isModifiedBySuggester.equals(criteria.isModifiedBySuggester));
+        if (!investedCapital.equals(that.investedCapital)) return false;
+        if (!buyDate.equals(that.buyDate)) return false;
+        return sellDate.equals(that.sellDate);
 
     }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + investedCapital.hashCode();
+        result = 31 * result + buyDate.hashCode();
+        result = 31 * result + sellDate.hashCode();
+        return result;
+    }
+
+    //
+//    @Override
+//    public boolean equals(Object obj) {
+//
+//        if (!(obj instanceof InvestmentRevenueCriteria))
+//            return false;
+//
+//        InvestmentRevenueCriteria criteria = (InvestmentRevenueCriteria) obj;
+//
+//        return (this.investmentName.equals(criteria.investmentName) &&
+//                this.investedCapital.equals(criteria.investedCapital) &&
+//                this.buyDate.equals(criteria.buyDate) &&
+//                this.sellDate.equals(criteria.sellDate) &&
+//                this.isFavourite.equals(criteria.isFavourite) &&
+//                this.isModifiedBySuggester.equals(criteria.isModifiedBySuggester));
+//
+//    }
 
 }

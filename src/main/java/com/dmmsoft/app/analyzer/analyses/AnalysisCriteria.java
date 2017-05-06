@@ -27,10 +27,24 @@ public class AnalysisCriteria {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        AnalysisCriteria that = (AnalysisCriteria) o;
 
+        if (!investmentName.equals(that.investmentName)) return false;
+        if (!isFavourite.equals(that.isFavourite)) return false;
+        return isModifiedBySuggester.equals(that.isModifiedBySuggester);
 
+    }
 
-
-
+    @Override
+    public int hashCode() {
+        int result = investmentName.hashCode();
+        result = 31 * result + isFavourite.hashCode();
+        result = 31 * result + isModifiedBySuggester.hashCode();
+        return result;
+    }
 }
