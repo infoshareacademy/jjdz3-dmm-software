@@ -13,15 +13,17 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Created by milo on 14.04.17.
  */
 public class InvestmentRevenue extends Analysis implements IResult {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(InvestmentRevenue.class);
     private InvestmentRevenueCriteria inputCriteria;
     private InvestmentRevenueCriteria finalInputCriteria;
-    private static final Logger LOGGER = LoggerFactory.getLogger(InvestmentRevenue.class);
+
 
     public InvestmentRevenue(MainContainer mainContainer, InvestmentRevenueCriteria inputCriteria) {
         this.mainContainer = mainContainer;
@@ -44,7 +46,7 @@ public class InvestmentRevenue extends Analysis implements IResult {
 
         } catch (NoDataForCriteria exception) {
             LOGGER.error("InvestmentRevelnue failure.", exception);
-            throw new NoDataForCriteria();
+            throw exception;
         }
         catch (IllegalArgumentException exception){
             LOGGER.error("sellDate cannot be before buyDate", exception);
@@ -52,26 +54,22 @@ public class InvestmentRevenue extends Analysis implements IResult {
         }
     }
 
-    private Investment getInvestment() {
-        Optional<Investment> filteredInvestment = mainContainer.getInvestments().stream()
+    private Investment getInvestment() throws NoDataForCriteria {
+      return  mainContainer.getInvestments().stream()
                 .filter(x -> x.getName().equals(inputCriteria.getInvestmentName()))
-                .findFirst();
-
-        if (!filteredInvestment.isPresent()) {
-            throw new NoDataForCriteria();
-        }
-        return filteredInvestment.get();
+                .findFirst().orElseThrow(NoDataForCriteria::new);
     }
 
-    private List<Quotation> getQuotations(Investment filteredInvestment) {
-        List<Quotation> quotations = filteredInvestment.getQuotations();
+    private List<Quotation> getQuotations(Investment filteredInvestment) throws NoDataForCriteria{
+        List<Quotation> quotations= filteredInvestment.getQuotations();
+
         if (quotations == null || quotations.isEmpty()) {
             throw new NoDataForCriteria();
         }
         return quotations;
     }
 
-    private Quotation getBuyQuotation(List<Quotation> quotations) {
+    private Quotation getBuyQuotation(List<Quotation> quotations) throws NoDataForCriteria{
 
         Optional<Quotation> quotation = quotations.stream()
                 .filter(x -> x.getDate().equals(inputCriteria.getBuyDate()))
@@ -80,13 +78,12 @@ public class InvestmentRevenue extends Analysis implements IResult {
 
         if (!quotation.isPresent()) {
             quotation = suggester.getNearestQuotation(quotations, inputCriteria.getBuyDate());
-            if (quotation.isPresent())
-                finalInputCriteria.setBuyDate(quotation.get().getDate());
-        }
-        return quotation.get();
+            quotation.ifPresent( x -> {finalInputCriteria.setBuyDate(x.getDate());});
+       }
+        return  quotation.orElseThrow(NoDataForCriteria:: new);
     }
 
-    private Quotation getSellQuotation(List<Quotation> quotations) {
+    private Quotation getSellQuotation(List<Quotation> quotations) throws NoDataForCriteria {
 
         Optional<Quotation> quotation = quotations.stream()
                 .filter(x -> x.getDate().equals(inputCriteria.getSellDate()))
@@ -95,10 +92,9 @@ public class InvestmentRevenue extends Analysis implements IResult {
 
         if (!quotation.isPresent()) {
             quotation = suggester.getNearestQuotation(quotations, inputCriteria.getSellDate());
-            if (quotation.isPresent())
-                finalInputCriteria.setSellDate(quotation.get().getDate());
+            quotation.ifPresent( x -> {finalInputCriteria.setSellDate(x.getDate());});
         }
-        return quotation.get();
+        return quotation.orElseThrow(NoDataForCriteria:: new);
     }
 
     private void checkQuotationOrder(Quotation buyQuot,Quotation sellQuot){
@@ -108,7 +104,7 @@ public class InvestmentRevenue extends Analysis implements IResult {
             }
     }
 
-    private InvestmentRevenueResult getInvestmentRevenueResult(Quotation buyQuot, Quotation sellQuot) {
+    private InvestmentRevenueResult getInvestmentRevenueResult(Quotation buyQuot, Quotation sellQuot) throws NoDataForCriteria {
         if (buyQuot!=null && sellQuot!=null) {
             Double deltaPrice = ((sellQuot.getClose() - buyQuot.getClose()) / buyQuot.getClose()) * 100;
             Double revenueValue = (deltaPrice / 100) * inputCriteria.getInvestedCapital();

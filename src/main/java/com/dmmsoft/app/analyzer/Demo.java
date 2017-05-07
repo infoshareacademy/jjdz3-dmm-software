@@ -1,5 +1,6 @@
 package com.dmmsoft.app.analyzer;
 
+import com.dmmsoft.app.analyzer.analyses.exception.NoDataForCriteria;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenue;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueCriteria;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueResult;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class Demo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoDataForCriteria {
 
         // just Test values (e.g. from .jsp form)
         Double capital = 10000.00;

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class InputCriteriaSuggester {
     private List<LocalDate> dateList = new ArrayList<>();
 
-    public Optional<Quotation> getNearestQuotation(List<Quotation> quotations, LocalDate targetDate) {
+    public Optional<Quotation> getNearestQuotation(List<Quotation> quotations, LocalDate targetDate) throws NoDataForCriteria {
 
         if (quotations != null && !quotations.isEmpty()) {
             for (Quotation quotation : quotations) {
@@ -32,7 +32,7 @@ public class InputCriteriaSuggester {
                 .findFirst();
     }
 
-    private LocalDate getNearestPreviousDate(List<LocalDate> dates, LocalDate targetDate) {
+    private LocalDate getNearestPreviousDate(List<LocalDate> dates, LocalDate targetDate) throws NoDataForCriteria {
        TreeSet<LocalDate> set = new TreeSet<>(dates);
         if(set.lower(targetDate)!=null) {
             return set.lower(targetDate);
