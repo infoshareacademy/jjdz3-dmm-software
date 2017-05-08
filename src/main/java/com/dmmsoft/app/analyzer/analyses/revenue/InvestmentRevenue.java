@@ -64,7 +64,7 @@ public class InvestmentRevenue extends Analysis implements IResult {
         List<Quotation> quotations= filteredInvestment.getQuotations();
 
         if (quotations == null || quotations.isEmpty()) {
-            throw new NoDataForCriteria();
+            throw new NoDataForCriteria("No Quotations for current Investment.");
         }
         return quotations;
     }
@@ -100,7 +100,7 @@ public class InvestmentRevenue extends Analysis implements IResult {
     private void checkQuotationOrder(Quotation buyQuot,Quotation sellQuot){
 
             if (sellQuot.getDate().isBefore(buyQuot.getDate())){
-                throw  new IllegalArgumentException();
+                throw  new IllegalArgumentException("Wrong input data. Quotation BuyDate must be before Quotation SellDate.");
             }
     }
 
@@ -113,13 +113,16 @@ public class InvestmentRevenue extends Analysis implements IResult {
             return new InvestmentRevenueResult(revenueValue, deltaPrice, finalInputCriteria);
 
         } else {
-            throw new NoDataForCriteria();
+            throw new NoDataForCriteria("Failed to calculate InvestmentRevenue.");
         }
     }
 
     private void doCheckIfInputWasModeratedBySuggester() {
         if (!this.inputCriteria.equals(this.finalInputCriteria)) {
             this.finalInputCriteria.setModifiedBySuggester(true);
+            LOGGER.info("InvestmentInputCriteria was moderated by Suggester."
+                    +"InputCriteria: "+inputCriteria.hashCode()
+                    +"FinalInputCriteria:"+finalInputCriteria.hashCode());
         }
     }
 

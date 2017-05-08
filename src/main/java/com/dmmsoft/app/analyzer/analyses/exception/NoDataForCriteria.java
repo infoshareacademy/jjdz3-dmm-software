@@ -7,4 +7,10 @@ public class NoDataForCriteria extends Exception {
     public NoDataForCriteria() {
        super(message);
     }
+
+    public NoDataForCriteria(String message){
+        super(message);
+    }
+
+
 }

@@ -26,10 +26,13 @@ public class InputCriteriaSuggester {
         }
         LocalDate nearestDate = this.getNearestPreviousDate(dateList, targetDate);
 
-        return  quotations.stream()
-                .filter(x -> x.getDate().equals(nearestDate))
-                .limit(1)
-                .findFirst();
+        if(quotations!=null && !quotations.isEmpty()) {
+        return quotations.stream()
+               .filter(x -> x.getDate().equals(nearestDate))
+               .limit(1)
+               .findFirst();
+        }
+      throw new NoDataForCriteria("Failed to propose near possible date by suggester. Null or empty Quotation list.");
     }
 
     private LocalDate getNearestPreviousDate(List<LocalDate> dates, LocalDate targetDate) throws NoDataForCriteria {
@@ -38,7 +41,7 @@ public class InputCriteriaSuggester {
             return set.lower(targetDate);
         }
         else {
-            throw new NoDataForCriteria();
+            throw new NoDataForCriteria("Suggester failed to propose nearest (previous) possible date.");
         }
     }
 
