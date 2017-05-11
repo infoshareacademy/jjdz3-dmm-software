@@ -2,14 +2,19 @@ package com.dmmsoft.app.dataloader;
 
 import junit.framework.TestCase;
 
+import java.io.File;
+import java.net.URL;
+import java.nio.file.Paths;
+
 /**
  * Created by milo on 15.04.17.
  */
 public class FundLoaderTest extends TestCase {
 
-    private final String TESTFILEPATH ="/home/milo/bossa/funds/AGI001.txt";
-    private final String TESTFILEPATH2 ="/home/milo/bossa/funds/AIP001.txt";
-    private final String TESTFILEPATH3 ="/home/milo/bossa/funds/ALL001.txt";
+    private final String TESTFILEPATH = Paths.get("src/test/resources/csv/funds/AGI001.txt").toString();
+    private final String TESTFILEPATH2 = Paths.get("src/test/resources/csv/funds/AIP001.txt").toString();
+    private final String TESTFILEPATH3 = Paths.get("src/test/resources/csv/funds/ALL001.txt").toString();
+
     private final int NUMBEROFROWS = 405;
     private final int NUMBEROFROWS2 = 3742;
     private final int NUMBEROFROWS3 = 3303;
