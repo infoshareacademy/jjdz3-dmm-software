@@ -31,8 +31,8 @@ public class Demo {
         MainContainerLoader mainContainerLoader = new MainContainerLoader(appCon);
 
         // loading data
-       // mainContainerLoader.loadFunds();
-       // mainContainerLoader.loadCurrencies();
+       mainContainerLoader.loadFunds();
+       mainContainerLoader.loadCurrencies();
         MainContainer mc = mainContainerLoader.getMainContainer();
 
         // extracting investments

@@ -48,10 +48,6 @@ public class InvestmentRevenue extends Analysis implements IResult {
             LOGGER.error("InvestmentRevelnue failure.", exception);
             throw exception;
         }
-        catch (IllegalArgumentException exception){
-            LOGGER.error("sellDate cannot be before buyDate", exception);
-            throw new IllegalArgumentException();
-        }
     }
 
     private Investment getInvestment() throws NoDataForCriteria {
@@ -60,13 +56,10 @@ public class InvestmentRevenue extends Analysis implements IResult {
                 .findFirst().orElseThrow(NoDataForCriteria::new);
     }
 
-    private List<Quotation> getQuotations(Investment filteredInvestment) throws NoDataForCriteria{
-        List<Quotation> quotations= filteredInvestment.getQuotations();
-
-        if (quotations == null || quotations.isEmpty()) {
-            throw new NoDataForCriteria("No Quotations for current Investment.");
-        }
-        return quotations;
+    private List<Quotation> getQuotations(Investment filteredInvestment) throws NoDataForCriteria {
+        return Optional.ofNullable(filteredInvestment.getQuotations())
+                .filter(l -> !l.isEmpty())
+                .orElseThrow(() -> new NoDataForCriteria("No Quotations for current Investment."));
     }
 
     private Quotation getBuyQuotation(List<Quotation> quotations) throws NoDataForCriteria{
