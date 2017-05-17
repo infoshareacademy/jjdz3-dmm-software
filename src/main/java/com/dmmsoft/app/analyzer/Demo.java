@@ -8,6 +8,7 @@ import com.dmmsoft.app.appconfiguration.AppConfigurationProvider;
 import com.dmmsoft.app.dataloader.MainContainerLoader;
 import com.dmmsoft.app.model.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -20,7 +21,7 @@ public class Demo {
     public static void main(String[] args) throws NoDataForCriteria {
 
         // just Test values (e.g. from .jsp form)
-        Double capital = 10000.00;
+        BigDecimal capital = new BigDecimal(1512000.25);
         DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
         LocalDate BUY_DATE = LocalDate.parse("20090910", formatter);
         LocalDate SELL_DATE = LocalDate.parse("20170402", formatter);

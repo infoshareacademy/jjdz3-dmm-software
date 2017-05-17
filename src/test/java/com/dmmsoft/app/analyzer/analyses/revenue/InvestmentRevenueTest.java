@@ -7,6 +7,7 @@ import com.dmmsoft.app.model.Investment;
 import com.dmmsoft.app.model.MainContainer;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 public class InvestmentRevenueTest  {
 
     // Test values (just as from .jsp form)
-    private final  Double capital = 10000.00;
+    private final   BigDecimal capital =  new BigDecimal(10000.00);
     private final   DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
     private final   LocalDate BUY_DATE = LocalDate.parse("20090910", formatter);
     private final   LocalDate SELL_DATE = LocalDate.parse("20170330", formatter);

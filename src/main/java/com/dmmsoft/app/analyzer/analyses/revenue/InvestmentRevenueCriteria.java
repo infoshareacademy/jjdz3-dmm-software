@@ -2,6 +2,7 @@ package com.dmmsoft.app.analyzer.analyses.revenue;
 
 import com.dmmsoft.app.analyzer.analyses.AnalysisCriteria;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -10,12 +11,12 @@ import java.time.LocalDate;
 public class InvestmentRevenueCriteria extends AnalysisCriteria {
 
 
-    private Double investedCapital;
+    private BigDecimal investedCapital;
     private LocalDate buyDate;
     private LocalDate sellDate;
 
 
-    public double getInvestedCapital() {
+    public BigDecimal getInvestedCapital() {
         return investedCapital;
     }
 
@@ -38,7 +39,7 @@ public class InvestmentRevenueCriteria extends AnalysisCriteria {
     public InvestmentRevenueCriteria() {
     }
 
-    public InvestmentRevenueCriteria(Double investedCapital, LocalDate buyDate, LocalDate sellDate, String investmentName, Boolean isFavourite) {
+    public InvestmentRevenueCriteria(BigDecimal investedCapital, LocalDate buyDate, LocalDate sellDate, String investmentName, Boolean isFavourite) {
         this.investmentName = investmentName;
         this.investedCapital = investedCapital;
         this.buyDate = buyDate;
