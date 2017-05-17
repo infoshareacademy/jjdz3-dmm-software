@@ -64,12 +64,9 @@ public class InvestmentRevenue extends Analysis implements IResult {
     }
 
     private List<Quotation> getQuotations(Investment filteredInvestment) throws NoDataForCriteria {
-        List<Quotation> quotations = filteredInvestment.getQuotations();
-
-        if (quotations == null || quotations.isEmpty()) {
-            throw new NoDataForCriteria("No Quotations for current Investment.");
-        }
-        return quotations;
+        return Optional.ofNullable(filteredInvestment.getQuotations())
+                .filter(l -> !l.isEmpty())
+                .orElseThrow(() -> new NoDataForCriteria("No Quotations for current Investment."));
     }
 
     private Quotation getBuyQuotation(List<Quotation> quotations) throws NoDataForCriteria {
