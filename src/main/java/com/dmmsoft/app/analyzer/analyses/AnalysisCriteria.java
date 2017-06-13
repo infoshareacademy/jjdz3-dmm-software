@@ -1,50 +1,74 @@
 package com.dmmsoft.app.analyzer.analyses;
 
-/**
- * Created by milo on 30.04.17.
- */
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+@Entity
+@Inheritance(
+        strategy = InheritanceType.TABLE_PER_CLASS
+)
 public class AnalysisCriteria {
-
+    @Id
+    @GeneratedValue
+    protected long id;
     protected String investmentName;
-    protected Boolean isFavourite = false;
-    protected Boolean isModifiedBySuggester = false;
+    protected Boolean isFavourite = Boolean.valueOf(false);
+    protected Boolean isModifiedBySuggester = Boolean.valueOf(false);
 
-
-    public Boolean getModifiedBySuggester() {
-        return isModifiedBySuggester;
+    public AnalysisCriteria() {
     }
 
-    public void setModifiedBySuggester(Boolean modifiedBySuggester) {
-        isModifiedBySuggester = modifiedBySuggester;
+    public long getId() {
+        return this.id;
     }
 
-    public Boolean getFavourite() {
-        return isFavourite;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getInvestmentName() {
-        return investmentName;
+        return this.investmentName;
     }
 
+    public void setInvestmentName(String investmentName) {
+        this.investmentName = investmentName;
+    }
 
-    @Override
+    public Boolean getFavourite() {
+        return this.isFavourite;
+    }
+
+    public void setFavourite(Boolean favourite) {
+        this.isFavourite = favourite;
+    }
+
+    public Boolean getModifiedBySuggester() {
+        return this.isModifiedBySuggester;
+    }
+
+    public void setModifiedBySuggester(Boolean modifiedBySuggester) {
+        this.isModifiedBySuggester = modifiedBySuggester;
+    }
+
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        AnalysisCriteria that = (AnalysisCriteria) o;
-
-        if (!investmentName.equals(that.investmentName)) return false;
-        if (!isFavourite.equals(that.isFavourite)) return false;
-        return isModifiedBySuggester.equals(that.isModifiedBySuggester);
-
+        if(this == o) {
+            return true;
+        } else if(o != null && this.getClass() == o.getClass()) {
+            AnalysisCriteria that = (AnalysisCriteria)o;
+            return !this.investmentName.equals(that.investmentName)?false:(!this.isFavourite.equals(that.isFavourite)?false:this.isModifiedBySuggester.equals(that.isModifiedBySuggester));
+        } else {
+            return false;
+        }
     }
 
-    @Override
     public int hashCode() {
-        int result = investmentName.hashCode();
-        result = 31 * result + isFavourite.hashCode();
-        result = 31 * result + isModifiedBySuggester.hashCode();
+        int result = this.investmentName.hashCode();
+        result = 31 * result + this.isFavourite.hashCode();
+        result = 31 * result + this.isModifiedBySuggester.hashCode();
         return result;
     }
 }
+

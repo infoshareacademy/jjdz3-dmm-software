@@ -1,31 +1,31 @@
 package com.dmmsoft.app.analyzer.analyses.revenue;
 
 import com.dmmsoft.app.analyzer.analyses.AnalysisCriteria;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 
-/**
- * Created by milo on 17.04.17.
- */
+@MappedSuperclass
 public class InvestmentRevenueCriteria extends AnalysisCriteria {
-
-
     private BigDecimal investedCapital;
     private LocalDate buyDate;
     private LocalDate sellDate;
 
-
     public BigDecimal getInvestedCapital() {
-        return investedCapital;
+        return this.investedCapital;
+    }
+
+    public void setInvestedCapital(BigDecimal investedCapital) {
+        this.investedCapital = investedCapital;
     }
 
     public LocalDate getBuyDate() {
-        return buyDate;
+        return this.buyDate;
     }
 
     public LocalDate getSellDate() {
-        return sellDate;
+        return this.sellDate;
     }
 
     public void setSellDate(LocalDate sellDate) {
@@ -45,7 +45,6 @@ public class InvestmentRevenueCriteria extends AnalysisCriteria {
         this.buyDate = buyDate;
         this.sellDate = sellDate;
         this.isFavourite = isFavourite;
-
     }
 
     public InvestmentRevenueCriteria(InvestmentRevenueCriteria itemToCopy) {
@@ -55,48 +54,30 @@ public class InvestmentRevenueCriteria extends AnalysisCriteria {
         this.sellDate = itemToCopy.sellDate;
         this.isModifiedBySuggester = itemToCopy.isModifiedBySuggester;
         this.isFavourite = itemToCopy.isFavourite;
-
     }
 
-    @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        InvestmentRevenueCriteria that = (InvestmentRevenueCriteria) o;
-
-        if (!investedCapital.equals(that.investedCapital)) return false;
-        if (!buyDate.equals(that.buyDate)) return false;
-        return sellDate.equals(that.sellDate);
-
+        if(this == o) {
+            return true;
+        } else if(o != null && this.getClass() == o.getClass()) {
+            if(!super.equals(o)) {
+                return false;
+            } else {
+                InvestmentRevenueCriteria that = (InvestmentRevenueCriteria)o;
+                return !this.investedCapital.equals(that.investedCapital)?false:(!this.buyDate.equals(that.buyDate)?false:this.sellDate.equals(that.sellDate));
+            }
+        } else {
+            return false;
+        }
     }
 
-    @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + investedCapital.hashCode();
-        result = 31 * result + buyDate.hashCode();
-        result = 31 * result + sellDate.hashCode();
+        result = 31 * result + this.investedCapital.hashCode();
+        result = 31 * result + this.buyDate.hashCode();
+        result = 31 * result + this.sellDate.hashCode();
         return result;
     }
-
-    //
-//    @Override
-//    public boolean equals(Object obj) {
-//
-//        if (!(obj instanceof InvestmentRevenueCriteria))
-//            return false;
-//
-//        InvestmentRevenueCriteria criteria = (InvestmentRevenueCriteria) obj;
-//
-//        return (this.investmentName.equals(criteria.investmentName) &&
-//                this.investedCapital.equals(criteria.investedCapital) &&
-//                this.buyDate.equals(criteria.buyDate) &&
-//                this.sellDate.equals(criteria.sellDate) &&
-//                this.isFavourite.equals(criteria.isFavourite) &&
-//                this.isModifiedBySuggester.equals(criteria.isModifiedBySuggester));
-//
-//    }
-
 }
+
+
