@@ -1,11 +1,11 @@
-package com.dmmsoft.app.analyzer.analyses.stats;
+package com.dmmsoft.app.analyzer.analyses.indicator;
 
 import com.dmmsoft.app.model.Quotation;
 
 /**
  * Created by milo on 14.04.17.
  */
-public class ItemStatsResult {
+public class IndicatorResult {
 
 
     private String name;
@@ -95,7 +95,7 @@ public class ItemStatsResult {
 
     @Override
     public String toString() {
-        return "ItemStatsResult{" +
+        return "IndicatorResult{" +
                 "name='" + name + '\'' +
                 ", \nfirstQuotation=" + firstQuotation +
                 ", \nlastQuotation=" + lastQuotation +

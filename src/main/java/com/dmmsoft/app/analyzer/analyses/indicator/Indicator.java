@@ -1,4 +1,4 @@
-package com.dmmsoft.app.analyzer.analyses.stats;
+package com.dmmsoft.app.analyzer.analyses.indicator;
 
 import com.dmmsoft.app.model.Investment;
 import com.dmmsoft.app.model.Quotation;
@@ -10,12 +10,9 @@ import java.util.function.Predicate;
 /**
  * Created by milo on 14.04.17.
  */
-public class ItemStats {
+public class Indicator {
 
-    private final int DAYS_SINCE_LAST_QUOTATION = 7;
-
-    public ItemStatsResult getResult(List<Investment> invList, ItemStatsCriteria query) {
-
+    public IndicatorResult getResult(List<Investment> invList, IndicatorCriteria query) {
 
         Predicate<Investment> investmentPredicate = x -> x.getName().equals(query.getName());
 
@@ -80,7 +77,7 @@ public class ItemStats {
       //  }
 
 
-        ItemStatsResult result = new ItemStatsResult();
+        IndicatorResult result = new IndicatorResult();
         result.setName(maxValueQuotation.getName());
         result.setMaxValueQuotation(maxValueQuotation);
         result.setMinValueQuotation(minValueQuotation);
