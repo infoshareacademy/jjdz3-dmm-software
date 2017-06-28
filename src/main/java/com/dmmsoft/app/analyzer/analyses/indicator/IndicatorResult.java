@@ -1,11 +1,12 @@
 package com.dmmsoft.app.analyzer.analyses.indicator;
 
+import com.dmmsoft.app.analyzer.analyses.AnalysisResult;
 import com.dmmsoft.app.model.Quotation;
 
 /**
  * Created by milo on 14.04.17.
  */
-public class IndicatorResult {
+public class IndicatorResult extends AnalysisResult {
 
 
     private String name;
