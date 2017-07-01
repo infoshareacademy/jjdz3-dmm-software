@@ -3,8 +3,11 @@ package com.dmmsoft.app.dataloader;
 import com.dmmsoft.app.model.Quotation;
 import com.dmmsoft.app.model.QuotationFactory;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by milo on 15.04.17.
@@ -28,15 +31,24 @@ public abstract class Loader {
 
     protected void deltaValueOfClose(List<Quotation> quotations) {
 
-        for (Quotation q : quotations) {
-            if ((quotations.indexOf(q) > 0 && quotations.indexOf(q) < quotations.size())) {
+        for (Quotation quotation : quotations) {
+            if ((quotations.indexOf(quotation) > 0 && quotations.indexOf(quotation) < quotations.size())) {
 
-                double previousValue = quotations.get(quotations.indexOf(q) - 1).getClose();
-                double actualValue = q.getClose();
+                BigDecimal previousValue = new BigDecimal(quotations.get(quotations.indexOf(quotation) - 1).getClose())
+                        .setScale(2, RoundingMode.HALF_EVEN);
+                BigDecimal actualValue = new BigDecimal(quotation.getClose())
+                        .setScale(2, RoundingMode.HALF_EVEN);
 
-                q.setDeltaClose(((actualValue - previousValue) / previousValue) * 100);
-            } else if (quotations.indexOf(q) == 0) {
-                q.setDeltaClose(0.0);
+                BigDecimal deltaClose;
+
+                deltaClose = ((actualValue.subtract(previousValue)))
+                        .divide(previousValue, 2, RoundingMode.HALF_EVEN)
+                        .multiply(new BigDecimal(100.0))
+                        .setScale(2, RoundingMode.HALF_EVEN);
+
+                quotation.setDeltaClose(deltaClose);
+            } else if (quotations.indexOf(quotation) == 0) {
+                quotation.setDeltaClose(new BigDecimal(0.0));
             }
         }
     }

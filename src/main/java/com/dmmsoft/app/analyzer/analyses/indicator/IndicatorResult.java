@@ -18,7 +18,7 @@ public class IndicatorResult extends AnalysisResult {
     private Quotation maxDeltaMinus;
     private Quotation actualValue;
 
-    private boolean isStillQuotable;
+
 
     public Quotation getFirstQuotation() {
         return firstQuotation;
@@ -77,14 +77,6 @@ public class IndicatorResult extends AnalysisResult {
     }
 
 
-    public boolean isStillQuotable() {
-        return isStillQuotable;
-    }
-
-    public void setStillQuotable(boolean stillQuotable) {
-        isStillQuotable = stillQuotable;
-    }
-
     public Quotation getMinValueQuotation() {
         return minValueQuotation;
     }
@@ -105,7 +97,6 @@ public class IndicatorResult extends AnalysisResult {
                 ", \nmaxDeltaPlus=" + maxDeltaPlus +
                 ", \nmaxDeltaMinus=" + maxDeltaMinus +
                 ", \nactualValue=" + actualValue +
-                ", \nisStillQuotable=" + isStillQuotable +
                 '}';
     }
 }

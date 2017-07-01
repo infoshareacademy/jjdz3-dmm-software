@@ -1,5 +1,6 @@
 package com.dmmsoft.app.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Quotation implements Comparable<Quotation> {
@@ -11,9 +12,7 @@ public class Quotation implements Comparable<Quotation> {
     private double low;
     private double close;
     private double volume;
-
-
-    private double deltaClose;
+    private BigDecimal deltaClose;
 
     public Quotation(String name, LocalDate date, double open, double high , double low, double close, double volume) {
         this.name = name;
@@ -82,18 +81,13 @@ public class Quotation implements Comparable<Quotation> {
         this.volume = volume;
     }
 
-
-    public double getDeltaClose() {
+    public BigDecimal getDeltaClose() {
         return deltaClose;
     }
 
-    public void setDeltaClose(double deltaClose) {
+    public void setDeltaClose(BigDecimal deltaClose) {
         this.deltaClose = deltaClose;
     }
-
-
-
-
 
     @Override
     public String toString() {

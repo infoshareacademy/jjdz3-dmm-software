@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -98,9 +99,10 @@ public class Indicator extends Analysis implements IResult {
     private Quotation getMaxDeltaPlusValue(List<Quotation> quotations) throws  NoDataForCriteria{
 
         Predicate<Quotation> maxDeltaPlusValuePredicate = x -> x.getDeltaClose() == quotations.stream()
-                .mapToDouble(Quotation::getDeltaClose)
-                .reduce(Double::max)
-                .getAsDouble();
+                .map(Quotation::getDeltaClose)
+                .sorted()
+                .reduce((first,second)->second)
+                .get();
 
         Optional<Quotation> quotation = quotations.stream()
                 .filter(maxDeltaPlusValuePredicate)
@@ -111,9 +113,10 @@ public class Indicator extends Analysis implements IResult {
     private Quotation getMaxDeltaMinusValue(List<Quotation> quotations) throws  NoDataForCriteria{
 
         Predicate<Quotation> maxDeltaMinusValuePredicate = x -> x.getDeltaClose() == quotations.stream()
-                .mapToDouble(Quotation::getDeltaClose)
-                .reduce(Double::min)
-                .getAsDouble();
+                .map(Quotation::getDeltaClose)
+                .sorted()
+                .reduce((first,second)->first)
+                .get();
 
         Optional<Quotation> quotation = quotations.stream()
                 .filter(maxDeltaMinusValuePredicate)
