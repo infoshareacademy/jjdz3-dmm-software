@@ -49,11 +49,8 @@ public class InvestmentRevenue extends Analysis implements IResult {
             return getInvestmentRevenueResult(buyQuot, sellQuot);
 
         } catch (NoDataForCriteria exception) {
-            LOGGER.error("InvestmentRevelnue failure.", exception);
+            LOGGER.error("InvestmentRevelnue failure.{}", exception.getMessage());
             throw exception;
-        } catch (IllegalArgumentException exception) {
-            LOGGER.error("sellDate cannot be before buyDate", exception);
-            throw new IllegalArgumentException();
         }
     }
 
@@ -101,10 +98,10 @@ public class InvestmentRevenue extends Analysis implements IResult {
         return quotation.orElseThrow(NoDataForCriteria::new);
     }
 
-    private void checkQuotationOrder(Quotation buyQuot, Quotation sellQuot) {
+    private void checkQuotationOrder(Quotation buyQuot, Quotation sellQuot) throws NoDataForCriteria{
 
         if (sellQuot.getDate().isBefore(buyQuot.getDate())) {
-            throw new IllegalArgumentException("Wrong input data. Quotation BuyDate must be before Quotation SellDate.");
+            throw new NoDataForCriteria("Wrong input data. Quotation BuyDate must be before Quotation SellDate.");
         }
     }
 
