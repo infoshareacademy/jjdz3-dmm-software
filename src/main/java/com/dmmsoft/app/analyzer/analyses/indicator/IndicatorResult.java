@@ -19,7 +19,6 @@ public class IndicatorResult extends AnalysisResult {
     private Quotation actualValue;
 
 
-
     public Quotation getFirstQuotation() {
         return firstQuotation;
     }

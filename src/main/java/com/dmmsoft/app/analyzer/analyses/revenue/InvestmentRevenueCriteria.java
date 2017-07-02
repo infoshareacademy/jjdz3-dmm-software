@@ -1,6 +1,7 @@
 package com.dmmsoft.app.analyzer.analyses.revenue;
 
 import com.dmmsoft.app.analyzer.analyses.AnalysisCriteria;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import javax.persistence.Entity;
@@ -57,14 +58,14 @@ public class InvestmentRevenueCriteria extends AnalysisCriteria {
     }
 
     public boolean equals(Object o) {
-        if(this == o) {
+        if (this == o) {
             return true;
-        } else if(o != null && this.getClass() == o.getClass()) {
-            if(!super.equals(o)) {
+        } else if (o != null && this.getClass() == o.getClass()) {
+            if (!super.equals(o)) {
                 return false;
             } else {
-                InvestmentRevenueCriteria that = (InvestmentRevenueCriteria)o;
-                return !this.investedCapital.equals(that.investedCapital)?false:(!this.buyDate.equals(that.buyDate)?false:this.sellDate.equals(that.sellDate));
+                InvestmentRevenueCriteria that = (InvestmentRevenueCriteria) o;
+                return !this.investedCapital.equals(that.investedCapital) ? false : (!this.buyDate.equals(that.buyDate) ? false : this.sellDate.equals(that.sellDate));
             }
         } else {
             return false;

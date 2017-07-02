@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
 import static java.math.RoundingMode.HALF_EVEN;
+
 /**
  * Created by milo on 14.04.17.
  */

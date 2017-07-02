@@ -10,8 +10,8 @@ import java.math.BigDecimal;
  */
 public class InvestmentRevenueResult extends AnalysisResult {
 
-  private BigDecimal capitalRevenueValue;
-  private BigDecimal capitalRevenueDeltaPrecentValue;
+    private BigDecimal capitalRevenueValue;
+    private BigDecimal capitalRevenueDeltaPrecentValue;
 
     public BigDecimal getCapitalRevenueValue() {
         return capitalRevenueValue;
