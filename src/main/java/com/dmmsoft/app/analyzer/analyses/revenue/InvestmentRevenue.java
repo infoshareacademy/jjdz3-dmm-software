@@ -72,7 +72,6 @@ public class InvestmentRevenue extends Analysis implements IResult {
 
         Optional<Quotation> quotation = quotations.stream()
                 .filter(x -> x.getDate().equals(inputCriteria.getBuyDate()))
-                .limit(1)
                 .findFirst();
 
         if (!quotation.isPresent()) {
@@ -88,7 +87,6 @@ public class InvestmentRevenue extends Analysis implements IResult {
 
         Optional<Quotation> quotation = quotations.stream()
                 .filter(x -> x.getDate().equals(inputCriteria.getSellDate()))
-                .limit(1)
                 .findFirst();
 
         if (!quotation.isPresent()) {
@@ -112,8 +110,10 @@ public class InvestmentRevenue extends Analysis implements IResult {
 
             BigDecimal deltaPrice = ((sellQuot.getClose()
                     .subtract(buyQuot.getClose()))
-                    .divide(buyQuot.getClose(), 2, HALF_EVEN)).multiply(new BigDecimal(100.0));
-            BigDecimal deltaPriceRounded = deltaPrice.setScale(2, HALF_EVEN);
+                    .divide(buyQuot.getClose(), 6, HALF_EVEN))
+                    .multiply(new BigDecimal(100.0));
+
+            BigDecimal deltaPriceRounded = deltaPrice.setScale(4, HALF_EVEN);
 
             BigDecimal revenueValue = ((deltaPriceRounded
                     .divide(new BigDecimal(100.0), 2, HALF_EVEN))

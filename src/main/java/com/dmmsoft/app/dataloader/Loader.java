@@ -42,9 +42,9 @@ public abstract class Loader {
                 BigDecimal deltaClose;
 
                 deltaClose = ((actualValue.subtract(previousValue)))
-                        .divide(previousValue, 2, RoundingMode.HALF_EVEN)
-                        .multiply(new BigDecimal(100.0))
-                        .setScale(2, RoundingMode.HALF_EVEN);
+                        .divide(previousValue, 8, RoundingMode.HALF_EVEN)
+                        .setScale(4, RoundingMode.HALF_EVEN)
+                        .multiply(new BigDecimal(100.0));
 
                 quotation.setDeltaClose(deltaClose);
             } else if (quotations.indexOf(quotation) == 0) {
