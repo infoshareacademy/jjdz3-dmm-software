@@ -7,21 +7,20 @@ public class Quotation implements Comparable<Quotation> {
 
     private String name;
     private LocalDate date;
-    private double open;
-    private double high;
-    private double low;
-    private double close;
-    private double volume;
+    private BigDecimal open;
+    private BigDecimal high;
+    private BigDecimal low;
+    private BigDecimal close;
+    private BigDecimal volume;
     private BigDecimal deltaClose;
 
-    public Quotation(String name, LocalDate date, double open, double high , double low, double close, double volume) {
+    public Quotation(String name, LocalDate date, BigDecimal open, BigDecimal high, BigDecimal low, BigDecimal close, BigDecimal volume) {
         this.name = name;
         this.date = date;
         this.open = open;
         this.high = high;
         this.low = low;
         this.close = close;
-        // this.deltaClose =deltaClose;
         this.volume = volume;
     }
 
@@ -41,45 +40,42 @@ public class Quotation implements Comparable<Quotation> {
         this.date = date;
     }
 
-    public double getOpen() {
+    public BigDecimal getOpen() {
         return open;
     }
 
-    public void setOpen(double open) {
+    public void setOpen(BigDecimal open) {
         this.open = open;
     }
 
-    public double getHigh() {
+    public BigDecimal getHigh() {
         return high;
     }
 
-    public void setHigh(double high) {
+    public void setHigh(BigDecimal high) {
         this.high = high;
     }
 
-    public double getLow() {
+    public BigDecimal getLow() {
         return low;
     }
 
-    public void setLow(double low) {
+    public void setLow(BigDecimal low) {
         this.low = low;
     }
 
-    public double getClose() {
+    public void setVolume(BigDecimal volume) {
+        this.volume = volume;
+    }
+
+    public BigDecimal getClose() {
         return close;
     }
 
-    public void setClose(double close) {
+    public void setClose(BigDecimal close) {
         this.close = close;
     }
 
-    public double getVolume() {
-        return volume;
-    }
-
-    public void setVolume(double volume) {
-        this.volume = volume;
-    }
 
     public BigDecimal getDeltaClose() {
         return deltaClose;
@@ -92,12 +88,12 @@ public class Quotation implements Comparable<Quotation> {
     @Override
     public String toString() {
         return "Quotation [name=" + name + ", date=" + date +
-              //  ", open=" + open +
-              //  ", high=" + high +
-              //  ", low=" +low+
-                ", " + "close=" +close+
-               // " , volume=" +volume+
-                ", deltaClose="+deltaClose+"%] \n";
+                //  ", open=" + open +
+                //  ", high=" + high +
+                //  ", low=" +low+
+                ", " + "close=" + close +
+                // " , volume=" +volume+
+                ", deltaClose=" + deltaClose + "%] \n";
 
     }
 

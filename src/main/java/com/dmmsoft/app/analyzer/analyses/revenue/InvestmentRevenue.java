@@ -20,6 +20,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
+import static java.math.RoundingMode.HALF_EVEN;
 /**
  * Created by milo on 14.04.17.
  */
@@ -98,7 +99,7 @@ public class InvestmentRevenue extends Analysis implements IResult {
         return quotation.orElseThrow(NoDataForCriteria::new);
     }
 
-    private void checkQuotationOrder(Quotation buyQuot, Quotation sellQuot) throws NoDataForCriteria{
+    private void checkQuotationOrder(Quotation buyQuot, Quotation sellQuot) throws NoDataForCriteria {
 
         if (sellQuot.getDate().isBefore(buyQuot.getDate())) {
             throw new NoDataForCriteria("Wrong input data. Quotation BuyDate must be before Quotation SellDate.");
@@ -108,12 +109,15 @@ public class InvestmentRevenue extends Analysis implements IResult {
     private InvestmentRevenueResult getInvestmentRevenueResult(Quotation buyQuot, Quotation sellQuot) throws NoDataForCriteria {
         if (buyQuot != null && sellQuot != null) {
 
-            BigDecimal deltaPrice = new BigDecimal(((sellQuot.getClose() - buyQuot.getClose()) / buyQuot.getClose()) * 100);
-            BigDecimal deltaPriceRounded = deltaPrice.setScale(4, RoundingMode.HALF_EVEN);
+            BigDecimal deltaPrice = ((sellQuot.getClose()
+                    .subtract(buyQuot.getClose()))
+                    .divide(buyQuot.getClose(), 2, HALF_EVEN)).multiply(new BigDecimal(100.0));
+            BigDecimal deltaPriceRounded = deltaPrice.setScale(2, HALF_EVEN);
 
-            BigDecimal revenueValue = ((deltaPriceRounded.divide(new BigDecimal(100)))
+            BigDecimal revenueValue = ((deltaPriceRounded
+                    .divide(new BigDecimal(100.0), 2, HALF_EVEN))
                     .multiply(inputCriteria.getInvestedCapital()))
-                    .setScale(2, RoundingMode.HALF_EVEN);
+                    .setScale(2, HALF_EVEN);
 
             doCheckIfInputWasModeratedBySuggester();
             return new InvestmentRevenueResult(revenueValue, deltaPriceRounded, finalInputCriteria);

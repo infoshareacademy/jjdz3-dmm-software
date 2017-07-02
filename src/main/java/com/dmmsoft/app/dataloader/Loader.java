@@ -34,9 +34,9 @@ public abstract class Loader {
         for (Quotation quotation : quotations) {
             if ((quotations.indexOf(quotation) > 0 && quotations.indexOf(quotation) < quotations.size())) {
 
-                BigDecimal previousValue = new BigDecimal(quotations.get(quotations.indexOf(quotation) - 1).getClose())
+                BigDecimal previousValue = quotations.get(quotations.indexOf(quotation) - 1).getClose()
                         .setScale(2, RoundingMode.HALF_EVEN);
-                BigDecimal actualValue = new BigDecimal(quotation.getClose())
+                BigDecimal actualValue = quotation.getClose()
                         .setScale(2, RoundingMode.HALF_EVEN);
 
                 BigDecimal deltaClose;
