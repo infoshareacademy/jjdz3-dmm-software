@@ -1,6 +1,9 @@
 package com.dmmsoft.app.analyzer;
 
 import com.dmmsoft.app.analyzer.analyses.exception.NoDataForCriteria;
+import com.dmmsoft.app.analyzer.analyses.indicator.Indicator;
+import com.dmmsoft.app.analyzer.analyses.indicator.IndicatorCriteria;
+import com.dmmsoft.app.analyzer.analyses.indicator.IndicatorResult;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenue;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueCriteria;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueResult;
@@ -43,6 +46,18 @@ public class Demo {
         InvestmentRevenueCriteria input = new InvestmentRevenueCriteria(capital, BUY_DATE, SELL_DATE, InvestmentName, false);
         InvestmentRevenueResult ir = new InvestmentRevenue(mc, input).getResult();
 
+        IndicatorCriteria criteria = new IndicatorCriteria("CHF");
+
+        IndicatorResult result = new Indicator(mc, criteria).getResult();
+        System.out.println(result.getName());
+        System.out.println(result.getMinValueQuotation().getClose());
+        System.out.println(result.getFirstQuotation().getClose());
+        System.out.println(result.getLastQuotation().getClose());
+        System.out.println(result.getMaxDeltaMinus().getDeltaClose());
+        System.out.println(result.getMaxDeltaPlus().getDeltaClose());
+        System.out.println(result.getMaxValueQuotation().getClose());
+        System.out.println(result.getMinValueQuotation().getClose());
+
         System.out.println("inputValues(buy date, sell date)");
         System.out.println(input.getBuyDate());
         System.out.println(input.getSellDate());
@@ -59,8 +74,5 @@ public class Demo {
 
         System.out.println(ir.getCapitalRevenueValue());
         System.out.println(ir.getCapitalRevenueDeltaPrecentValue());
-
     }
-
-
 }

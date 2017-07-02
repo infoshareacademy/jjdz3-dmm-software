@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -68,26 +69,30 @@ public class Indicator extends Analysis implements IResult {
     private Quotation getMaxValue(List<Quotation> quotations) throws NoDataForCriteria {
 
         BigDecimal maxCloseValue = quotations.stream()
-                .map(Quotation::getDeltaClose)
+                .map(Quotation::getClose)
                 .max(BigDecimal::compareTo)
                 .orElseThrow(NoDataForCriteria::new);
 
-        Predicate<Quotation> maxValuePredicate = x -> x.getClose().equals(maxCloseValue);
+        Predicate<Quotation> maxValuePredicate = x -> Objects.equals(x.getClose(), maxCloseValue);
 
         Optional<Quotation> quotation = quotations.stream()
                 .filter(maxValuePredicate)
-                .findFirst();
-        return quotation.orElseThrow(NoDataForCriteria::new);
+                .findAny();
+        if(quotation.isPresent()) {
+            return quotation.get();
+        } else{
+        throw new NoDataForCriteria();
+        }
     }
 
     private Quotation getMinValue(List<Quotation> quotations) throws NoDataForCriteria {
 
         BigDecimal minCloseValue = quotations.stream()
-                .map(Quotation::getDeltaClose)
+                .map(Quotation::getClose)
                 .min(BigDecimal::compareTo)
                 .orElseThrow(NoDataForCriteria::new);
 
-        Predicate<Quotation> minValuePredicate = x -> x.getClose().equals(minCloseValue);
+        Predicate<Quotation> minValuePredicate = x -> Objects.equals(x.getClose(), minCloseValue);
 
         Optional<Quotation> quotation = quotations.stream()
                 .filter(minValuePredicate)
@@ -102,7 +107,7 @@ public class Indicator extends Analysis implements IResult {
                 .max(BigDecimal::compareTo)
                 .orElseThrow(NoDataForCriteria::new);
 
-        Predicate<Quotation> maxDeltaPlusValuePredicate = x -> x.getDeltaClose().equals(maxDeltaPlus);
+        Predicate<Quotation> maxDeltaPlusValuePredicate = x -> Objects.equals(x.getDeltaClose(), maxDeltaPlus);
 
         Optional<Quotation> quotation = quotations.stream()
                 .filter(maxDeltaPlusValuePredicate)
@@ -117,7 +122,7 @@ public class Indicator extends Analysis implements IResult {
                 .min(BigDecimal::compareTo)
                 .orElseThrow(NoDataForCriteria::new);
 
-        Predicate<Quotation> maxDeltaMinusValuePredicate = x -> x.getDeltaClose().equals(maxDeltaMinus);
+        Predicate<Quotation> maxDeltaMinusValuePredicate = x -> Objects.equals(x.getDeltaClose(), maxDeltaMinus);
 
         Optional<Quotation> quotation = quotations.stream()
                 .filter(maxDeltaMinusValuePredicate)

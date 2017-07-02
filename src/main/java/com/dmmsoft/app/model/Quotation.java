@@ -14,13 +14,14 @@ public class Quotation implements Comparable<Quotation> {
     private BigDecimal volume;
     private BigDecimal deltaClose;
 
-    public Quotation(String name, LocalDate date, BigDecimal open, BigDecimal high, BigDecimal low, BigDecimal close, BigDecimal volume) {
+    public Quotation(String name, LocalDate date, BigDecimal open, BigDecimal high , BigDecimal low, BigDecimal close, BigDecimal volume) {
         this.name = name;
         this.date = date;
         this.open = open;
         this.high = high;
         this.low = low;
         this.close = close;
+        // this.deltaClose =deltaClose;
         this.volume = volume;
     }
 
@@ -38,6 +39,15 @@ public class Quotation implements Comparable<Quotation> {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+
+    public BigDecimal getClose() {
+        return close;
+    }
+
+    public void setClose(BigDecimal close) {
+        this.close = close;
     }
 
     public BigDecimal getOpen() {
@@ -64,18 +74,13 @@ public class Quotation implements Comparable<Quotation> {
         this.low = low;
     }
 
+    public BigDecimal getVolume() {
+        return volume;
+    }
+
     public void setVolume(BigDecimal volume) {
         this.volume = volume;
     }
-
-    public BigDecimal getClose() {
-        return close;
-    }
-
-    public void setClose(BigDecimal close) {
-        this.close = close;
-    }
-
 
     public BigDecimal getDeltaClose() {
         return deltaClose;
@@ -88,12 +93,12 @@ public class Quotation implements Comparable<Quotation> {
     @Override
     public String toString() {
         return "Quotation [name=" + name + ", date=" + date +
-                //  ", open=" + open +
-                //  ", high=" + high +
-                //  ", low=" +low+
-                ", " + "close=" + close +
-                // " , volume=" +volume+
-                ", deltaClose=" + deltaClose + "%] \n";
+              //  ", open=" + open +
+              //  ", high=" + high +
+              //  ", low=" +low+
+                ", " + "close=" +close+
+               // " , volume=" +volume+
+                ", deltaClose="+deltaClose+"%] \n";
 
     }
 
