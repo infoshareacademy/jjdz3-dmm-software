@@ -1,3 +1,6 @@
 .idea/
 target/
 *.iml
+logs/
+/src/main/java/com/dmmsoft/app/analyzer/Demo.java
+/src/main/java/com/dmmsoft/app/analyzer/Test.java
