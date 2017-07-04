@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dmmsoft.app.file.path.CurrencyFolderPath;
-import com.dmmsoft.app.file.path.FilePath;
-import com.dmmsoft.app.file.path.FundFolderPath;
+import com.dmmsoft.app.file.path.*;
+import com.dmmsoft.app.file.url.CurrencyUrl;
+import com.dmmsoft.app.file.url.FundUrl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +24,12 @@ public class AppConfigurationProvider {
 
     private FundFolderPath fundFolderPath;
     private CurrencyFolderPath currencyFolderPath;
+
+    private FundBackupFolderPath fundBackupFolderPath;
+    private CurrencyBackupFolderPath currencyBackupFolderPath;
+
+    private FundUrl fundUrl;
+    private CurrencyUrl currencyUrl;
 
     private List<FilePath> fundFilePaths = new ArrayList<>();
     private List<FilePath> currencyFilePaths = new ArrayList<>();
@@ -39,6 +45,22 @@ public class AppConfigurationProvider {
     }
     private void setCurrencyFolderPath(CurrencyFolderPath currencyFolderPath) {
         this.currencyFolderPath = currencyFolderPath;
+    }
+
+    public FundUrl getFundUrl() {
+        return fundUrl;
+    }
+
+    public CurrencyUrl getCurrencyUrl() {
+        return currencyUrl;
+    }
+
+    public FundBackupFolderPath getFundBackupFolderPath() {
+        return fundBackupFolderPath;
+    }
+
+    public CurrencyBackupFolderPath getCurrencyBackupFolderPath() {
+        return currencyBackupFolderPath;
     }
 
     private FundFolderPath getFundFolderPath() {
@@ -60,6 +82,12 @@ public class AppConfigurationProvider {
 
             this.fundFolderPath = jsonMapper.getAppConfigurationFromJson().fundFolderPath;
             this.currencyFolderPath = jsonMapper.getAppConfigurationFromJson().currencyFolderPath;
+
+            this.fundBackupFolderPath = jsonMapper.getAppConfigurationFromJson().fundBackupFolderPath;
+            this.currencyBackupFolderPath = jsonMapper.getAppConfigurationFromJson().currencyBackupFolderPath;
+
+            this.fundUrl = jsonMapper.getAppConfigurationFromJson().fundUrl;
+            this.currencyUrl = jsonMapper.getAppConfigurationFromJson().currencyUrl;
 
             if(fundFilePaths.isEmpty()||fundFilePaths==null) {
                 this.fundFilePaths = this.generateFilePaths(fundFolderPath.getFolderPath(),

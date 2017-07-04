@@ -1,9 +1,7 @@
-package com.dmmsoft.app.dataloader;
+package com.dmmsoft.app.model.loader;
 
 import junit.framework.TestCase;
 
-import java.io.File;
-import java.net.URL;
 import java.nio.file.Paths;
 
 /**
