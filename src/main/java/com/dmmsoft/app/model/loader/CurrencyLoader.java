@@ -1,4 +1,4 @@
-package com.dmmsoft.app.dataloader;
+package com.dmmsoft.app.model.loader;
 
 import com.dmmsoft.app.model.Currency;
 import com.dmmsoft.app.model.Quotation;

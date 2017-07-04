@@ -2,7 +2,7 @@ package com.dmmsoft.app.analyzer.analyses.revenue;
 
 import com.dmmsoft.app.analyzer.analyses.exception.NoDataForCriteria;
 import com.dmmsoft.app.appconfiguration.AppConfigurationProvider;
-import com.dmmsoft.app.dataloader.MainContainerLoader;
+import com.dmmsoft.app.model.loader.MainContainerLoader;
 import com.dmmsoft.app.model.Investment;
 import com.dmmsoft.app.model.MainContainer;
 import org.junit.Test;

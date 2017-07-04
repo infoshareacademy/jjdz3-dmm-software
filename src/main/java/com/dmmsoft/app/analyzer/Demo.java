@@ -8,7 +8,7 @@ import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenue;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueCriteria;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueResult;
 import com.dmmsoft.app.appconfiguration.AppConfigurationProvider;
-import com.dmmsoft.app.dataloader.MainContainerLoader;
+import com.dmmsoft.app.model.loader.MainContainerLoader;
 import com.dmmsoft.app.model.*;
 
 import java.math.BigDecimal;
@@ -32,6 +32,12 @@ public class Demo {
 
         // application initialization
         AppConfigurationProvider appCon = new AppConfigurationProvider().getConfiguration();
+        System.out.println(appCon.getCurrencyBackupFolderPath().getFolderPath());
+        System.out.println(appCon.getFundBackupFolderPath().getFolderPath());
+        System.out.println(appCon.getCurrencyUrl().getFileUrl());
+        System.out.println(appCon.getFundUrl().getFileUrl());
+
+
         MainContainerLoader mainContainerLoader = new MainContainerLoader(appCon);
 
         // loading data
