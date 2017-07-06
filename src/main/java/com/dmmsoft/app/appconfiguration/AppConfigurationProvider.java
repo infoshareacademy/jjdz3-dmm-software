@@ -63,11 +63,11 @@ public class AppConfigurationProvider {
         return currencyBackupFolderPath;
     }
 
-    private FundFolderPath getFundFolderPath() {
+    public FundFolderPath getFundFolderPath() {
         return fundFolderPath;
     }
 
-    private CurrencyFolderPath getCurrencyFolderPath() {
+    public CurrencyFolderPath getCurrencyFolderPath() {
         return currencyFolderPath;
     }
 

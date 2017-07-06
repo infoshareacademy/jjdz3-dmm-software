@@ -47,9 +47,7 @@ public class QuotationFactory {
             scanner.close();
 
         } catch (Exception e) {
-            LOGGER.info("Error parsing csv files " + e.getMessage());
-        } finally {
-
+            LOGGER.error("Failded to parse csv file {}, {}",filepath, e.getMessage());
         }
     }
 }
