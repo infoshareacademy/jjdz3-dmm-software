@@ -6,6 +6,7 @@
 
   "fundUrl":{"fileUrl":"http://bossa.pl/pub/fundinwest/omega/omegafun.zip"},
   "currencyUrl":{"fileUrl":"http://bossa.pl/pub/waluty/omega/omeganbp.zip"},
+  "smtpConfigFilePath":"/home/milo/dmmfinance/",
 
   "fundFilePaths":[
   ],

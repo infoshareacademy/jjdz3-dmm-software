@@ -33,11 +33,16 @@ public class AppConfigurationProvider {
     private FundUrl fundUrl;
     private CurrencyUrl currencyUrl;
 
+    private String smtpConfigFilePath;
+
     private List<FilePath> fundFilePaths = new ArrayList<>();
     private List<FilePath> currencyFilePaths = new ArrayList<>();
 
 
-    public List<FilePath> getFundFilePaths() {return fundFilePaths;}
+    public List<FilePath> getFundFilePaths() {
+        return fundFilePaths;
+    }
+
     public List<FilePath> getCurrencyFilePaths() {
         return currencyFilePaths;
     }
@@ -45,8 +50,17 @@ public class AppConfigurationProvider {
     private void setFundFolderPath(FundFolderPath fundFolderPath) {
         this.fundFolderPath = fundFolderPath;
     }
+
     private void setCurrencyFolderPath(CurrencyFolderPath currencyFolderPath) {
         this.currencyFolderPath = currencyFolderPath;
+    }
+
+    public String getSmtpConfigFilePath() {
+        return smtpConfigFilePath;
+    }
+
+    public void setSmtpConfigFilePath(String smtpConfigFilePath) {
+        this.smtpConfigFilePath = smtpConfigFilePath;
     }
 
     public FundUrl getFundUrl() {
@@ -91,12 +105,14 @@ public class AppConfigurationProvider {
             this.fundUrl = jsonMapper.getAppConfigurationFromJson().fundUrl;
             this.currencyUrl = jsonMapper.getAppConfigurationFromJson().currencyUrl;
 
-            if(fundFilePaths.isEmpty()||fundFilePaths==null) {
+            this.smtpConfigFilePath = jsonMapper.getAppConfigurationFromJson().smtpConfigFilePath;
+
+            if (fundFilePaths.isEmpty() || fundFilePaths == null) {
                 this.fundFilePaths = this.generateFilePaths(fundFolderPath.getFolderPath(),
                         this.getFileNameList(fundFolderPath.getFolderPath()));
             }
 
-            if(currencyFilePaths.isEmpty()||currencyFilePaths==null) {
+            if (currencyFilePaths.isEmpty() || currencyFilePaths == null) {
                 this.currencyFilePaths = this.generateFilePaths(currencyFolderPath.getFolderPath(),
                         this.getFileNameList(currencyFolderPath.getFolderPath()));
             }
@@ -111,8 +127,7 @@ public class AppConfigurationProvider {
     }
 
 
-
-    private List<String> getFileNameList(String folderPath){
+    private List<String> getFileNameList(String folderPath) {
         List<String> fileNames = new ArrayList<>();
 
         File[] files = new File(folderPath).listFiles();
@@ -124,12 +139,12 @@ public class AppConfigurationProvider {
         return fileNames;
     }
 
-    private List<FilePath> generateFilePaths(String folderPath, List<String>fileList){
+    private List<FilePath> generateFilePaths(String folderPath, List<String> fileList) {
 
 
         List<FilePath> filePaths = new ArrayList<>();
-        for(String fileName : fileList){
-            filePaths.add(new FilePath(folderPath.concat(fileName)))  ;
+        for (String fileName : fileList) {
+            filePaths.add(new FilePath(folderPath.concat(fileName)));
         }
         return filePaths;
     }
