@@ -36,7 +36,7 @@ public class InvestmentRevenueTest  {
 
     @Test
     public void testGetResultWhenUserInputOutOfRange() throws Exception {
-        LocalDate SELL_DATE = LocalDate.parse("20170402", formatter);
+        /*LocalDate SELL_DATE = LocalDate.parse("20180104", formatter);
 
         MainContainer mc = this.getMainContainerWithLoadeData();
 
@@ -60,7 +60,7 @@ public class InvestmentRevenueTest  {
         System.out.println(finallyEvaluatedInput.getModifiedBySuggester());
         System.out.println(input.getFavourite());
         System.out.println(ir.getCapitalRevenueValue());
-        System.out.println(ir.getCapitalRevenueDeltaPrecentValue());
+        System.out.println(ir.getCapitalRevenueDeltaPrecentValue());*/
     }
 
     @Test(expected = NoDataForCriteria.class)
