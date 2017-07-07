@@ -2,19 +2,26 @@ package com.dmmsoft.app.model;
 
 import junit.framework.TestCase;
 
+import java.io.File;
+
 /**
  * Created by milo on 15.04.17.
  */
 public class QuotationFactoryTest extends TestCase {
 
-    private final String TESTFILEPATH ="/home/milo/bossa/funds/AGI001.txt";
-    private final int NUMBEROFROWS = 405;
-
+    File resourcesDirectory = new File("src/test/resources/csv/currencies/EUR.txt");
+    private final int NUMBEROFROWS = 4622;
     QuotationFactory quotationFactory = new QuotationFactory();
 
 
     public void testGetNumberOfQuotations() throws Exception {
-        quotationFactory.loadDataFromFile(TESTFILEPATH);
+
+
+        String filePath = resourcesDirectory.getAbsolutePath();
+
+        System.out.println("filepath: " + filePath);
+
+        quotationFactory.loadDataFromFile(filePath);
 
         System.out.println("ilość notowań: " +quotationFactory.getNumberOfQuotations());
         if (quotationFactory.getNumberOfQuotations()!=NUMBEROFROWS){
@@ -23,7 +30,6 @@ public class QuotationFactoryTest extends TestCase {
 
 
     }
-
 
 
     public void testGetQuotation() throws Exception {

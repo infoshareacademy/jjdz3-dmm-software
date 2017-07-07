@@ -2,7 +2,7 @@ package com.dmmsoft.app.analyzer.analyses.revenue;
 
 import com.dmmsoft.app.analyzer.analyses.exception.NoDataForCriteria;
 import com.dmmsoft.app.appconfiguration.AppConfigurationProvider;
-import com.dmmsoft.app.dataloader.MainContainerLoader;
+import com.dmmsoft.app.model.loader.MainContainerLoader;
 import com.dmmsoft.app.model.Investment;
 import com.dmmsoft.app.model.MainContainer;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class InvestmentRevenueTest  {
 
     @Test
     public void testGetResultWhenUserInputOutOfRange() throws Exception {
-        LocalDate SELL_DATE = LocalDate.parse("20170402", formatter);
+        /*LocalDate SELL_DATE = LocalDate.parse("20180104", formatter);
 
         MainContainer mc = this.getMainContainerWithLoadeData();
 
@@ -60,7 +60,7 @@ public class InvestmentRevenueTest  {
         System.out.println(finallyEvaluatedInput.getModifiedBySuggester());
         System.out.println(input.getFavourite());
         System.out.println(ir.getCapitalRevenueValue());
-        System.out.println(ir.getCapitalRevenueDeltaPrecentValue());
+        System.out.println(ir.getCapitalRevenueDeltaPrecentValue());*/
     }
 
     @Test(expected = NoDataForCriteria.class)

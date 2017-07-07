@@ -1,4 +1,4 @@
-package com.dmmsoft.app.dataloader;
+package com.dmmsoft.app.model.loader;
 
 import com.dmmsoft.app.appconfiguration.AppConfigurationProvider;
 import com.dmmsoft.app.file.path.FilePath;

@@ -8,9 +8,11 @@ import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenue;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueCriteria;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueResult;
 import com.dmmsoft.app.appconfiguration.AppConfigurationProvider;
-import com.dmmsoft.app.dataloader.MainContainerLoader;
+import com.dmmsoft.app.file.RemoteDownloader;
+import com.dmmsoft.app.model.loader.MainContainerLoader;
 import com.dmmsoft.app.model.*;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +23,7 @@ import java.util.List;
  */
 public class Demo {
 
-    public static void main(String[] args) throws NoDataForCriteria {
+    public static void main(String[] args) throws NoDataForCriteria, IOException {
 
         // just Test values (e.g. from .jsp form)
         BigDecimal capital = new BigDecimal(1512000.25);
@@ -32,12 +34,20 @@ public class Demo {
 
         // application initialization
         AppConfigurationProvider appCon = new AppConfigurationProvider().getConfiguration();
+        System.out.println(appCon.getCurrencyBackupFolderPath().getFolderPath());
+        System.out.println(appCon.getFundBackupFolderPath().getFolderPath());
+        System.out.println(appCon.getCurrencyUrl().getFileUrl());
+        System.out.println(appCon.getFundUrl().getFileUrl());
+
+
         MainContainerLoader mainContainerLoader = new MainContainerLoader(appCon);
 
         // loading data
         mainContainerLoader.loadFunds();
         mainContainerLoader.loadCurrencies();
         MainContainer mc = mainContainerLoader.getMainContainer();
+
+        new RemoteDownloader().getModelFilesFromRemoteLocation();
 
         // extracting investments
         List<Investment> investments = mc.getInvestments();
