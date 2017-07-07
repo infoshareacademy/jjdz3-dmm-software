@@ -5,6 +5,6 @@ package com.dmmsoft.app.file.path;
  */
 
 public class CurrencyFolderPath extends FolderPath {
-
+    
 
 }
