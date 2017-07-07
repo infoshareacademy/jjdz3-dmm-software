@@ -20,7 +20,9 @@ import org.slf4j.LoggerFactory;
 public class AppConfigurationProvider {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AppConfigurationProvider.class);
-    private final String CONFIGURATION_FILE_PATH = "Configuration3.json";
+    private final String CONFIGURATION_FILE_PATH = "Configuration.json";
+    private final String OS_USER_NAME_FILE_VARIABLE = "user_name";
+    private String osUserName;
 
     private FundFolderPath fundFolderPath;
     private CurrencyFolderPath currencyFolderPath;
@@ -74,8 +76,8 @@ public class AppConfigurationProvider {
     public AppConfigurationProvider getConfiguration() {
         FileReader fileReader = new FileReader(CONFIGURATION_FILE_PATH);
         try {
-            String jsonString = fileReader.getFileAsString();
-            JSONMapper jsonMapper = new JSONMapper(jsonString);
+            String fileContent = fileReader.getFileAsString();
+            JSONMapper jsonMapper = new JSONMapper(fileContent);
 
             this.fundFilePaths = jsonMapper.getAppConfigurationFromJson().fundFilePaths;
             this.currencyFilePaths = jsonMapper.getAppConfigurationFromJson().currencyFilePaths;
