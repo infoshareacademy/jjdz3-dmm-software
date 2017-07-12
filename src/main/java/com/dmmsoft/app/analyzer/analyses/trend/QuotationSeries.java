@@ -4,16 +4,64 @@ import com.dmmsoft.app.analyzer.analyses.Analysis;
 import com.dmmsoft.app.analyzer.analyses.AnalysisResult;
 import com.dmmsoft.app.analyzer.analyses.IResult;
 import com.dmmsoft.app.analyzer.analyses.exception.NoDataForCriteria;
+import com.dmmsoft.app.model.Investment;
+import com.dmmsoft.app.model.MainContainer;
+import com.dmmsoft.app.model.Quotation;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by milo on 14.04.17.
  */
 public class QuotationSeries extends Analysis implements IResult {
 
+    private QuotationSeriesCriteria inputCriteria;
+
     @Override
     public AnalysisResult getResult() throws NoDataForCriteria {
 
-        // TODO: data series provider for charts
-        return null;
+        this.checkDatesOrder(inputCriteria.getStartDate(), inputCriteria.getEndDate());
+        Investment investment = getInvestment();
+        List<Quotation> quotations = getQuotations(investment);
+        List<Quotation> filteredQuotations = getQuotationFromDateRange(quotations);
+        return new QuotationSeriesResult(filteredQuotations);
+    }
+
+    public QuotationSeries(MainContainer mainContainer, QuotationSeriesCriteria inputCriteria) {
+        this.mainContainer = mainContainer;
+        this.inputCriteria = inputCriteria;
+    }
+
+    private List<Quotation> getQuotationFromDateRange(List<Quotation> quotations) throws NoDataForCriteria {
+        List<Quotation> filteredQuotatios = quotations.stream()
+                .filter(x -> x.getDate().isEqual(inputCriteria.getStartDate())||x.getDate().isAfter(inputCriteria.getStartDate()))
+                .filter(x -> x.getDate().isEqual(inputCriteria.getEndDate())||x.getDate().isBefore(inputCriteria.getEndDate()))
+                .collect(Collectors.toList());
+
+        if (filteredQuotatios.size()<2) {
+        throw new NoDataForCriteria("No quotations for current dates range or less then 2");
+        }
+        return filteredQuotatios;
+    }
+
+    private void checkDatesOrder(LocalDate startDate, LocalDate endDate) throws NoDataForCriteria {
+        if (!startDate.isBefore(endDate)) {
+            throw new NoDataForCriteria("Wrong input data. StartDate must be before EndDate.");
+        }
+    }
+
+    private Investment getInvestment() throws NoDataForCriteria {
+        return mainContainer.getInvestments().stream()
+                .filter(x -> x.getName().equals(inputCriteria.getInvestmentName()))
+                .findFirst().orElseThrow(NoDataForCriteria::new);
+    }
+
+    private List<Quotation> getQuotations(Investment filteredInvestment) throws NoDataForCriteria {
+        return Optional.ofNullable(filteredInvestment.getQuotations())
+                .filter(l -> !l.isEmpty())
+                .orElseThrow(() -> new NoDataForCriteria("No Quotations for current Investment name."));
     }
 }

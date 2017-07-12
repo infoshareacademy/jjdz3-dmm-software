@@ -46,8 +46,8 @@ public class InvestmentRevenueTest  {
 
         //analysis input
         System.out.println("\ninputValues(buy date, sell date)");
-        System.out.println(input.getBuyDate());
-        System.out.println(input.getSellDate());
+        System.out.println(input.getStartDate());
+        System.out.println(input.getEndDate());
         System.out.println(input.getModifiedBySuggester());
         System.out.println(input.getFavourite());
 
@@ -55,8 +55,8 @@ public class InvestmentRevenueTest  {
         System.out.println("\nresultValues(buy date, sell date)");
         InvestmentRevenueCriteria finallyEvaluatedInput =(InvestmentRevenueCriteria)ir.getFinallyEvaluatedInput();
 
-        System.out.println(finallyEvaluatedInput.getBuyDate());
-        System.out.println(finallyEvaluatedInput.getSellDate());
+        System.out.println(finallyEvaluatedInput.getStartDate());
+        System.out.println(finallyEvaluatedInput.getEndDate());
         System.out.println(finallyEvaluatedInput.getModifiedBySuggester());
         System.out.println(input.getFavourite());
         System.out.println(ir.getCapitalRevenueValue());

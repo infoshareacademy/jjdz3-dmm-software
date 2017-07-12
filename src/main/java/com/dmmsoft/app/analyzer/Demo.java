@@ -7,6 +7,9 @@ import com.dmmsoft.app.analyzer.analyses.indicator.IndicatorResult;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenue;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueCriteria;
 import com.dmmsoft.app.analyzer.analyses.revenue.InvestmentRevenueResult;
+import com.dmmsoft.app.analyzer.analyses.trend.QuotationSeries;
+import com.dmmsoft.app.analyzer.analyses.trend.QuotationSeriesCriteria;
+import com.dmmsoft.app.analyzer.analyses.trend.QuotationSeriesResult;
 import com.dmmsoft.app.appconfiguration.AppConfigurationProvider;
 import com.dmmsoft.app.file.RemoteDownloader;
 import com.dmmsoft.app.model.loader.MainContainerLoader;
@@ -29,7 +32,7 @@ public class Demo {
         BigDecimal capital = new BigDecimal(1512000.25);
         DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
         LocalDate BUY_DATE = LocalDate.parse("20090910", formatter);
-        LocalDate SELL_DATE = LocalDate.parse("20170402", formatter);
+        LocalDate SELL_DATE = LocalDate.parse("20170404", formatter);
         String InvestmentName = "CHF";
 
         // application initialization
@@ -51,6 +54,14 @@ public class Demo {
 
         // extracting investments
         List<Investment> investments = mc.getInvestments();
+
+        QuotationSeriesCriteria quotationSeriesCriteria = new QuotationSeriesCriteria(InvestmentName, BUY_DATE, SELL_DATE);
+        QuotationSeries quotationSeries =  new QuotationSeries(mc, quotationSeriesCriteria);
+        QuotationSeriesResult quotationSeriesResult = (QuotationSeriesResult) quotationSeries.getResult();
+
+        for(Quotation item: quotationSeriesResult.getQuotationList()) {
+            System.out.println("results"+item.getDate()+" "+item.getClose());
+        }
 
         // example analysis usage
         InvestmentRevenueCriteria input = new InvestmentRevenueCriteria(capital, BUY_DATE, SELL_DATE, InvestmentName, false);
