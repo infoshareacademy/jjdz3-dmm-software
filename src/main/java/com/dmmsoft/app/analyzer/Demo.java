@@ -41,7 +41,7 @@ public class Demo {
         System.out.println(appCon.getFundBackupFolderPath().getFolderPath());
         System.out.println(appCon.getCurrencyUrl().getFileUrl());
         System.out.println(appCon.getFundUrl().getFileUrl());
-        System.out.println(appCon.getSmtpConfigFilePath());
+        System.out.println(appCon.getExternalResourceFilePath());
 
         MainContainerLoader mainContainerLoader = new MainContainerLoader(appCon);
 

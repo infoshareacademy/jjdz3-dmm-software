@@ -33,7 +33,7 @@ public class AppConfigurationProvider {
     private FundUrl fundUrl;
     private CurrencyUrl currencyUrl;
 
-    private String smtpConfigFilePath;
+    private String externalResourceFilePath;
 
     private List<FilePath> fundFilePaths = new ArrayList<>();
     private List<FilePath> currencyFilePaths = new ArrayList<>();
@@ -55,12 +55,12 @@ public class AppConfigurationProvider {
         this.currencyFolderPath = currencyFolderPath;
     }
 
-    public String getSmtpConfigFilePath() {
-        return smtpConfigFilePath;
+    public String getExternalResourceFilePath() {
+        return externalResourceFilePath;
     }
 
-    public void setSmtpConfigFilePath(String smtpConfigFilePath) {
-        this.smtpConfigFilePath = smtpConfigFilePath;
+    public void setExternalResourceFilePath(String externalResourceFilePath) {
+        this.externalResourceFilePath = externalResourceFilePath;
     }
 
     public FundUrl getFundUrl() {
@@ -105,7 +105,7 @@ public class AppConfigurationProvider {
             this.fundUrl = jsonMapper.getAppConfigurationFromJson().fundUrl;
             this.currencyUrl = jsonMapper.getAppConfigurationFromJson().currencyUrl;
 
-            this.smtpConfigFilePath = jsonMapper.getAppConfigurationFromJson().smtpConfigFilePath;
+            this.externalResourceFilePath = jsonMapper.getAppConfigurationFromJson().externalResourceFilePath;
 
             if (fundFilePaths.isEmpty() || fundFilePaths == null) {
                 this.fundFilePaths = this.generateFilePaths(fundFolderPath.getFolderPath(),
